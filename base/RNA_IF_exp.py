@@ -18,7 +18,7 @@ ta.get_split_loaders(recompute=True)
 # Create model
 model = PygModel(
     num_node_features=ta.metadata["description"]["num_node_features"],
-    num_classes=ta.metadata["description"]["num_classes"],
+    num_classes=ta.metadata["description"]["num_classes"] + 1,
     graph_level=False,
 )
 
