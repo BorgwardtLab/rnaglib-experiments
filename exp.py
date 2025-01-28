@@ -7,6 +7,7 @@ from rnaglib.tasks import ChemicalModification
 from rnaglib.learning.task_models import PygModel
 from rnaglib.transforms import GraphRepresentation
 from rnaglib.transforms import RNAFMTransform
+from rnaglib.dataset_transforms import CDHitComputer, StructureDistanceComputer, ClusterSplitter
 from rnaglib.encoders import ListEncoder
 
 import wandb
@@ -111,37 +112,52 @@ class RNATrainer:
 
 
 def benchmark():
-    TASKLIST = [BindingSite, ChemicalModification]
+    TASKLIST = [ChemicalModification]
 
     for task in TASKLIST:
-        for use_rnafm in [True, False]:
-            # Setup task
-            print(task.__name__)
-            ta = task(root=task.__name__, debug=True, recompute=False)
-            ta.dataset.add_representation(GraphRepresentation(framework="pyg"))
-            ta.get_split_loaders(recompute=False)
-
-            if use_rnafm:
-                rnafm = RNAFMTransform()
-                [rnafm(rna) for rna in ta.dataset]
-                ta.dataset.features_computer.add_feature(
-                    feature_names=["rnafm"], custom_encoders={"rnafm": ListEncoder(640)}
+        for use_rnafm in [False]:
+            for distance in [CDHitComputer(), StructureDistanceComputer()]:
+                # Setup task
+                print(task.__name__)
+                ta = task(
+                    root=task.__name__,
+                    debug=True,
+                    recompute=True,
                 )
-            # Create model
-            model = PygModel(
-                ta.metadata["description"]["num_node_features"] + use_rnafm * 640,
-                ta.metadata["description"]["num_classes"],
-                graph_level=False,
-            )
 
-            # Create trainer and run
-            trainer = RNATrainer(ta, model, wandb_project="rna_binding_site")
-            trainer.train()
+                ta.dataset = distance()(ta.dataset)
+                ta.splitter = ClusterSplitter(distance_name=distance.name)
+
+                ta.dataset.add_representation(GraphRepresentation(framework="pyg"))
+                ta.get_split_loaders(recompute=False)
+
+                if use_rnafm:
+                    rnafm = RNAFMTransform()
+                    [rnafm(rna) for rna in ta.dataset]
+                    ta.dataset.features_computer.add_feature(
+                        feature_names=["rnafm"], custom_encoders={"rnafm": ListEncoder(640)}
+                    )
+                # Create model
+                model = PygModel(
+                    ta.metadata["description"]["num_node_features"] + use_rnafm * 640,
+                    ta.metadata["description"]["num_classes"],
+                    graph_level=False,
+                )
+
+                # Create trainer and run
+                trainer = RNATrainer(ta, model, wandb_project="rna_binding_site")
+                trainer.train()
 
 
 # Example usage:
 if __name__ == "__main__":
-    benchmark()
+    ta = ChemicalModification(
+        root="cm",
+        debug=True,
+        recompute=True,
+    )
+
+    # benchmark()
 
     """
     from rnaglib.learning.task_models import PygModel
