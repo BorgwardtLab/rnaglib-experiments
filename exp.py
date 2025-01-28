@@ -38,7 +38,9 @@ class RNATrainer:
         """Run training loop with logging"""
         self.setup()
 
+        print("Getting split loaders")
         train_loader, _, _ = self.task.get_split_loaders()
+        print("Got split loaders")
         for epoch in range(self.epochs):
             # Training phase
             self.model.train()
@@ -112,10 +114,10 @@ class RNATrainer:
 
 
 def benchmark():
-    TASKLIST = [ChemicalModification]
+    TASKLIST = [ChemicalModification, BindingSite]
 
     for task in TASKLIST:
-        for use_rnafm in [False]:
+        for use_rnafm in [True, False]:
             for distance in [CDHitComputer(), StructureDistanceComputer()]:
                 # Setup task
                 print(task.__name__)
@@ -125,11 +127,13 @@ def benchmark():
                     recompute=True,
                 )
 
-                ta.dataset = distance()(ta.dataset)
+                print("Splitting")
+                ta.dataset = distance(ta.dataset)
                 ta.splitter = ClusterSplitter(distance_name=distance.name)
 
                 ta.dataset.add_representation(GraphRepresentation(framework="pyg"))
                 ta.get_split_loaders(recompute=False)
+                print("Got splits")
 
                 if use_rnafm:
                     rnafm = RNAFMTransform()
@@ -137,6 +141,7 @@ def benchmark():
                     ta.dataset.features_computer.add_feature(
                         feature_names=["rnafm"], custom_encoders={"rnafm": ListEncoder(640)}
                     )
+                    print("Done computing embs")
                 # Create model
                 model = PygModel(
                     ta.metadata["description"]["num_node_features"] + use_rnafm * 640,
@@ -146,18 +151,14 @@ def benchmark():
 
                 # Create trainer and run
                 trainer = RNATrainer(ta, model, wandb_project="rna_binding_site")
+                print("Training")
                 trainer.train()
+                print("Trained")
 
 
 # Example usage:
 if __name__ == "__main__":
-    ta = ChemicalModification(
-        root="cm",
-        debug=True,
-        recompute=True,
-    )
-
-    # benchmark()
+    benchmark()
 
     """
     from rnaglib.learning.task_models import PygModel
