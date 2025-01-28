@@ -2,6 +2,13 @@ import json
 import os
 from datetime import datetime
 
+from rnaglib.tasks import BindingSite
+from rnaglib.tasks import ChemicalModification
+from rnaglib.learning.task_models import PygModel
+from rnaglib.transforms import GraphRepresentation
+from rnaglib.transforms import RNAFMTransform
+from rnaglib.encoders import ListEncoder
+
 import wandb
 
 
@@ -17,21 +24,24 @@ class RNATrainer:
 
     def setup(self):
         """Initialize wandb and model training"""
+        """
         wandb.init(
             entity="mlsb",  # Replace with your team name
             project=self.wandb_project,
             name=self.exp_name,
         )
+        """
         self.model.configure_training(learning_rate=self.learning_rate)
 
     def train(self):
         """Run training loop with logging"""
         self.setup()
 
+        train_loader, _, _ = self.task.get_split_loaders()
         for epoch in range(self.epochs):
             # Training phase
             self.model.train()
-            for batch in self.task.train_dataloader:
+            for batch in train_loader:
                 graph = batch["graph"].to(self.model.device)
                 self.model.optimizer.zero_grad()
                 out = self.model(graph)
@@ -51,18 +61,19 @@ class RNATrainer:
                 "train_accuracy": train_metrics["accuracy"],
                 "val_accuracy": val_metrics["accuracy"],
             }
-            wandb.log(metrics)
+            # wandb.log(metrics)
             self.training_log.append(metrics)
 
             # Print progress
-            print(
-                f"Epoch {epoch + 1}, "
-                f"Train Loss: {train_metrics['loss']:.4f}, Val Loss: {val_metrics['loss']:.4f}, "
-                f"Train Acc: {train_metrics['accuracy']:.4f}, Val Acc: {val_metrics['accuracy']:.4f}",
-            )
+            if not epoch % 20:
+                print(
+                    f"Epoch {epoch + 1}, "
+                    f"Train Loss: {train_metrics['loss']:.4f}, Val Loss: {val_metrics['loss']:.4f}, "
+                    f"Train Acc: {train_metrics['accuracy']:.4f}, Val Acc: {val_metrics['accuracy']:.4f}",
+                )
 
         self.save_results()
-        wandb.finish()
+        # wandb.finish()
 
     def save_results(self):
         """Save final results and metrics"""
@@ -99,8 +110,40 @@ class RNATrainer:
             print(f"Test {k}: {v:.4f}")
 
 
+def benchmark():
+    TASKLIST = [BindingSite, ChemicalModification]
+
+    for task in TASKLIST:
+        for use_rnafm in [True, False]:
+            # Setup task
+            print(task.__name__)
+            ta = task(root=task.__name__, debug=True, recompute=False)
+            ta.dataset.add_representation(GraphRepresentation(framework="pyg"))
+            ta.get_split_loaders(recompute=False)
+
+            if use_rnafm:
+                rnafm = RNAFMTransform()
+                [rnafm(rna) for rna in ta.dataset]
+                ta.dataset.features_computer.add_feature(
+                    feature_names=["rnafm"], custom_encoders={"rnafm": ListEncoder(640)}
+                )
+            # Create model
+            model = PygModel(
+                ta.metadata["description"]["num_node_features"] + use_rnafm * 640,
+                ta.metadata["description"]["num_classes"],
+                graph_level=False,
+            )
+
+            # Create trainer and run
+            trainer = RNATrainer(ta, model, wandb_project="rna_binding_site")
+            trainer.train()
+
+
 # Example usage:
 if __name__ == "__main__":
+    benchmark()
+
+    """
     from rnaglib.learning.task_models import PygModel
     from rnaglib.tasks import BindingSite
     from rnaglib.transforms import GraphRepresentation
@@ -120,3 +163,4 @@ if __name__ == "__main__":
     # Create trainer and run
     trainer = RNATrainer(ta, model, wandb_project="rna_binding_site")
     trainer.train()
+    """
