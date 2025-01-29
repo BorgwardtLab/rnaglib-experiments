@@ -10,14 +10,15 @@ from rnaglib.encoders import ListEncoder
 
 
 class RNATrainer:
-    def __init__(self, task, model, wandb_project, learning_rate=0.001, epochs=100):
+    def __init__(self, task, model, wandb_project, exp_name="default", learning_rate=0.001, epochs=100, seed=0):
         self.task = task
         self.model = model
         self.wandb_project = wandb_project
         self.learning_rate = learning_rate
         self.epochs = epochs
-        self.exp_name = f"rna_{datetime.now().strftime('%Y%m%d_%H%M')}"
+        self.exp_name = exp_name
         self.training_log = []
+        self.seed = seed
 
     def setup(self):
         """Initialize wandb and model training"""
@@ -28,6 +29,15 @@ class RNATrainer:
             name=self.exp_name,
         )
         """
+        # Set seeds for reproducibility
+        torch.manual_seed(self.seed)  # CPU random number generator
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(self.seed)  # GPU random number generator for all GPUs
+
+        # For additional control, especially with PyTorch's cudnn backend:
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+
         self.model.configure_training(learning_rate=self.learning_rate)
 
     def train(self):

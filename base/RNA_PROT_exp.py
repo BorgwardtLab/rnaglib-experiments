@@ -7,25 +7,19 @@ from rnaglib.learning.task_models import PygModel
 from rnaglib.tasks import ProteinBindingSite
 from rnaglib.transforms import GraphRepresentation
 
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from exp import RNATrainer
-
 # Setup task
-ta = ProteinBindingSite("RNA_Prot", recompute=True, debug=False)
+ta_RBP = ProteinBindingSite("RNA_Prot", recompute=True, debug=False)
 
-ta.dataset.add_representation(GraphRepresentation(framework="pyg"))
-ta.get_split_loaders(recompute=True)
-
+ta_RBP.dataset.add_representation(GraphRepresentation(framework="pyg"))
 
 # Setup model
 
-model = PygModel(
-    ta.metadata["description"]["num_node_features"],
-    ta.metadata["description"]["num_classes"],
-    graph_level=False,
-)
-
-
-# Create trainer and run
-trainer = RNATrainer(ta, model, wandb_project="rna_prot")
-trainer.train()
+models_RBP = [
+    PygModel(
+        ta_RBP.metadata["description"]["num_node_features"],
+        ta_RBP.metadata["description"]["num_classes"],
+        graph_level=False,
+        num_layers=i,
+    )
+    for i in range(3)
+]
