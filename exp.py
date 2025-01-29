@@ -1,16 +1,12 @@
-import json
 import os
+import sys
+import json
 from datetime import datetime
+import wandb
 
-from rnaglib.tasks import BindingSite
-from rnaglib.tasks import ChemicalModification
-from rnaglib.learning.task_models import PygModel
-from rnaglib.transforms import GraphRepresentation
 from rnaglib.transforms import RNAFMTransform
 from rnaglib.dataset_transforms import CDHitComputer, StructureDistanceComputer, ClusterSplitter
 from rnaglib.encoders import ListEncoder
-
-import wandb
 
 
 class RNATrainer:
@@ -111,49 +107,6 @@ class RNATrainer:
         print("\nFinal Test Results:")
         for k, v in test_metrics.items():
             print(f"Test {k}: {v:.4f}")
-
-
-def benchmark():
-    TASKLIST = [ChemicalModification, BindingSite]
-
-    for task in TASKLIST:
-        for use_rnafm in [True, False]:
-            for distance in [CDHitComputer(), StructureDistanceComputer()]:
-                # Setup task
-                print(task.__name__)
-                ta = task(
-                    root=task.__name__,
-                    debug=True,
-                    recompute=True,
-                )
-
-                print("Splitting")
-                ta.dataset = distance(ta.dataset)
-                ta.splitter = ClusterSplitter(distance_name=distance.name)
-
-                ta.dataset.add_representation(GraphRepresentation(framework="pyg"))
-                ta.get_split_loaders(recompute=False)
-                print("Got splits")
-
-                if use_rnafm:
-                    rnafm = RNAFMTransform()
-                    [rnafm(rna) for rna in ta.dataset]
-                    ta.dataset.features_computer.add_feature(
-                        feature_names=["rnafm"], custom_encoders={"rnafm": ListEncoder(640)}
-                    )
-                    print("Done computing embs")
-                # Create model
-                model = PygModel(
-                    ta.metadata["description"]["num_node_features"] + use_rnafm * 640,
-                    ta.metadata["description"]["num_classes"],
-                    graph_level=False,
-                )
-
-                # Create trainer and run
-                trainer = RNATrainer(ta, model, wandb_project="rna_binding_site")
-                print("Training")
-                trainer.train()
-                print("Trained")
 
 
 # Example usage:

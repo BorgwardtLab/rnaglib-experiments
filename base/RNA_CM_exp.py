@@ -11,23 +11,17 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from exp import RNATrainer
 
 # Setup task
-ta = ChemicalModification(
+ta_CM = ChemicalModification(
     root="RNA_CM",
     recompute=True,
     debug=False,
 )
-ta.dataset.add_representation(GraphRepresentation(framework="pyg"))
-ta.get_split_loaders(recompute=True)
+ta_CM.dataset.add_representation(GraphRepresentation(framework="pyg"))
 
 # Setup model
 
-model = PygModel(
+model_CM = PygModel(
     ta.metadata["description"]["num_node_features"],
     ta.metadata["description"]["num_classes"],
     graph_level=False,
 )
-
-
-# Create trainer and run
-trainer = RNATrainer(ta, model, wandb_project="rna_cm")
-trainer.train()

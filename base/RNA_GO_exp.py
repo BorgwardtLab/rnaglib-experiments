@@ -11,18 +11,13 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from exp import RNATrainer
 
 # Setup task
-ta = RNAGo(root="RNA_GO", recompute=True, debug=False)
-ta.dataset.add_representation(GraphRepresentation(framework="pyg"))
-ta.get_split_loaders(batch_size=1)
+ta_GO = RNAGu(root="RNA_GO", recompute=True, debug=False)
+ta_GO.dataset.add_representation(GraphRepresentation(framework="pyg"))
 
 # Create model
-model = PygModel(
+model_GO = PygModel(
     ta.metadata["description"]["num_node_features"],
     num_classes=len(ta.metadata["label_mapping"]),
     graph_level=True,
     multi_label=True,
 )
-
-# Create trainer and run
-trainer = RNATrainer(ta, model, wandb_project="rna_go")
-trainer.train()
