@@ -10,7 +10,7 @@ from rnaglib.encoders import ListEncoder
 
 
 class RNATrainer:
-    def __init__(self, task, model, wandb_project, exp_name="default", learning_rate=0.001, epochs=100, seed=0):
+    def __init__(self, task, model, wandb_project, exp_name="default", learning_rate=0.001, epochs=2, seed=0):
         self.task = task
         self.model = model
         self.wandb_project = wandb_project

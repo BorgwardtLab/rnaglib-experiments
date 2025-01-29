@@ -8,7 +8,7 @@ from rnaglib.tasks import ProteinBindingSite
 from rnaglib.transforms import GraphRepresentation
 
 # Setup task
-ta_RBP = ProteinBindingSite("RNA_Prot", recompute=True, debug=False)
+ta_RBP = ProteinBindingSite("RNA_Prot", recompute=False, debug=False)
 
 ta_RBP.dataset.add_representation(GraphRepresentation(framework="pyg"))
 

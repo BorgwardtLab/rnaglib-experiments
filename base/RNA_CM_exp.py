@@ -10,7 +10,7 @@ from rnaglib.transforms import GraphRepresentation
 # Setup task
 ta_CM = ChemicalModification(
     root="RNA_CM",
-    recompute=True,
+    recompute=False,
     debug=False,
 )
 ta_CM.dataset.add_representation(GraphRepresentation(framework="pyg"))

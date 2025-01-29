@@ -1,5 +1,6 @@
 import os
 import sys
+from joblib import Parallel, delayed
 
 from rnaglib.learning.task_models import PygModel
 from rnaglib.tasks import BindingSite
@@ -19,6 +20,28 @@ from base.RNA_RBP_exp import ta_RBP, models_RBP
 from base.RNA_SITE_exp import ta_SITE, models_SITE
 
 
+def do_one(model, task, distance, rnafm, seed):
+    task.dataset = distance(task.dataset, num_layers)
+    task.splitter = ClusterSplitter(distance_name=distance.name)
+
+    task.dataset.add_representation(GraphRepresentation(framework="pyg"))
+    task.get_split_loaders(recompute=True)
+    if use_rnafm:
+        rnafm = RNAFMTransform()
+        [rnafm(rna) for rna in task.dataset]
+        task.dataset.features_computer.add_feature(feature_names=["rnafm"], custom_encoders={"rnafm": ListEncoder(640)})
+        print("Done computing embs")
+        trainer = RNATrainer(
+            task,
+            model,
+            exp_name=f"{task.name}_rnafm-{rnafm}_distance-{distance.name}_layers-{num_layers}_seed-{seed}",
+            seed=seed,
+        )
+        print("Training")
+        trainer.train()
+        print("Trained")
+
+
 def benchmark():
     TASKLIST = [
         (ta_CM, model_CM),
@@ -28,32 +51,12 @@ def benchmark():
         (ta_RBP, model_RBP),
         (ta_SITE, model_SITE),
     ]
-
+    TODO = []
     for task, models in TASKLIST:
         for distance in [CDHitComputer(), StructureDistanceComputer()]:
-            print("Splitting")
-            task.dataset = distance(task.dataset)
-            task.splitter = ClusterSplitter(distance_name=distance.name)
-
-            task.dataset.add_representation(GraphRepresentation(framework="pyg"))
-            task.get_split_loaders(recompute=False)
-            print("Got splits")
-            for use_rnafm in [True, False]:
-                if use_rnafm:
-                    rnafm = RNAFMTransform()
-                    [rnafm(rna) for rna in task.dataset]
-                    task.dataset.features_computer.add_feature(
-                        feature_names=["rnafm"], custom_encoders={"rnafm": ListEncoder(640)}
-                    )
-                    print("Done computing embs")
-                for num_layers, model in models:
+            for rnafm in [True, False]:
+                for num_layers, model in enumerate(models):
                     for seed in [0, 1, 2]:
-                        trainer = RNATrainer(
-                            task,
-                            model,
-                            exp_name=f"{task.name}_rnafm-{use_rnafm}_distance-{distance.name}_layers-{num_layers}_seed-{seed}",
-                            seed=seed,
-                        )
-                        print("Training")
-                        trainer.train()
-                        print("Trained")
+                        TODO.append((model, task, distance, rnafm, seed))
+
+    _ = Parallel(num_workers=-1)(delayed(do_one)(*run_args) for run_args in TODO)
