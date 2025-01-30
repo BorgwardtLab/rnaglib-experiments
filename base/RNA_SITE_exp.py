@@ -36,7 +36,6 @@ else:
     source = "RNA_SITE_seq"
     tmp = "RNA_SITE_seq"
 
-    temp_dir = os.path.join(os.path.dirname(source), tmp)
     shutil.copytree(source, tmp)
     shutil.rmtree(source)
     os.rename(tmp, source)

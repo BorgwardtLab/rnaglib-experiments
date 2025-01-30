@@ -28,8 +28,7 @@ else:
     source = "RNA_IF_seq"
     tmp = "RNA_IF_tmp"
 
-    temp_dir = os.path.join(os.path.dirname(source), tmp)
-    shutil.copytree(source, tmp)
+    shutil.copytree(source, tmp, dirs_exist_ok=True)
     shutil.rmtree(source)
     os.rename(tmp, source)
 

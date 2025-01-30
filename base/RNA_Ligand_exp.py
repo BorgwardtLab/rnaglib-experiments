@@ -28,8 +28,7 @@ else:
     source = "RNA_Ligand_struc"
     tmp = "RNA_Ligand_struc"
 
-    temp_dir = os.path.join(os.path.dirname(source), tmp)
-    shutil.copytree(source, tmp)
+    shutil.copytree(source, tmp, dirs_exist_ok=True)
     shutil.rmtree(source)
     os.rename(tmp, source)
 
