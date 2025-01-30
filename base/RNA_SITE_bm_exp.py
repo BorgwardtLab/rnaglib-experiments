@@ -7,6 +7,7 @@ from rnaglib.transforms import GraphRepresentation
 # Setup task
 ta_SITE_bm = BenchmarkBindingSite(root="RNA_Site_literature", debug=False, recompute=False)
 ta_SITE_bm.dataset.add_representation(GraphRepresentation(framework="pyg"))
+ta_SITE_bm.set_loaders(recompute=True)
 
 # Create model
 models_SITE_bm = [
