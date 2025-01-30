@@ -19,7 +19,7 @@ else:
     ta_IF_seq = InverseFolding(root="RNA_IF_seq", recompute=False, debug=False)
     distance = CDHitComputer()
     ta_IF_seq.dataset.add_representation(GraphRepresentation(framework="pyg"))
-    ta_IF_seq.dataset = distance(task_IF_seq.dataset)
+    ta_IF_seq.dataset = distance(ta_IF_seq.dataset)
 
     ta_IF_seq.splitter = ClusterSplitter(distance_name=distance.name)
 
