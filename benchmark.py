@@ -6,6 +6,7 @@ from rnaglib.learning.task_models import PygModel
 from rnaglib.tasks import BindingSite
 from rnaglib.tasks import ChemicalModification
 from rnaglib.transforms import GraphRepresentation
+from rnaglib.transforms import RNAFMTransform
 from rnaglib.dataset_transforms import CDHitComputer, ClusterSplitter, StructureDistanceComputer
 
 
