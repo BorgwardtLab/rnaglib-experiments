@@ -2,6 +2,7 @@
 
 import os
 import sys
+import shutil
 
 from rnaglib.learning.task_models import PygModel
 from rnaglib.tasks import ChemicalModification
