@@ -36,7 +36,7 @@ else:
 
     ta_CM_seq.set_loaders(recompute=True)
 
-    task_GO_seq.write()
+    ta_CM_seq.write()
 
     source = "RNA_CM_seq"
     tmp = "RNA_CM_tmp"
