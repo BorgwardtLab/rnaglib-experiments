@@ -59,7 +59,7 @@ def benchmark():
             for rnafm in [True, False]:
                 for num_layers, model in enumerate(models):
                     for seed in [0, 1, 2]:
-                        TODO.append((model, num_layers, task, rnafm, seed))
+                        todo.append((model, num_layers, task, rnafm, seed))
 
             _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in TODO)
 
