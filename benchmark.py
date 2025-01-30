@@ -16,7 +16,7 @@ from base.RNA_CM_exp import ta_CM, models_CM
 from base.RNA_GO_exp import ta_GO, models_GO
 from base.RNA_Ligand_exp import ta_ligand, models_ligand
 from base.RNA_IF_exp import ta_IF, models_IF
-from base.RNA_RBP_exp import ta_RBP, models_RBP
+from base.RNA_PROT_exp import ta_RBP, models_RBP
 from base.RNA_SITE_exp import ta_SITE, models_SITE
 
 
