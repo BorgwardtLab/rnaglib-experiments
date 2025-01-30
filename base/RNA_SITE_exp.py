@@ -34,7 +34,7 @@ else:
     ta_SITE_seq.set_loaders(recompute=True)
 
     source = "RNA_SITE_seq"
-    tmp = "RNA_SITE_seq"
+    tmp = "RNA_SITE_tmp"
 
     shutil.copytree(source, tmp, dirs_exist_ok=True)
     shutil.rmtree(source)

@@ -26,7 +26,7 @@ else:
     ta_ligand_struc.set_loaders(recompute=True)
 
     source = "RNA_Ligand_struc"
-    tmp = "RNA_Ligand_struc"
+    tmp = "RNA_Ligand_tmp"
 
     shutil.copytree(source, tmp, dirs_exist_ok=True)
     shutil.rmtree(source)
