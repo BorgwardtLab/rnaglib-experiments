@@ -21,12 +21,7 @@ from base.RNA_PROT_exp import ta_RBP, models_RBP
 from base.RNA_SITE_exp import ta_SITE, models_SITE
 
 
-def do_one(model, num_layers, task, distance, rnafm, seed):
-    task.dataset = distance(task.dataset)
-    task.splitter = ClusterSplitter(distance_name=distance.name)
-
-    task.dataset.add_representation(GraphRepresentation(framework="pyg"))
-    task.get_split_loaders(recompute=True)
+def do_one(model, num_layers, task, use_rnafm, seed):
     if use_rnafm:
         rnafm = RNAFMTransform()
         [rnafm(rna) for rna in task.dataset]
@@ -52,15 +47,21 @@ def benchmark():
         (ta_RBP, models_RBP),
         (ta_SITE, models_SITE),
     ]
-    TODO = []
     for task, models in TASKLIST:
         for distance in [CDHitComputer(), StructureDistanceComputer()]:
+            task.dataset = distance(task.dataset)
+            task.splitter = ClusterSplitter(distance_name=distance.name)
+
+            task.dataset.add_representation(GraphRepresentation(framework="pyg"))
+            task.get_split_loaders(recompute=True)
+
+            todo = []
             for rnafm in [True, False]:
                 for num_layers, model in enumerate(models):
                     for seed in [0, 1, 2]:
-                        TODO.append((model, num_layers, task, distance, rnafm, seed))
+                        TODO.append((model, num_layers, task, rnafm, seed))
 
-    _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in TODO)
+            _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in TODO)
 
 
 if __name__ == "__main__":
