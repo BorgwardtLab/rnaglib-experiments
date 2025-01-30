@@ -60,3 +60,7 @@ def benchmark():
                         TODO.append((model, task, distance, rnafm, seed))
 
     _ = Parallel(num_workers=-1)(delayed(do_one)(*run_args) for run_args in TODO)
+
+
+if __name__ == "__main__":
+    benchmark()
