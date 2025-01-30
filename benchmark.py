@@ -6,6 +6,7 @@ from rnaglib.learning.task_models import PygModel
 from rnaglib.tasks import BindingSite
 from rnaglib.tasks import ChemicalModification
 from rnaglib.transforms import GraphRepresentation
+from rnaglib.dataset_transforms import CDHitComputer, ClusterSplitter, StructureDistanceComputer
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -20,8 +21,8 @@ from base.RNA_PROT_exp import ta_RBP, models_RBP
 from base.RNA_SITE_exp import ta_SITE, models_SITE
 
 
-def do_one(model, task, distance, rnafm, seed):
-    task.dataset = distance(task.dataset, num_layers)
+def do_one(model, num_layers, task, distance, rnafm, seed):
+    task.dataset = distance(task.dataset)
     task.splitter = ClusterSplitter(distance_name=distance.name)
 
     task.dataset.add_representation(GraphRepresentation(framework="pyg"))
@@ -44,12 +45,12 @@ def do_one(model, task, distance, rnafm, seed):
 
 def benchmark():
     TASKLIST = [
-        (ta_CM, model_CM),
-        (ta_GO, model_GO),
-        (ta_IF, model_IF),
-        (ta_ligand, model_ligand),
-        (ta_RBP, model_RBP),
-        (ta_SITE, model_SITE),
+        (ta_CM, models_CM),
+        (ta_GO, models_GO),
+        (ta_IF, models_IF),
+        (ta_ligand, models_ligand),
+        (ta_RBP, models_RBP),
+        (ta_SITE, models_SITE),
     ]
     TODO = []
     for task, models in TASKLIST:
@@ -57,9 +58,9 @@ def benchmark():
             for rnafm in [True, False]:
                 for num_layers, model in enumerate(models):
                     for seed in [0, 1, 2]:
-                        TODO.append((model, task, distance, rnafm, seed))
+                        TODO.append((model, num_layers, task, distance, rnafm, seed))
 
-    _ = Parallel(num_workers=-1)(delayed(do_one)(*run_args) for run_args in TODO)
+    _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in TODO)
 
 
 if __name__ == "__main__":
