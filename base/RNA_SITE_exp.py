@@ -36,7 +36,7 @@ else:
     source = "RNA_SITE_seq"
     tmp = "RNA_SITE_seq"
 
-    shutil.copytree(source, tmp)
+    shutil.copytree(source, tmp, dirs_exist_ok=True)
     shutil.rmtree(source)
     os.rename(tmp, source)
 
