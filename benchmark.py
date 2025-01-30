@@ -16,12 +16,12 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, current_dir)
 
 from exp import RNATrainer
-from base.RNA_CM_exp import ta_CM, models_CM
-from base.RNA_GO_exp import ta_GO, models_GO
-from base.RNA_Ligand_exp import ta_ligand, models_ligand
+from base.RNA_CM_exp import ta_CM_struc, ta_CM_seq, models_CM
+from base.RNA_GO_exp import ta_GO_struc, ta_GO_seq, models_GO
+from base.RNA_Ligand_exp import ta_ligand_struc, ta_ligand_seq, models_ligand
+from base.RNA_PROT_exp import ta_RBP_struc, ta_RBP_seq, models_RBP
+from base.RNA_SITE_exp import ta_SITE_struc, ta_SITE_seq, models_SITE
 from base.RNA_IF_exp import ta_IF, models_IF
-from base.RNA_PROT_exp import ta_RBP, models_RBP
-from base.RNA_SITE_exp import ta_SITE, models_SITE
 
 
 def do_one(model, num_layers, task, use_rnafm, seed, distance):
@@ -56,21 +56,16 @@ def do_one(model, num_layers, task, use_rnafm, seed, distance):
 
 def benchmark():
     TASKLIST = [
-        (ta_CM, models_CM),
-        (ta_GO, models_GO),
-        (ta_ligand, models_ligand),
-        (ta_RBP, models_RBP),
-        (ta_SITE, models_SITE),
-        (ta_IF, models_IF),
+        (ta_CM_struc, ta_CM_seq, models_CM),
+        (ta_GO_struc, ta_GO_seq, models_GO),
+        (ta_ligand_struc, ta_ligand_seq, models_ligand),
+        (ta_RBP_struc, ta_RBP_seq, models_RBP),
+        (ta_SITE_struc, ta_SITE_seq, models_SITE),
+        (ta_IF_struc, ta_IF_seq, models_IF),
     ]
-    for task, models in TASKLIST:
-        print(task.name)
-        for distance in [CDHitComputer(), StructureDistanceComputer()]:
-            task.dataset = distance(task.dataset)
-            task.splitter = ClusterSplitter(distance_name=distance.name)
-
-            task.set_loaders(recompute=True)
-            todo = []
+    for (task_struc, task_seq), models in TASKLIST:
+        todo = []
+        for task in (task_struc, task_seq):
             for use_rnafm in [True, False]:
                 if use_rnafm:
                     rnafm = RNAFMTransform()
@@ -81,12 +76,13 @@ def benchmark():
                 else:
                     task.dataset.features_computer.remove_feature(feature_name="rnafm", input_feature=True)
                 task.set_loaders(recompute=False)
+                continue
                 for num_layers, model in enumerate(models):
                     for seed in [0, 1, 2]:
                         task_ = copy.deepcopy(task)
-                        todo.append((model, num_layers, task_, use_rnafm, seed, distance.name))
+                        todo.append((PygModel(**model), num_layers, task_, use_rnafm, seed, distance.name))
 
-            _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in todo)
+            # _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in todo)
 
 
 if __name__ == "__main__":
