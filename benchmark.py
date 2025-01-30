@@ -32,7 +32,7 @@ def do_one(model, num_layers, task, use_rnafm, seed, distance):
         trainer = RNATrainer(
             task,
             model,
-            exp_name=f"{task.name}_rnafm-{rnafm}_distance-{distance.name}_layers-{num_layers}_seed-{seed}",
+            exp_name=f"{task.name}_rnafm-{rnafm}_distance-{distance}_layers-{num_layers}_seed-{seed}",
             seed=seed,
         )
         print("Training")
