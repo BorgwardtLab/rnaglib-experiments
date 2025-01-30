@@ -61,7 +61,7 @@ def benchmark():
                     for seed in [0, 1, 2]:
                         todo.append((model, num_layers, task, rnafm, seed))
 
-            _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in TODO)
+            _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in todo)
 
 
 if __name__ == "__main__":
