@@ -24,20 +24,16 @@ from base.RNA_SITE_exp import ta_SITE, models_SITE
 
 
 def do_one(model, num_layers, task, use_rnafm, seed, distance):
-    if use_rnafm:
-        rnafm = RNAFMTransform()
-        [rnafm(rna) for rna in task.dataset]
-        task.dataset.features_computer.add_feature(feature_names=["rnafm"], custom_encoders={"rnafm": ListEncoder(640)})
-        print("Done computing embs")
-        trainer = RNATrainer(
-            task,
-            model,
-            exp_name=f"{task.name}_rnafm-{rnafm}_distance-{distance}_layers-{num_layers}_seed-{seed}",
-            seed=seed,
-        )
-        print("Training")
-        trainer.train()
-        print("Trained")
+    print("Done computing embs")
+    trainer = RNATrainer(
+        task,
+        model,
+        exp_name=f"{task.name}_rnafm-{use_rnafm}_distance-{distance}_layers-{num_layers}_seed-{seed}",
+        seed=seed,
+    )
+    print("Training")
+    trainer.train()
+    print("Trained")
 
 
 def benchmark():
@@ -58,10 +54,16 @@ def benchmark():
             task.get_split_loaders(recompute=True)
 
             todo = []
-            for rnafm in [True, False]:
+            for use_rnafm in [True, False]:
+                if use_rnafm:
+                    rnafm = RNAFMTransform()
+                    [rnafm(rna) for rna in task.dataset]
+                    task.dataset.features_computer.add_feature(
+                        feature_names=["rnafm"], custom_encoders={"rnafm": ListEncoder(640)}
+                    )
                 for num_layers, model in enumerate(models):
                     for seed in [0, 1, 2]:
-                        todo.append((model, num_layers, task, rnafm, seed, distance.name))
+                        todo.append((model, num_layers, task, use_rnafm, seed, distance.name))
 
             _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in todo)
 

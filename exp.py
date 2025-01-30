@@ -4,16 +4,14 @@ import json
 from datetime import datetime
 import wandb
 
-from rnaglib.transforms import RNAFMTransform
-from rnaglib.dataset_transforms import CDHitComputer, StructureDistanceComputer, ClusterSplitter
-from rnaglib.encoders import ListEncoder
+import torch
 
 
 class RNATrainer:
-    def __init__(self, task, model, wandb_project, exp_name="default", learning_rate=0.001, epochs=2, seed=0):
+    def __init__(self, task, model, wandb_project="", exp_name="default", learning_rate=0.001, epochs=2, seed=0):
         self.task = task
         self.model = model
-        self.wandb_project = wandb_project
+        self.wandb_project = exp_name
         self.learning_rate = learning_rate
         self.epochs = epochs
         self.exp_name = exp_name
