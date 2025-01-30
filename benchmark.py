@@ -21,7 +21,7 @@ from base.RNA_GO_exp import ta_GO_struc, ta_GO_seq, models_GO
 from base.RNA_Ligand_exp import ta_ligand_struc, ta_ligand_seq, models_ligand
 from base.RNA_PROT_exp import ta_RBP_struc, ta_RBP_seq, models_RBP
 from base.RNA_SITE_exp import ta_SITE_struc, ta_SITE_seq, models_SITE
-from base.RNA_IF_exp import ta_IF, models_IF
+from base.RNA_IF_exp import ta_IF_struc, ta_IF_seq, models_IF
 
 
 def do_one(model, num_layers, task, use_rnafm, seed, distance):
@@ -66,6 +66,7 @@ def benchmark():
     for (task_struc, task_seq), models in TASKLIST:
         todo = []
         for task in (task_struc, task_seq):
+            print(task.name)
             for use_rnafm in [True, False]:
                 if use_rnafm:
                     rnafm = RNAFMTransform()
@@ -76,7 +77,6 @@ def benchmark():
                 else:
                     task.dataset.features_computer.remove_feature(feature_name="rnafm", input_feature=True)
                 task.set_loaders(recompute=False)
-                continue
                 for num_layers, model in enumerate(models):
                     for seed in [0, 1, 2]:
                         task_ = copy.deepcopy(task)
