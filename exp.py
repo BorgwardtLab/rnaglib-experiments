@@ -43,12 +43,11 @@ class RNATrainer:
         self.setup()
 
         print("Getting split loaders")
-        train_loader, _, _ = self.task.get_split_loaders()
         print("Got split loaders")
         for epoch in range(self.epochs):
             # Training phase
             self.model.train()
-            for batch in train_loader:
+            for batch in self.task.train_dataloader:
                 graph = batch["graph"].to(self.model.device)
                 self.model.optimizer.zero_grad()
                 out = self.model(graph)
@@ -96,12 +95,12 @@ class RNATrainer:
             "training_history": self.training_log,
             "hyperparameters": {
                 "learning_rate": self.learning_rate,
-                "num_node_features": self.model.convs[0].in_channels,
+                "num_node_features": self.model.num_node_features,
                 "num_classes": self.model.num_classes,
                 "graph_level": self.model.graph_level,
                 "num_layers": self.model.num_layers,
-                "hidden_channels": self.model.convs[0].out_channels,
-                "dropout_rate": self.model.dropouts[0].p,
+                "hidden_channels": self.model.hidden_channels,
+                "dropout_rate": self.model.dropout_rate,
                 "multi_label": self.model.multi_label,
             },
         }
@@ -119,9 +118,6 @@ class RNATrainer:
 
 # Example usage:
 if __name__ == "__main__":
-    benchmark()
-
-    """
     from rnaglib.learning.task_models import PygModel
     from rnaglib.tasks import BindingSite
     from rnaglib.transforms import GraphRepresentation
@@ -141,4 +137,3 @@ if __name__ == "__main__":
     # Create trainer and run
     trainer = RNATrainer(ta, model, wandb_project="rna_binding_site")
     trainer.train()
-    """

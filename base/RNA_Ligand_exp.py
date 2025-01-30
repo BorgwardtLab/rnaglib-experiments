@@ -8,10 +8,8 @@ from rnaglib.tasks import LigandIdentification
 from rnaglib.transforms import GraphRepresentation
 
 # Setup task
-batch_size = 8
 ta_ligand = LigandIdentification("RNA_Ligand", data_filename="binding_pockets.csv", recompute=False)
 ta_ligand.dataset.add_representation(GraphRepresentation(framework="pyg"))
-ta_ligand.set_loaders(batch_size=batch_size, recompute=True)
 
 # Create model
 models_ligand = [
