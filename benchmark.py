@@ -58,10 +58,10 @@ def benchmark():
     TASKLIST = [
         (ta_CM, models_CM),
         (ta_GO, models_GO),
-        (ta_IF, models_IF),
         (ta_ligand, models_ligand),
         (ta_RBP, models_RBP),
         (ta_SITE, models_SITE),
+        (ta_IF, models_IF),
     ]
     for task, models in TASKLIST:
         print(task.name)
