@@ -23,7 +23,7 @@ from base.RNA_PROT_exp import ta_RBP, models_RBP
 from base.RNA_SITE_exp import ta_SITE, models_SITE
 
 
-def do_one(model, num_layers, task, use_rnafm, seed):
+def do_one(model, num_layers, task, use_rnafm, seed, distance):
     if use_rnafm:
         rnafm = RNAFMTransform()
         [rnafm(rna) for rna in task.dataset]
@@ -61,7 +61,7 @@ def benchmark():
             for rnafm in [True, False]:
                 for num_layers, model in enumerate(models):
                     for seed in [0, 1, 2]:
-                        todo.append((model, num_layers, task, rnafm, seed))
+                        todo.append((model, num_layers, task, rnafm, seed, distance.name))
 
             _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in todo)
 
