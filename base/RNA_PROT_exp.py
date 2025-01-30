@@ -27,7 +27,7 @@ else:
     )
     distance = CDHitComputer()
     ta_RBP_seq.dataset.add_representation(GraphRepresentation(framework="pyg"))
-    ta_RBP_seq.dataset = distance(task_RBP_seq.dataset)
+    ta_RBP_seq.dataset = distance(ta_RBP_seq.dataset)
 
     ta_RBP_seq.splitter = ClusterSplitter(distance_name=distance.name)
 
