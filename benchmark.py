@@ -7,6 +7,7 @@ from rnaglib.tasks import BindingSite
 from rnaglib.tasks import ChemicalModification
 from rnaglib.transforms import GraphRepresentation
 from rnaglib.transforms import RNAFMTransform
+from rnaglib.encoders import ListEncoder
 from rnaglib.dataset_transforms import CDHitComputer, ClusterSplitter, StructureDistanceComputer
 
 
