@@ -80,9 +80,9 @@ def benchmark():
                 for num_layers, model in enumerate(models):
                     for seed in [0, 1, 2]:
                         task_ = copy.deepcopy(task)
-                        todo.append((PygModel(**model), num_layers, task_, use_rnafm, seed, distance.name))
+                        todo.append((PygModel(**model), num_layers, task_, use_rnafm, seed, task_.root))
 
-            # _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in todo)
+            _ = Parallel(n_jobs=-1)(delayed(do_one)(*run_args) for run_args in todo)
 
 
 if __name__ == "__main__":
