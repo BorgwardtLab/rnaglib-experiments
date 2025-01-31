@@ -1,19 +1,20 @@
 import json
 import pandas as pd
 
-TASKLIST = ["rna_cm", "rna_go", "rna_ligand", "rna_prot", "rna_site", "rna_if"]
+TASKLIST = ["rna_cm", "rna_go", "rna_ligand", "rna_prot", "rna_site", "rna_if", "rna_site_bench"]
 RNAFM = [True, False]
 DISTANCES = ["USalign", "cd_hit"]
 SEEDS = [0, 1, 2]
 LAYERS = [0, 1, 2]
 
 METRICS = {
-    "rna_cm": "f1",
+    "rna_cm": "accuracy",
     "rna_go": "f1",
     "rna_ligand": "auroc",
     "rna_prot": "mcc",
     "rna_site": "auroc",
     "rna_if": "accuracy",
+    "RNA_site_bench": "accuracy",
 }
 
 rows = []
