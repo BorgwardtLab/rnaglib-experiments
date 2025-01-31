@@ -19,6 +19,7 @@ if os.path.exists("RNA_RBP_seq"):
         recompute=False,
         debug=False,
     )
+    ta_RBP_seq.dataset.add_representation(GraphRepresentation(framework="pyg"))
 else:
     ta_RBP_seq = ProteinBindingSite(
         root="RNA_RBP_seq",

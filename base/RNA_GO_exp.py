@@ -19,6 +19,7 @@ if os.path.exists("RNA_GO_struc"):
         recompute=False,
         debug=False,
     )
+    ta_GO_struc.dataset.add_representation(GraphRepresentation(framework="pyg"))
 else:
     ta_GO_struc = RNAGo(
         root="RNA_GO_struc",

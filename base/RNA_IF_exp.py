@@ -15,6 +15,7 @@ ta_IF_struc.dataset.add_representation(GraphRepresentation(framework="pyg"))
 
 if os.path.exists("RNA_IF_seq"):
     ta_IF_seq = InverseFolding(root="RNA_IF_seq", recompute=False, debug=False)
+    ta_IF_seq.dataset.add_representation(GraphRepresentation(framework="pyg"))
 else:
     ta_IF_seq = InverseFolding(root="RNA_IF_seq", recompute=False, debug=False)
     distance = CDHitComputer()
@@ -33,11 +34,10 @@ else:
     os.rename(tmp, source)
 
 
-
 # Create model
 models_IF = [
     {
-        "num_node_features": num_node_features=ta_IF_seq.metadata["description"]["num_node_features"],
+        "num_node_features": ta_IF_seq.metadata["description"]["num_node_features"],
         "num_classes": ta_IF_seq.metadata["description"]["num_classes"] + 1,
         "graph_level": False,
         "num_layers": i,

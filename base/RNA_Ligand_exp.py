@@ -15,6 +15,7 @@ ta_ligand_seq.dataset.add_representation(GraphRepresentation(framework="pyg"))
 
 if os.path.exists("RNA_Ligand_struc"):
     ta_ligand_struc = LigandIdentification("RNA_Ligand_struc", data_filename="binding_pockets.csv", recompute=False)
+    ta_ligand_struc.dataset.add_representation(GraphRepresentation(framework="pyg"))
 else:
     ta_ligand_struc = LigandIdentification("RNA_Ligand_struc", data_filename="binding_pockets.csv", recompute=False)
     distance = StructureDistanceComputer()

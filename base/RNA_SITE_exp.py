@@ -19,6 +19,7 @@ if os.path.exists("RNA_SITE_seq"):
         recompute=False,
         debug=False,
     )
+    ta_SITE_seq.dataset.add_representation(GraphRepresentation(framework="pyg"))
 else:
     ta_SITE_seq = BindingSite(
         root="RNA_SITE_seq",

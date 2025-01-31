@@ -23,6 +23,7 @@ if os.path.exists("RNA_CM_seq"):
         recompute=False,
         debug=False,
     )
+    ta_CM_seq.dataset.add_representation(GraphRepresentation(framework="pyg"))
 else:
     ta_CM_seq = ChemicalModification(
         root="RNA_CM_seq",
