@@ -1,5 +1,7 @@
 import json
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 TASKLIST = ["rna_cm", "rna_go", "rna_ligand", "rna_prot", "rna_site", "rna_if", "rna_site_bench"]
 RNAFM = [True, False]
@@ -14,7 +16,7 @@ METRICS = {
     "rna_prot": "mcc",
     "rna_site": "auroc",
     "rna_if": "accuracy",
-    "RNA_site_bench": "accuracy",
+    "rna_site_bench": "accuracy",
 }
 
 rows = []
@@ -52,3 +54,22 @@ df_mean["metric"] = [METRICS[row.task] for row in df_mean.itertuples()]
 
 df_mean.to_csv("benchmark_results.csv")
 print(df_mean)
+
+for var in ["gnn_layers", "distance", "rnafm"]:
+    g = sns.catplot(
+        data=df_mean,
+        x=var,
+        y="score",
+        col="task",
+        hue=var,
+        kind="bar",
+        height=4,
+        aspect=0.6,
+    )
+    g.set_axis_labels("", "Test Score")
+    # g.set_xticklabels(["Men", "Women", "Children"])
+    # g.set_titles("{col_name} {col_var}")
+    g.set(ylim=(0, 1))
+    g.despine(left=True)
+    plt.savefig(var + ".pdf", format="pdf")
+    plt.show()
