@@ -75,7 +75,7 @@ def benchmark():
                         feature_names=["rnafm"], custom_encoders={"rnafm": ListEncoder(640)}
                     )
                 else:
-                    task.dataset.features_computer.remove_feature(feature_name="rnafm", input_feature=True)
+                    task.dataset.features_computer.removemfeature(feature_name="rnafm", input_feature=True)
                 task.set_loaders(recompute=False)
                 for num_layers, model in enumerate(models):
                     for seed in [0, 1, 2]:
