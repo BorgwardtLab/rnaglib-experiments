@@ -10,7 +10,7 @@ SEEDS = [0, 1, 2]
 LAYERS = [0, 1, 2]
 
 METRICS = {
-    "rna_cm": "accuracy",
+    "rna_cm": "f1",
     "rna_go": "f1",
     "rna_ligand": "auroc",
     "rna_prot": "mcc",
