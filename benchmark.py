@@ -63,7 +63,7 @@ def benchmark():
         (ta_SITE_struc, ta_SITE_seq, models_SITE),
         (ta_IF_struc, ta_IF_seq, models_IF),
     ]
-    for (task_struc, task_seq), models in TASKLIST:
+    for task_struc, task_seq, models in TASKLIST:
         todo = []
         for task in (task_struc, task_seq):
             print(task.name)
