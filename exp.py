@@ -17,7 +17,6 @@ class RNATrainer:
         self.exp_name = exp_name
         self.training_log = []
         self.seed = seed
-
     def setup(self):
         """Initialize wandb and model training"""
         """
@@ -113,7 +112,8 @@ class RNATrainer:
         # Print final metrics
         print("\nFinal Test Results:")
         for k, v in test_metrics.items():
-            print(f"Test {k}: {v:.4f}")
+            print(k, v)
+            # print(f"Test {k}: {v:.4f}")
 
 
 # Example usage:
