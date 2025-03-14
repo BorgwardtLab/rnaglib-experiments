@@ -11,6 +11,8 @@ from rnaglib.tasks import ChemicalModification
 from rnaglib.transforms import GraphRepresentation
 from rnaglib.dataset_transforms import CDHitComputer, ClusterSplitter, StructureDistanceComputer
 
+from exp import RNATrainer
+
 SEQ_ROOT = "roots/RNA_CM_seq"
 STRUC_ROOT = "roots/RNA_CM_struc"
 
@@ -60,6 +62,7 @@ model_CM = {
         "num_layers": 3,
         }
 
+trainer_CM = RNATrainer(ta_CM_struc, model_CM)
 
 if __name__ == "__main__":
     pass
