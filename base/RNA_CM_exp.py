@@ -26,7 +26,7 @@ model_args = {
         }
 
 model = PygModel(**model_args)
-trainer = RNATrainer(ta, model)
+trainer = RNATrainer(ta, model, epochs=40)
 
 trainer.train()
 
