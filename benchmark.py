@@ -60,12 +60,12 @@ def benchmark():
 
 def simple_benchmark():
     TASKLIST = [
-        (ta_GO_struc, trainer_GO, model_GO),
+        #(ta_GO_struc, trainer_GO, model_GO),
         (ta_CM_struc, trainer_CM, model_CM),
-        (ta_ligand_struc, trainer_ligand, model_ligand),
-        (ta_RBP_struc, trainer_RBP, model_RBP),
-        (ta_SITE_struc, trainer_SITE, model_SITE),
-        (ta_IF_struc, trainer_IF, model_IF),
+        #(ta_ligand_struc, trainer_ligand, model_ligand),
+        #(ta_RBP_struc, trainer_RBP, model_RBP),
+        #(ta_SITE_struc, trainer_SITE, model_SITE),
+        #(ta_IF_struc, trainer_IF, model_IF),
     ]
     for task, trainer, model in TASKLIST:
         todo = []

@@ -17,6 +17,7 @@ class RNATrainer:
         self.exp_name = exp_name
         self.training_log = []
         self.seed = seed
+
     def setup(self):
         """Initialize wandb and model training"""
         """
