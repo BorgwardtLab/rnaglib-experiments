@@ -45,7 +45,7 @@ class RNATrainer:
         print("Getting split loaders")
         print("Got split loaders")
 
-        if self.num_classes == 2:
+        if self.model.num_classes == 2:
             neg_count = float(self.task.metadata["class_distribution"]["0"])
             pos_count = float(self.task.metadata["class_distribution"]["1"])
             pos_weight = torch.tensor(np.sqrt(neg_count / pos_count)).to(self.model.device)

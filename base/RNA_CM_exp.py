@@ -10,6 +10,10 @@ from rnaglib.learning.task_models import PygModel
 from rnaglib.tasks import get_task
 from rnaglib.transforms import GraphRepresentation
 
+script_dir = os.path.dirname(os.path.realpath(__file__))
+if __name__ == "__main__":
+    sys.path.append(os.path.join(script_dir, '..'))
+
 from exp import RNATrainer
 
 # Setup task
