@@ -64,13 +64,6 @@ for tid in TASKS_TODO:
         task.dataset.add_representation(GraphRepresentation(framework="pyg"))
         task.set_loaders(recompute=False)
 
-        model_args = {
-                "num_node_features": task.metadata["num_node_features"],
-                "num_classes": task.metadata["num_classes"],
-                "graph_level": task.metadata["graph_level"],
-                "num_layers": 3,
-                }
-
         task.get_split_loaders()
 
         model = PygModel.from_task(task, **MODEL_ARGS[tid])
