@@ -5,7 +5,7 @@ from datetime import datetime
 import wandb
 
 import torch
-
+import numpy as np
 
 class RNATrainer:
     def __init__(self, task, model, wandb_project="", exp_name="default", learning_rate=0.001, epochs=100, seed=0):
@@ -44,6 +44,13 @@ class RNATrainer:
 
         print("Getting split loaders")
         print("Got split loaders")
+
+        if self.num_classes == 2:
+            neg_count = float(self.task.metadata["class_distribution"]["0"])
+            pos_count = float(self.task.metadata["class_distribution"]["1"])
+            pos_weight = torch.tensor(np.sqrt(neg_count / pos_count)).to(self.model.device)
+            self.model.criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
+
         for epoch in range(self.epochs):
             # Training phase
             self.model.train()

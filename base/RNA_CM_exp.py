@@ -16,14 +16,14 @@ from exp import RNATrainer
 ta = get_task(root="roots/RNA_CM", task_id="rna_cm")
 
 ta.dataset.add_representation(GraphRepresentation(framework="pyg"))
-ta.get_split_loaders()
+ta.get_split_loaders(batch_size=8)
 
 model_args = {
         "num_node_features": ta.metadata["num_node_features"],
         "num_classes": ta.metadata["num_classes"],
         "graph_level": False,
         "num_layers": 3,
-        }
+}
 
 model = PygModel(**model_args)
 trainer = RNATrainer(ta, model, epochs=40)
