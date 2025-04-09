@@ -48,7 +48,9 @@ class RNATrainer:
         if self.model.num_classes == 2:
             neg_count = float(self.task.metadata["class_distribution"]["0"])
             pos_count = float(self.task.metadata["class_distribution"]["1"])
-            pos_weight = torch.tensor(np.sqrt(neg_count / pos_count)).to(self.model.device)
+            pos_weight = torch.tensor(np.sqrt(neg_count /
+                                              pos_count)).to(self.model.device,
+                                                             dtype=torch.float32)
             self.model.criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 
         for epoch in range(self.epochs):
