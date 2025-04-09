@@ -1,7 +1,6 @@
 import os
 import shutil
 
-from rnaglib.dataset_transforms.structure_distance_computer import StructureDistanceComputer
 from rnaglib.tasks import get_task
 from rnaglib.tasks import ChemicalModification
 from rnaglib.transforms import GraphRepresentation
@@ -62,8 +61,6 @@ for tid in TASKS_TODO:
 
 
         task.dataset.add_representation(GraphRepresentation(framework="pyg"))
-        task.set_loaders(recompute=False)
-
         task.get_split_loaders()
 
         model = PygModel.from_task(task, **MODEL_ARGS[tid])
