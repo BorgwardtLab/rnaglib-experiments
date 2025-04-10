@@ -26,7 +26,9 @@ MODEL_ARGS = {"rna_cm": {"num_layers": 3},
               "rna_go": {"num_layers": 3},
               "rna_if": {"num_layers": 3},
               "rna_ligand": {"num_layers": 4},
-              "rna_prot": {"num_layers": 3},
+              "rna_prot": {"num_layers": 4, 
+                          "hidden_channels": 64
+                          "dropout_rate": 0.2},
               "rna_site": {"num_layers": 4, 
                            "hidden_channels": 256},
               }
@@ -38,7 +40,8 @@ TRAINER_ARGS = {"rna_cm": {'epochs': 40,
                 "rna_if": {"epochs": 100},
                 "rna_ligand": {"epochs": 10,
                                "learning_rate": 1e-5},
-                "rna_prot": {"epochs": 100},
+                "rna_prot": {"epochs": 100, 
+                            "learning_rate": 0.01},
                 "rna_site": {"batch_size": 8, "epochs": 100}
                 }
 
