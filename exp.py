@@ -8,8 +8,10 @@ import torch
 import numpy as np
 
 class RNATrainer:
-    def __init__(self, task, model, wandb_project="", exp_name="default", learning_rate=0.001, epochs=100, seed=0):
+    def __init__(self, task, model, rep, wandb_project="", exp_name="default",
+                 learning_rate=0.001, epochs=100, seed=0, batch_size=8):
         self.task = task
+        self.representation = rep
         self.model = model
         self.wandb_project = exp_name
         self.learning_rate = learning_rate
@@ -17,6 +19,7 @@ class RNATrainer:
         self.exp_name = exp_name
         self.training_log = []
         self.seed = seed
+        self.batch_size = batch_size
 
     def setup(self):
         """Initialize wandb and model training"""
@@ -38,12 +41,13 @@ class RNATrainer:
 
         self.model.configure_training(learning_rate=self.learning_rate)
 
+        self.task.add_representation(self.representation)
+        self.task.get_split_loaders(recompute=False,
+                                    batch_size=self.batch_size)
+
     def train(self):
         """Run training loop with logging"""
         self.setup()
-
-        print("Getting split loaders")
-        print("Got split loaders")
 
         if self.model.num_classes == 2:
             neg_count = float(self.task.metadata["class_distribution"]["0"])
