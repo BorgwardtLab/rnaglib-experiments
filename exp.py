@@ -13,7 +13,7 @@ class RNATrainer:
         self.task = task
         self.representation = rep
         self.model = model
-        self.wandb_project = exp_name
+        self.wandb_project = wandb_project
         self.learning_rate = learning_rate
         self.epochs = epochs
         self.exp_name = exp_name
@@ -23,13 +23,12 @@ class RNATrainer:
 
     def setup(self):
         """Initialize wandb and model training"""
-        """
         wandb.init(
             entity="mlsb",  # Replace with your team name
             project=self.wandb_project,
             name=self.exp_name,
         )
-        """
+    
         # Set seeds for reproducibility
         torch.manual_seed(self.seed)  # CPU random number generator
         if torch.cuda.is_available():
@@ -42,6 +41,7 @@ class RNATrainer:
         self.model.configure_training(learning_rate=self.learning_rate)
 
         self.task.add_representation(self.representation)
+
         self.task.get_split_loaders(recompute=False,
                                     batch_size=self.batch_size)
 
@@ -80,7 +80,7 @@ class RNATrainer:
                 "train_accuracy": train_metrics["accuracy"],
                 "val_accuracy": val_metrics["accuracy"],
             }
-            # wandb.log(metrics)
+            wandb.log(metrics)
             self.training_log.append(metrics)
 
             # Print progress
@@ -92,7 +92,7 @@ class RNATrainer:
                 )
 
         self.save_results()
-        # wandb.finish()
+        wandb.finish()
 
     def save_results(self):
         """Save final results and metrics"""

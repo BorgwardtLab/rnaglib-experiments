@@ -1,31 +1,37 @@
 import os
 import json
-import shutil
 
 from rnaglib.dataset_transforms.cd_hit import CDHitComputer
 from rnaglib.dataset_transforms.structure_distance_computer import StructureDistanceComputer
 from rnaglib.tasks import get_task
-from rnaglib.tasks import ChemicalModification
 from rnaglib.transforms import GraphRepresentation
-from rnaglib.dataset_transforms import ClusterSplitter
+from rnaglib.dataset_transforms import ClusterSplitter, RandomSplitter
 from rnaglib.learning import PygModel
 
 from exp import RNATrainer
 
 
-TASKS_TODO = ['rna_cm', 
-              'rna_go',
-              'rna_if',
-              'rna_ligand',
-              'rna_prot',
-              'rna_site']
+# TASKS_TODO = ['rna_cm', 
+#               'rna_go',
+#               'rna_if',
+#               'rna_ligand',
+#               'rna_prot',
+#               'rna_site']
 
-TASKS_TODO = ['rna_ligand']
+
+# Use this if you are submitting one job per task
+TASKS_TODO = [os.environ.get('TASK')]
+
+#TASKS_TODO = ['rna_ligand']
 
 
 SPLITS = {"seq": 'cd_hit',
-          "struc": 'USalign' 
+          "struc": 'USalign', 
+          "rand": None,
           }
+
+#SPLITS = {"rand": None}
+
 MODEL_ARGS = {"rna_cm": {"num_layers": 3},
               "rna_go": {"num_layers": 3},
               "rna_if": {"num_layers": 3,
@@ -71,7 +77,12 @@ for tid in TASKS_TODO:
                 if split == 'seq':
                     task.dataset = CDHitComputer()(task.dataset)
 
-            task.splitter = ClusterSplitter(distance_name=distance)
+            if split == 'rand':
+                task.splitter = RandomSplitter()
+            else:
+                task.splitter = ClusterSplitter(distance_name=distance)
+            # Representation needs to be added here as the loaders are not updated when the rep is added later.
+            task.add_representation(GraphRepresentation(framework="pyg"))
             task.get_split_loaders(recompute=True)
 
             task.write()
@@ -84,7 +95,10 @@ for tid in TASKS_TODO:
             result_file = f"results/workshop_{tid}_{split}_{seed}.json"
             if os.path.exists(result_file) and not recompute:
                 continue
-            trainer = RNATrainer(task, model, rep, seed=seed, **TRAINER_ARGS[tid])
+
+            exp_name = f"{tid}_{split}_{seed}"
+
+            trainer = RNATrainer(task, model, rep, seed=seed, wandb_project="rnaglib-splitting", exp_name=exp_name, **TRAINER_ARGS[tid])
             trainer.train()
             metrics = model.evaluate(task, split="test")
             with open(result_file, "w") as j:
