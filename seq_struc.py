@@ -88,10 +88,11 @@ for tid in TASKS_TODO:
             task.write()
 
 
-        model = PygModel.from_task(task, **MODEL_ARGS[tid])
-        rep = GraphRepresentation(framework="pyg")
+
 
         for seed in [0, 1, 2]:
+            model = PygModel.from_task(task, **MODEL_ARGS[tid])
+            rep = GraphRepresentation(framework="pyg")
             result_file = f"results/workshop_{tid}_{split}_{seed}.json"
             if os.path.exists(result_file) and not recompute:
                 continue
