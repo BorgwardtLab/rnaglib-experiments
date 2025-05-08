@@ -48,14 +48,14 @@ TRAINER_ARGS = {"rna_cm": {'epochs': 40,
                            "batch_size": 8},
                 "rna_go": {"epochs": 20,
                            "learning_rate":0.001},
-                "rna_if": {"epochs": 100,
+                "rna_if": {"epochs": 40, # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
                            "learning_rate": 0.0001},
                 "rna_ligand": {"epochs": 40,
                                "learning_rate": 1e-5},
-                "rna_prot": {"epochs": 100, 
+                "rna_prot": {"epochs": 40, # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
                             "learning_rate": 0.01},
                 "rna_site": {"batch_size": 8,
-                             "epochs": 100}
+                             "epochs": 40} # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
                          }
 
 
