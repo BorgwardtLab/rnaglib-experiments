@@ -20,7 +20,7 @@ from exp import RNATrainer
 
 
 # Use this if you are submitting one job per task
-TASKS_TODO = [os.environ.get('TASK')]
+#TASKS_TODO = [os.environ.get('TASK')]
 
 #TASKS_TODO = ['rna_ligand']
 
@@ -33,7 +33,8 @@ SPLITS = {"seq": 'cd_hit',
 #SPLITS = {"rand": None}
 
 MODEL_ARGS = {"rna_cm": {"num_layers": 3},
-              "rna_go": {"num_layers": 3},
+              "rna_go": {"num_layers": 3,
+                         "multi_label": True},
               "rna_if": {"num_layers": 3,
                          "hidden_channels": 128},
               "rna_ligand": {"num_layers": 4},
@@ -83,7 +84,7 @@ for tid in TASKS_TODO:
                 task.splitter = ClusterSplitter(distance_name=distance)
             # Representation needs to be added here as the loaders are not updated when the rep is added later.
             task.add_representation(GraphRepresentation(framework="pyg"))
-            task.get_split_loaders(recompute=True)
+            task.get_split_loaders(recompute=True, batch_size=TRAINER_ARGS[tid]["batch_size"])
 
             task.write()
 
