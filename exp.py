@@ -75,10 +75,8 @@ class RNATrainer:
             # Log to wandb
             metrics = {
                 "epoch": epoch,
-                "train_loss": train_metrics["loss"],
-                "val_loss": val_metrics["loss"],
-                "train_accuracy": train_metrics["accuracy"],
-                "val_accuracy": val_metrics["accuracy"],
+                **{f"train_{k}": v for k, v in train_metrics.items()},
+                **{f"val_{k}": v for k, v in val_metrics.items()}
             }
             wandb.log(metrics)
             self.training_log.append(metrics)

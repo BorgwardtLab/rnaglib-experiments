@@ -22,8 +22,8 @@ from exp import RNATrainer
 # Use this if you are submitting one job per task
 TASKS_TODO = [os.environ.get('TASK')]
 
-#TASKS_TODO = ['rna_ligand']
-
+#TASKS_TODO = ['rna_site_redundant']
+STRUCTURES_PATH = "/fs/pool/pool-wyss/RNA/.rnaglib/structures"
 
 SPLITS = {"seq": 'cd_hit',
           "struc": 'USalign', 
@@ -42,20 +42,24 @@ MODEL_ARGS = {"rna_cm": {"num_layers": 3},
                           "dropout_rate": 0.2},
               "rna_site": {"num_layers": 4, 
                            "hidden_channels": 256},
+              "rna_site_redundant": {"num_layers": 4, 
+                           "hidden_channels": 256},
               }
 
 TRAINER_ARGS = {"rna_cm": {'epochs': 40, 
                            "batch_size": 8},
                 "rna_go": {"epochs": 20,
-                           "learning_rate":0.001},
+                           "learning_rate":0.0001}, #0.001 (original)
                 "rna_if": {"epochs": 40, # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
                            "learning_rate": 0.0001},
                 "rna_ligand": {"epochs": 40,
                                "learning_rate": 1e-5},
                 "rna_prot": {"epochs": 40, # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
-                            "learning_rate": 0.01},
+                            "learning_rate": 0.001}, #0.01 (original)
                 "rna_site": {"batch_size": 8,
-                             "epochs": 40} # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
+                             "epochs": 40}, # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
+                "rna_site_redundant": {"epochs": 100,
+                         "learning_rate": 0.001}
                          }
 
 
@@ -66,14 +70,27 @@ for tid in TASKS_TODO:
         print(tid, split)
         root = f"roots/{tid}_{split}"
         print(root)
+
         if os.path.exists(root): 
-            task = get_task(task_id=tid, root=root)
+            if tid != "rna_site_redundant":
+                print(f"Loading task {tid} from {root}")
+                task = get_task(task_id=tid, root=root)
+            else:
+                from rnaglib.tasks import BindingSiteRedundant
+                print(f"Loading task {tid} from {root}")
+                task = BindingSiteRedundant(root=root, structures_path=STRUCTURES_PATH)
         else:
-            task = get_task(task_id=tid, root=root)
+            if tid != "rna_site_redundant":
+                print(f"Creating task {tid} in {root}")
+                task = get_task(task_id=tid, root=root)
+            else:
+                from rnaglib.tasks import BindingSiteRedundant
+                print(f"Creating task {tid} in {root}")
+                task = BindingSiteRedundant(root=root, structures_path=STRUCTURES_PATH)
 
             if distance not in task.dataset.distances:
                 if split == 'struc':
-                    task.dataset = StructureDistanceComputer()(task.dataset)
+                    task.dataset = StructureDistanceComputer(structures_path=STRUCTURES_PATH)(task.dataset)
                 if split == 'seq':
                     task.dataset = CDHitComputer()(task.dataset)
 

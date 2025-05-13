@@ -25,7 +25,7 @@ from exp import RNATrainer
 # Use this if you are submitting one job per task
 TASKS_TODO = [os.environ.get('TASK')]
 
-TASKS_TODO = ['rna_site_redundant']
+#TASKS_TODO = ['rna_site_redundant']
 
 RNA_FM = [True, False]
 
@@ -39,6 +39,7 @@ MODEL_ARGS = {"rna_cm": {"num_layers": 3},
                           "dropout_rate": 0.2},
               "rna_site": {"num_layers": 4, 
                            "hidden_channels": 256},
+              "rna_go_struc_0.6": {"num_layers": 3},
               "rna_site_redundant": {"num_layers": 4, 
                            "hidden_channels": 256},
               }
@@ -46,15 +47,17 @@ MODEL_ARGS = {"rna_cm": {"num_layers": 3},
 TRAINER_ARGS = {"rna_cm": {'epochs': 40, 
                            "batch_size": 8},
                 "rna_go": {"epochs": 20,
-                           "learning_rate":0.001},
+                           "learning_rate":0.0001}, #0.001 (original)
                 "rna_if": {"epochs": 40, # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
                            "learning_rate": 0.0001},
                 "rna_ligand": {"epochs": 40,
                                "learning_rate": 1e-5},
                 "rna_prot": {"epochs": 100, 
-                            "learning_rate": 0.01},
+                            "learning_rate": 0.001}, #0.01 (original)
                 "rna_site": {"batch_size": 8,
                              "epochs": 100},
+                "rna_go_struc_0.6": {"epochs": 100,
+                             "learning_rate": 0.0001},   
                 "rna_site_redundant": {"epochs": 100,
                                "learning_rate": 0.001}
                          }
