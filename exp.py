@@ -78,6 +78,20 @@ class RNATrainer:
                 **{f"train_{k}": v for k, v in train_metrics.items()},
                 **{f"val_{k}": v for k, v in val_metrics.items()}
             }
+            try:
+                metrics["train_auc"] = train_metrics['auc']
+                metrics["val_auc"] = val_metrics['auc']
+            except:
+                pass
+            if self.task.metadata['multi_label']:
+                metrics["train_jaccard"] = train_metrics["jaccard"]
+                metrics["val_jaccard"] = val_metrics["jaccard"]
+            else:
+                metrics["train_balanced_accuracy"] = train_metrics["balanced_accuracy"]
+                metrics["val_balanced_accuracy"] = val_metrics["balanced_accuracy"]
+                metrics["train_mcc"] = train_metrics["mcc"]
+                metrics["val_mcc"] = val_metrics["mcc"]
+
             wandb.log(metrics)
             self.training_log.append(metrics)
 
