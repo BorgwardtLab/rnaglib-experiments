@@ -61,7 +61,7 @@ class RNATrainer:
             # Training phase
             self.model.train()
             for batch in self.task.train_dataloader:
-                graph = batch["graph"].to(self.model.device)
+                graph = batch[self.representation.name].to(self.model.device)
                 self.model.optimizer.zero_grad()
                 out = self.model(graph)
                 loss = self.model.compute_loss(out, graph.y)
