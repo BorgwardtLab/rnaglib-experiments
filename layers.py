@@ -94,10 +94,10 @@ if __name__ == "__main__":
         rep = GraphRepresentation(framework="pyg", edge_map=edge_maps[representation])
         ta.dataset.add_representation(rep)
         for seed in [0, 1, 2]:
-            ta.get_split_loaders(batch_size=TRAINER_ARGS[ta_name][representation]["batch_size"], recompute=True)
+            ta.get_split_loaders(batch_size=TRAINER_ARGS[ta_name][representation]["batch_size"], recompute=False)
             for nb_layers in [2, 3, 4, 5, 6]:
                 exp_name = (f"{ta_name}_{representation}_{nb_layers}layers_lr{TRAINER_ARGS[ta_name][representation]['learning_rate']}_"
-                            f"{TRAINER_ARGS[ta_name][representation][representation]['epochs']}epochs_hiddendim{MODEL_ARGS[ta_name][representation]['hidden_channels']}_"
+                            f"{TRAINER_ARGS[ta_name][representation]['epochs']}epochs_hiddendim{MODEL_ARGS[ta_name][representation]['hidden_channels']}_"
                             f"batch_size{TRAINER_ARGS[ta_name][representation]['batch_size']}")
                 model = PygModel(num_node_features=ta.metadata["num_node_features"],
                                  num_classes=ta.metadata["num_classes"],
