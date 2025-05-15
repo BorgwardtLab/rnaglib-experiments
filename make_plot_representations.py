@@ -6,27 +6,33 @@ import seaborn as sns
 MODEL_ARGS = {
     "rna_cm": {
         "2.5D":{
+            "num_layers": 3,
             "hidden_channels": 128
         },
         "2D":{
+            "num_layers": 3,
             "hidden_channels": 128
         }
     },
     "rna_prot": {
         "2.5D":{
+            "num_layers": 4,
             "hidden_channels": 64,
             "dropout_rate": 0.2
         },
         "2D":{
+            "num_layers": 4,
             "hidden_channels": 64,
             "dropout_rate": 0.2
         },
     },
     "rna_site": {
         "2.5D":{
+            "num_layers": 4, 
             "hidden_channels": 256
         },
         "2D":{
+            "num_layers": 2, 
             "hidden_channels":128
         },
     },
@@ -82,15 +88,13 @@ METRICS = {
 }
 SEEDS = [0, 1, 2]
 TASKLIST = ["rna_cm", "rna_site", "rna_prot"]
-NB_LAYERS_LIST = [2,3,4,5,6]
-
-representation = "2D"
+REPRESENTATIONS = ["2D_GCN", "2D", "2.5D"]
 
 rows = []
 for ta_name in TASKLIST:
-    for nb_layers in NB_LAYERS_LIST:
+    for representation in REPRESENTATIONS:
         for seed in SEEDS:
-            json_name = f"""results/{ta_name}_{representation}_{str(nb_layers)}layers_lr{str(TRAINER_ARGS[ta_name][representation]["learning_rate"])}_{str(TRAINER_ARGS[ta_name][representation]["epochs"])}epochs_hiddendim{str(MODEL_ARGS[ta_name][representation]["hidden_channels"])}_batch_size{str(TRAINER_ARGS[ta_name][representation]["batch_size"])}_seed{str(seed)}_results.json"""
+            json_name = f"""results/{ta_name}_{representation}_{str(TRAINER_ARGS[ta_name][representation]["num_layers"])}layers_lr{str(TRAINER_ARGS[ta_name][representation]["learning_rate"])}_{str(TRAINER_ARGS[ta_name][representation]["epochs"])}epochs_hiddendim{str(MODEL_ARGS[ta_name][representation]["hidden_channels"])}_batch_size{str(TRAINER_ARGS[ta_name][representation]["batch_size"])}_seed{str(seed)}_results.json"""
             with open(json_name) as result:
                 result = json.load(result)
                 test_metrics = result["test_metrics"]
@@ -100,15 +104,15 @@ for ta_name in TASKLIST:
                         "metric": METRICS[ta_name],
                         "task": ta_name,
                         "seed": seed,
-                        "nb_layers": nb_layers,
+                        "representation": representation,
                     }
                 )
     pass
 
 df = pd.DataFrame(rows)
-df.to_csv(f"nb_layers_{representation}.csv")
-df_mean = df.groupby(["task", "nb_layers"])["score"].mean().reset_index()
-df_std = df.groupby(["task", "nb_layers"])["score"].std().reset_index()
+df.to_csv("splitting.csv")
+df_mean = df.groupby(["task", "representation"])["score"].mean().reset_index()
+df_std = df.groupby(["task", "representation"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
 df_mean["metric"] = [METRICS[row.task] for row in df_mean.itertuples()]
 print(df_mean)
@@ -116,7 +120,7 @@ g = sns.catplot(
     data=df,
     x="task",
     y="score",
-    hue="nb_layers",
+    hue="representation",
     kind="bar",
     height=4,
     aspect=1.6,
@@ -126,6 +130,6 @@ g.set_axis_labels("", "Test Score")
 g.set(ylim=(0.5, None))
 g.despine(left=True)
 
-plt.savefig(f"nb_layers_{representation}.pdf", format="pdf")
+plt.savefig(f"representations_ablation.pdf", format="pdf")
 plt.show()
 plt.clf()
