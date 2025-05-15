@@ -6,6 +6,7 @@ import sys
 from rnaglib.learning.task_models import PygModel
 from rnaglib.tasks import get_task
 from rnaglib.transforms import GraphRepresentation
+from rnaglib.config.graph_keys import GRAPH_KEYS, TOOL
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(current_dir, ".."))
@@ -91,13 +92,14 @@ if __name__ == "__main__":
     for ta_name in ["rna_site", "rna_cm", "rna_prot"]:
 
         ta = get_task(root="roots/" + ta_name, task_id=ta_name)
-        rep = GraphRepresentation(framework="pyg", edge_map=edge_maps[representation])
+        edge_map = GRAPH_KEYS[edge_maps[representation]][TOOL]
+        rep = GraphRepresentation(framework="pyg", edge_map=edge_map)
         ta.dataset.add_representation(rep)
         for seed in [0, 1, 2]:
-            ta.get_split_loaders(batch_size=TRAINER_ARGS[ta_name][representation]["batch_size"], recompute=True)
+            ta.get_split_loaders(batch_size=TRAINER_ARGS[ta_name][representation]["batch_size"], recompute=False)
             for nb_layers in [2, 3, 4, 5, 6]:
                 exp_name = (f"{ta_name}_{representation}_{nb_layers}layers_lr{TRAINER_ARGS[ta_name][representation]['learning_rate']}_"
-                            f"{TRAINER_ARGS[ta_name][representation][representation]['epochs']}epochs_hiddendim{MODEL_ARGS[ta_name][representation]['hidden_channels']}_"
+                            f"{TRAINER_ARGS[ta_name][representation]['epochs']}epochs_hiddendim{MODEL_ARGS[ta_name][representation]['hidden_channels']}_"
                             f"batch_size{TRAINER_ARGS[ta_name][representation]['batch_size']}")
                 model = PygModel(num_node_features=ta.metadata["num_node_features"],
                                  num_classes=ta.metadata["num_classes"],
