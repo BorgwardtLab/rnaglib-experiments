@@ -87,6 +87,7 @@ edge_maps = {
     "2D": "2D_edge_map"
 }
 representation = "2D"
+layer_type = "gcn"
 
 if __name__ == "__main__":
     for ta_name in ["rna_site", "rna_cm", "rna_prot"]:
@@ -96,9 +97,13 @@ if __name__ == "__main__":
         rep = GraphRepresentation(framework="pyg", edge_map=edge_map)
         ta.dataset.add_representation(rep)
         for seed in [0, 1, 2]:
-            ta.get_split_loaders(batch_size=TRAINER_ARGS[ta_name][representation]["batch_size"], recompute=False)
+            ta.get_split_loaders(batch_size=TRAINER_ARGS[ta_name][representation]["batch_size"], recompute=True)
             for nb_layers in [2, 3, 4, 5, 6]:
-                exp_name = (f"{ta_name}_{representation}_{nb_layers}layers_lr{TRAINER_ARGS[ta_name][representation]['learning_rate']}_"
+                if representation=="2D" and layer_type=="gcn":
+                    complete_representation_name = "2D_GCN"
+                else:
+                    complete_representation_name = representation
+                exp_name = (f"{ta_name}_{complete_representation_name}_{nb_layers}layers_lr{TRAINER_ARGS[ta_name][representation]['learning_rate']}_"
                             f"{TRAINER_ARGS[ta_name][representation]['epochs']}epochs_hiddendim{MODEL_ARGS[ta_name][representation]['hidden_channels']}_"
                             f"batch_size{TRAINER_ARGS[ta_name][representation]['batch_size']}")
                 model = PygModel(num_node_features=ta.metadata["num_node_features"],
