@@ -23,16 +23,15 @@ for threshold in thresholds:
                     {
                         "score": score,
                         "metric": METRIC,
-                        "task": f"{threshold:.1f}",
+                        "threshold": f"{threshold:.1f}",
                         "seed": seed,
                         "distance": distance,
                     }
                 )
 
-# Add simulated "random" group using thresholds 0.4, 0.6, 0.8
-rand_thresholds = [0.4, 0.6, 0.8]
-for i, threshold in enumerate(rand_thresholds):
-    path = f"results/thresholds_rna_site_redundant_rand_{threshold}_{0}.json"
+# Add random performance over three seeds
+for seed in SEEDS:
+    path = f"results/thresholds_rna_site_redundant_rand_0.4_{seed}.json"
     with open(path) as result:
         result = json.load(result)
         score = result[METRIC]
@@ -40,8 +39,8 @@ for i, threshold in enumerate(rand_thresholds):
             {
                 "score": score,
                 "metric": METRIC,
-                "task": "random",
-                "seed": i,  # simulate different seeds
+                "threshold": "random",
+                "seed": seed,  # simulate different seeds
                 "distance": "rand",  # used for filtering
             }
         )
@@ -54,7 +53,7 @@ df.to_csv("thresholds_with_random.csv")
 task_order = ["random"] + [f"{t:.1f}" for t in thresholds]
 
 # Create a column to use for legend hue, exclude 'rand'
-df["plot_distance"] = df["distance"].apply(lambda d: d if d in ["struc", "seq"] else "random")
+df["distance"] = df["distance"].apply(lambda d: d if d in ["struc", "seq"] else "random")
 
 # Custom color palette (you can tweak these)
 palette = {
@@ -62,27 +61,26 @@ palette = {
     "seq": sns.color_palette()[1],
     "random": sns.color_palette()[2],
 }
+print(df)
 
 # Plot
 g = sns.catplot(
     data=df,
-    x="task",
+    x="threshold",
     y="score",
-    hue="plot_distance",
+    hue="distance",
     kind="bar",
     height=4,
     aspect=1,
     order=task_order,
     palette=palette,
+    legend=False,
 )
 
 # Format axes
 g.set_axis_labels("Threshold", "Test Score")
-g.set(ylim=(0.4, 0.85))
+g.set(ylim=(0.5, 0.85))
 g.despine(left=True)
-
-# Remove legend entirely
-g._legend.remove()
 
 # Save + show
 plt.savefig("thresholds.pdf", format="pdf")
