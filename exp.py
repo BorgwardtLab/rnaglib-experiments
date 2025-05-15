@@ -61,7 +61,7 @@ class RNATrainer:
             # Training phase
             self.model.train()
             for batch in self.task.train_dataloader:
-                graph = batch["graph"].to(self.model.device)
+                graph = batch[self.representation.name].to(self.model.device)
                 self.model.optimizer.zero_grad()
                 out = self.model(graph)
                 loss = self.model.compute_loss(out, graph.y)
@@ -87,10 +87,16 @@ class RNATrainer:
                 metrics["train_jaccard"] = train_metrics["jaccard"]
                 metrics["val_jaccard"] = val_metrics["jaccard"]
             else:
-                metrics["train_balanced_accuracy"] = train_metrics["balanced_accuracy"]
-                metrics["val_balanced_accuracy"] = val_metrics["balanced_accuracy"]
-                metrics["train_mcc"] = train_metrics["mcc"]
-                metrics["val_mcc"] = val_metrics["mcc"]
+                try:
+                    metrics["train_balanced_accuracy"] = train_metrics["balanced_accuracy"]
+                    metrics["val_balanced_accuracy"] = val_metrics["balanced_accuracy"]
+                except:
+                    pass
+                try:
+                    metrics["train_mcc"] = train_metrics["mcc"]
+                    metrics["val_mcc"] = val_metrics["mcc"]
+                except:
+                    pass
 
             wandb.log(metrics)
             self.training_log.append(metrics)

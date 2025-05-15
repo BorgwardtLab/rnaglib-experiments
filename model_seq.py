@@ -201,7 +201,7 @@ class SequenceModel(torch.nn.Module):
             epoch_loss = 0
             num_batches = 0
             for batch in task.train_dataloader:
-                graph = batch["graph"].to(self.device)
+                graph = batch["sequence"].to(self.device)
                 self.optimizer.zero_grad()
                 out = self(graph)
                 loss = self.compute_loss(out, graph.y)
@@ -224,7 +224,7 @@ class SequenceModel(torch.nn.Module):
         total_loss = 0
         with torch.no_grad():
             for batch in loader:
-                graph = batch["graph"]
+                graph = batch["sequence"]
                 graph = graph.to(self.device)
                 out = self(graph)
                 labels = graph.y

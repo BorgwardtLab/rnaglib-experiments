@@ -30,7 +30,7 @@ SPLITS = {"seq": 'cd_hit',
           "rand": None,
           }
 
-#SPLITS = {"rand": None}
+SPLITS = {"rand": None}
 
 MODEL_ARGS = {"rna_cm": {"num_layers": 3},
               "rna_go": {"num_layers": 3,
@@ -95,28 +95,28 @@ for tid in TASKS_TODO:
             if split == 'seq':
                 task.dataset = CDHitComputer()(task.dataset)
 
-        if split == 'rand':
-            task.splitter = RandomSplitter()
-        else:
-            task.splitter = ClusterSplitter(distance_name=distance, similarity_threshold=0.6) #remove threshold
-        # Representation needs to be added here as the loaders are not updated when the rep is added later.
-        task.add_representation(GraphRepresentation(framework="pyg"))
-        if "batch_size" in TRAINER_ARGS[tid]:
-            task.get_split_loaders(recompute=True, batch_size=TRAINER_ARGS[tid]["batch_size"])
-        else:
-            task.get_split_loaders(recompute=True)
-
-        task.write()
-
-
         for seed in [0, 1, 2]:
+
+            if split == 'rand':
+                task.splitter = RandomSplitter(seed=seed)
+            else:
+                task.splitter = ClusterSplitter(distance_name=distance, similarity_threshold=0.6) #remove threshold
+            # Representation needs to be added here as the loaders are not updated when the rep is added later.
+            task.add_representation(GraphRepresentation(framework="pyg"))
+            if "batch_size" in TRAINER_ARGS[tid]:
+                task.get_split_loaders(recompute=True, batch_size=TRAINER_ARGS[tid]["batch_size"])
+            else:
+                task.get_split_loaders(recompute=True)
+
+            task.write()
+
             model = PygModel.from_task(task, **MODEL_ARGS[tid])
             rep = GraphRepresentation(framework="pyg")
-            result_file = f"results/workshop_{tid}_{split}_{seed}.json"
+            result_file = f"results/outerseed_{tid}_{split}_{seed}.json"
             if os.path.exists(result_file) and not recompute:
                 continue
 
-            exp_name = f"{tid}_{split}_{seed}"
+            exp_name = f"outerseed_{tid}_{split}_{seed}"
 
             trainer = RNATrainer(task, model, rep, seed=seed, wandb_project="rnaglib-splitting", exp_name=exp_name, **TRAINER_ARGS[tid])
             trainer.train()
