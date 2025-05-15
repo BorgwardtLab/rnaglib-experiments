@@ -88,7 +88,7 @@ edge_maps = {
 representation = "2D"
 
 if __name__ == "__main__":
-    for ta_name in ["rna_prot", "rna_cm", "rna_site"]:
+    for ta_name in ["rna_site", "rna_cm", "rna_prot"]:
 
         ta = get_task(root="roots/" + ta_name, task_id=ta_name)
         rep = GraphRepresentation(framework="pyg", edge_map=edge_maps[representation])
