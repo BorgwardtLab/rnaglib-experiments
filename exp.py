@@ -8,7 +8,7 @@ import torch
 import numpy as np
 
 class RNATrainer:
-    def __init__(self, task, model, rep, wandb_project="", exp_name="default",
+    def __init__(self, task, model, rep="pyg", wandb_project="", exp_name="default",
                  learning_rate=0.001, epochs=100, seed=0, batch_size=8):
         self.task = task
         self.representation = rep

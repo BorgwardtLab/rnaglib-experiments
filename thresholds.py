@@ -55,7 +55,8 @@ TRAINER_ARGS = {"rna_cm": {'epochs': 40,
                             "learning_rate": 0.001}, #0.01 (original)
                 "rna_site": {"batch_size": 8,
                              "epochs": 40}, # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
-                "rna_site_redundant": {"epochs": 100,
+                "rna_site_redundant": {"batch_size": 8,
+                    "epochs": 40,
                          "learning_rate": 0.001}
                          }
 
@@ -85,26 +86,28 @@ for tid in TASKS_TODO:
                 print(f"Creating task {tid} in {root}")
                 task = BindingSiteRedundant(root=root, structures_path=STRUCTURES_PATH)
 
-            if distance not in task.dataset.distances:
-                if split == 'struc':
-                    task.dataset = StructureDistanceComputer(structures_path=STRUCTURES_PATH)(task.dataset)
-                if split == 'seq':
-                    task.dataset = CDHitComputer()(task.dataset)
+        if distance not in task.dataset.distances:
+            if split == 'struc':
+                task.dataset = StructureDistanceComputer(structures_path=STRUCTURES_PATH)(task.dataset)
+            if split == 'seq':
+                task.dataset = CDHitComputer()(task.dataset)
 
-            if split == 'rand':
-                task.splitter = RandomSplitter()
-            else:
-                task.splitter = ClusterSplitter(distance_name=distance, similarity_threshold=SIMILARITY_THRESHOLD)
-            # Representation needs to be added here as the loaders are not updated when the rep is added later.
-            task.add_representation(GraphRepresentation(framework="pyg"))
-            task.get_split_loaders(recompute=True, batch_size=TRAINER_ARGS[tid]["batch_size"])
+        if split == 'rand':
+            task.splitter = RandomSplitter()
+        else:
+            task.splitter = ClusterSplitter(distance_name=distance, similarity_threshold=float(SIMILARITY_THRESHOLD))
+        # Representation needs to be added here as the loaders are not updated when the rep is added later.
+        task.add_representation(GraphRepresentation(framework="pyg"))
 
-            task.write()
+        print('similarity threshold', SIMILARITY_THRESHOLD, type(SIMILARITY_THRESHOLD))
+        task.get_split_loaders(recompute=True, batch_size=TRAINER_ARGS[tid]["batch_size"])
+
+        task.write()
 
 
 
 
-        for seed in [0]:
+        for seed in [0,1,2]:
             model = PygModel.from_task(task, **MODEL_ARGS[tid])
             rep = GraphRepresentation(framework="pyg")
             result_file = f"results/thresholds_{tid}_{split}_{SIMILARITY_THRESHOLD}_{seed}.json"

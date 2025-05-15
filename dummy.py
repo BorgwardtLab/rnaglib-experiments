@@ -10,27 +10,22 @@ from rnaglib.learning import PygModel
 
 from exp import RNATrainer
 
+import numpy as np
 
-# TASKS_TODO = ['rna_cm', 
-#               'rna_go',
-#               'rna_if',
-#               'rna_ligand',
-#               'rna_prot',
-#               'rna_site']
+
+TASKS_TODO = ['rna_cm', 
+              'rna_go',
+              'rna_if',
+              'rna_ligand',
+              'rna_prot',
+              'rna_site']
 
 
 # Use this if you are submitting one job per task
-TASKS_TODO = [os.environ.get('TASK')]
+#TASKS_TODO = [os.environ.get('TASK')]
 
-#TASKS_TODO = ['rna_go']
-STRUCTURES_PATH = "/fs/pool/pool-wyss/RNA/.rnaglib/structures"
 
-SPLITS = {"seq": 'cd_hit',
-          "struc": 'USalign', 
-          "rand": None,
-          }
-
-#SPLITS = {"rand": None}
+SPLITS = {"struc": 'USalign'}
 
 MODEL_ARGS = {"rna_cm": {"num_layers": 3},
               "rna_go": {"num_layers": 3,
@@ -64,6 +59,61 @@ TRAINER_ARGS = {"rna_cm": {'epochs': 40,
                          }
 
 
+def evaluate_dummy(model, task, split="test"):
+    dataloader = model.get_dataloader(task=task, split=split)
+    mean_loss, all_preds, all_probs, all_labels = model.inference(loader=dataloader)  # get real labels and structure
+
+    # Flatten for analysis
+    if task.metadata["graph_level"]:
+        flat_labels = np.stack(all_labels)
+    else:
+        flat_labels = np.concatenate(all_labels)
+
+    if task.metadata["multi_label"]:
+        # Mean label vector across samples
+        majority_vector = (flat_labels.mean(axis=0) > 0.5).astype(np.float32)
+        all_preds = [majority_vector] * len(all_labels)
+        all_probs = [majority_vector] * len(all_labels)
+
+    elif task.metadata["num_classes"] == 2:
+        # Binary: Predict class 1 or 0 everywhere
+        unique, counts = np.unique(flat_labels, return_counts=True)
+        majority_class = unique[np.argmax(counts)]
+        p = majority_class * np.ones_like(flat_labels, dtype=np.float32)
+        full_probs = np.stack([1 - p, p], axis=1)
+
+        # Same split logic as in inference
+        if not task.metadata["graph_level"]:
+            ptr = np.cumsum([0] + [len(lbl) for lbl in all_labels])
+            all_probs = [full_probs[ptr[i]:ptr[i+1]] for i in range(len(ptr) - 1)]
+            all_preds = [np.full_like(lbl, majority_class) for lbl in all_labels]
+        else:
+            all_probs = full_probs
+            all_preds = np.full_like(flat_labels, majority_class)
+
+    else:
+        # Multiclass
+        num_classes = task.metadata["num_classes"]
+        unique, counts = np.unique(flat_labels, return_counts=True)
+        majority_class = unique[np.argmax(counts)]
+
+        one_hot_probs = np.zeros((len(flat_labels), num_classes), dtype=np.float32)
+        one_hot_probs[:, majority_class] = 1.0
+
+        if not task.metadata["graph_level"]:
+            ptr = np.cumsum([0] + [len(lbl) for lbl in all_labels])
+            all_probs = [one_hot_probs[ptr[i]:ptr[i+1]] for i in range(len(ptr) - 1)]
+            all_preds = [np.full_like(lbl, majority_class) for lbl in all_labels]
+        else:
+            all_probs = one_hot_probs
+            all_preds = np.full_like(flat_labels, majority_class)
+
+    # Metrics on dummy preds
+    metrics = task.compute_metrics(all_preds, all_probs, all_labels)
+    metrics["loss"] = 0  # Dummy model, no training
+    return metrics
+
+
 recompute = True
 
 for tid in TASKS_TODO:
@@ -89,38 +139,21 @@ for tid in TASKS_TODO:
                 print(f"Creating task {tid} in {root}")
                 task = BindingSiteRedundant(root=root, structures_path=STRUCTURES_PATH)
 
-        if distance not in task.dataset.distances:
-            if split == 'struc':
-                task.dataset = StructureDistanceComputer(structures_path=STRUCTURES_PATH)(task.dataset)
-            if split == 'seq':
-                task.dataset = CDHitComputer()(task.dataset)
-
-        if split == 'rand':
-            task.splitter = RandomSplitter()
-        else:
-            task.splitter = ClusterSplitter(distance_name=distance, similarity_threshold=0.6) #remove threshold
-        # Representation needs to be added here as the loaders are not updated when the rep is added later.
         task.add_representation(GraphRepresentation(framework="pyg"))
-        if "batch_size" in TRAINER_ARGS[tid]:
-            task.get_split_loaders(recompute=True, batch_size=TRAINER_ARGS[tid]["batch_size"])
-        else:
-            task.get_split_loaders(recompute=True)
-
-        task.write()
+        task.get_split_loaders(recompute=False)
 
 
-        for seed in [0, 1, 2]:
-            model = PygModel.from_task(task, **MODEL_ARGS[tid])
-            rep = GraphRepresentation(framework="pyg")
-            result_file = f"results/workshop_{tid}_{split}_{seed}.json"
-            if os.path.exists(result_file) and not recompute:
-                continue
+    
+        model = PygModel.from_task(task, **MODEL_ARGS[tid])
+        rep = GraphRepresentation(framework="pyg")
+        result_file = f"results/dummy_{tid}_{split}.json"
+        if os.path.exists(result_file) and not recompute:
+            continue
 
-            exp_name = f"{tid}_{split}_{seed}"
+        exp_name = f"dummy_{tid}_{split}"
 
-            trainer = RNATrainer(task, model, rep, seed=seed, wandb_project="rnaglib-splitting", exp_name=exp_name, **TRAINER_ARGS[tid])
-            trainer.train()
-            metrics = model.evaluate(task, split="test")
-            with open(result_file, "w") as j:
-                json.dump(metrics, j)
-                pass
+
+        metrics = evaluate_dummy(model, task, split="test")
+        with open(result_file, "w") as j:
+            json.dump(metrics, j)
+            pass
