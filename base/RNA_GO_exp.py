@@ -69,5 +69,5 @@ trainer_GO = RNATrainer(ta_GO, model_GO, rep, exp_name=exp_name, learning_rate=l
 if __name__ == "__main__":
         for seed in [0,1,2]:
                 model_GO = PygModel(**model_GO_args)
-                trainer_GO = RNATrainer(ta_GO, model_GO, rep, exp_name=exp_name, learning_rate=learning_rate, epochs=epochs, seed=seed)
+                trainer_GO = RNATrainer(ta_GO, model_GO, rep, exp_name=exp_name+"_seed"+str(seed), learning_rate=learning_rate, epochs=epochs, seed=seed)
                 trainer_GO.train()

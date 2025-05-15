@@ -7,7 +7,7 @@ import shutil
 import torch
 
 from rnaglib.learning.task_models import PygModel
-from rnaglib.tasks import get_task
+from rnaglib.tasks import get_task, RNA_CM
 from rnaglib.transforms import GraphRepresentation
 
 script_dir = os.path.dirname(os.path.realpath(__file__))

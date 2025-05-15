@@ -20,9 +20,9 @@ from exp import RNATrainer
 
 
 # Use this if you are submitting one job per task
-#TASKS_TODO = [os.environ.get('TASK')]
+TASKS_TODO = [os.environ.get('TASK')]
 
-#TASKS_TODO = ['rna_site_redundant']
+#TASKS_TODO = ['rna_go']
 STRUCTURES_PATH = "/fs/pool/pool-wyss/RNA/.rnaglib/structures"
 
 SPLITS = {"seq": 'cd_hit',
@@ -49,8 +49,8 @@ MODEL_ARGS = {"rna_cm": {"num_layers": 3},
 
 TRAINER_ARGS = {"rna_cm": {'epochs': 40, 
                            "batch_size": 8},
-                "rna_go": {"epochs": 20,
-                           "learning_rate":0.0001}, #0.001 (original)
+                "rna_go": {"epochs": 10,
+                           "learning_rate":0.001}, #0.001 (original)
                 "rna_if": {"epochs": 40, # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
                            "learning_rate": 0.0001},
                 "rna_ligand": {"epochs": 40,
@@ -89,23 +89,24 @@ for tid in TASKS_TODO:
                 print(f"Creating task {tid} in {root}")
                 task = BindingSiteRedundant(root=root, structures_path=STRUCTURES_PATH)
 
-            if distance not in task.dataset.distances:
-                if split == 'struc':
-                    task.dataset = StructureDistanceComputer(structures_path=STRUCTURES_PATH)(task.dataset)
-                if split == 'seq':
-                    task.dataset = CDHitComputer()(task.dataset)
+        if distance not in task.dataset.distances:
+            if split == 'struc':
+                task.dataset = StructureDistanceComputer(structures_path=STRUCTURES_PATH)(task.dataset)
+            if split == 'seq':
+                task.dataset = CDHitComputer()(task.dataset)
 
-            if split == 'rand':
-                task.splitter = RandomSplitter()
-            else:
-                task.splitter = ClusterSplitter(distance_name=distance)
-            # Representation needs to be added here as the loaders are not updated when the rep is added later.
-            task.add_representation(GraphRepresentation(framework="pyg"))
+        if split == 'rand':
+            task.splitter = RandomSplitter()
+        else:
+            task.splitter = ClusterSplitter(distance_name=distance, similarity_threshold=0.6) #remove threshold
+        # Representation needs to be added here as the loaders are not updated when the rep is added later.
+        task.add_representation(GraphRepresentation(framework="pyg"))
+        if "batch_size" in TRAINER_ARGS[tid]:
             task.get_split_loaders(recompute=True, batch_size=TRAINER_ARGS[tid]["batch_size"])
+        else:
+            task.get_split_loaders(recompute=True)
 
-            task.write()
-
-
+        task.write()
 
 
         for seed in [0, 1, 2]:
@@ -123,5 +124,3 @@ for tid in TASKS_TODO:
             with open(result_file, "w") as j:
                 json.dump(metrics, j)
                 pass
-
-
