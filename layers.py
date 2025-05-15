@@ -19,6 +19,9 @@ MODEL_ARGS = {
         },
         "2D":{
             "hidden_channels": 128
+        },
+        "2D_GCN":{
+            "hidden_channels": 128
         }
     },
     "rna_prot": {
@@ -30,6 +33,10 @@ MODEL_ARGS = {
             "hidden_channels": 64,
             "dropout_rate": 0.2
         },
+        "2D_GCN":{
+            "hidden_channels": 64,
+            "dropout_rate": 0.2
+        },
     },
     "rna_site": {
         "2.5D":{
@@ -38,6 +45,9 @@ MODEL_ARGS = {
         "2D":{
             "hidden_channels":128
         },
+        "2D_GCN":{
+            "hidden_channels": 128
+        }
     },
 }
 
@@ -52,7 +62,7 @@ TRAINER_ARGS = {
         "2D":{
             "epochs": 40,
             "batch_size": 8,
-            "learning_rate": 0.001
+            "learning_rate": 0.0001
         }
     },
     "rna_prot": {
@@ -66,6 +76,11 @@ TRAINER_ARGS = {
             "batch_size": 8,
             "learning_rate": 0.01
         },
+         "2D_GCN":{
+            "epochs": 40,
+            "batch_size": 8,
+            "learning_rate": 0.01
+        },
     },  # 0.01 (original)
     "rna_site": {
         "2.5D":{
@@ -74,6 +89,11 @@ TRAINER_ARGS = {
             "learning_rate": 0.001
         },
         "2D":{
+            "batch_size": 8,
+            "epochs": 40,
+            "learning_rate": 0.0001
+        },
+        "2D_GCN":{
             "batch_size": 8,
             "epochs": 40,
             "learning_rate": 0.0001
