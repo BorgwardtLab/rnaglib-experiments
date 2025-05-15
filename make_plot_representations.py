@@ -5,35 +5,35 @@ import seaborn as sns
 
 MODEL_ARGS = {
     "rna_cm": {
-        "2.5D":{
+        "2.5D": {
             "num_layers": 3,
             "hidden_channels": 128
         },
-        "2D":{
+        "2D": {
             "num_layers": 3,
             "hidden_channels": 128
         }
     },
     "rna_prot": {
-        "2.5D":{
+        "2.5D": {
             "num_layers": 4,
             "hidden_channels": 64,
             "dropout_rate": 0.2
         },
-        "2D":{
+        "2D": {
             "num_layers": 4,
             "hidden_channels": 64,
             "dropout_rate": 0.2
         },
     },
     "rna_site": {
-        "2.5D":{
-            "num_layers": 4, 
+        "2.5D": {
+            "num_layers": 4,
             "hidden_channels": 256
         },
-        "2D":{
-            "num_layers": 2, 
-            "hidden_channels":128
+        "2D": {
+            "num_layers": 2,
+            "hidden_channels": 128
         },
     },
 }
@@ -41,36 +41,36 @@ MODEL_ARGS = {
 # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
 TRAINER_ARGS = {
     "rna_cm": {
-        "2.5D":{
+        "2.5D": {
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.001
         },
-        "2D":{
+        "2D": {
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.001
         }
     },
     "rna_prot": {
-        "2.5D":{
+        "2.5D": {
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.01
         },
-         "2D":{
+        "2D": {
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.01
         },
     },  # 0.01 (original)
     "rna_site": {
-        "2.5D":{
+        "2.5D": {
             "batch_size": 8,
             "epochs": 40,
             "learning_rate": 0.001
         },
-        "2D":{
+        "2D": {
             "batch_size": 8,
             "epochs": 40,
             "learning_rate": 0.0001
@@ -107,7 +107,6 @@ for ta_name in TASKLIST:
                         "representation": representation,
                     }
                 )
-    pass
 
 df = pd.DataFrame(rows)
 df.to_csv("splitting.csv")
