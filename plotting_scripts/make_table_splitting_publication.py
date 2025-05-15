@@ -2,7 +2,7 @@ import json
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import matplotlib.lines as mlines # Import mlines
+import matplotlib.lines as mlines  # Import mlines
 import matplotlib.patches as mpatches
 
 plt.rcParams["text.usetex"] = True
@@ -114,7 +114,7 @@ g.set(ylim=(0, 1))
 # Add a vertical dotted line between rna_site and rna_site_redundant
 ax = g.ax
 line_pos = list(task_names.keys()).index("rna_site") + 0.5
-ax.axvline(x=line_pos, linestyle="--", color="dimgray", linewidth=2)
+ax.axvline(x=line_pos, ymax=0.75, linestyle="--", color="dimgray", linewidth=2)
 
 # Create handles and labels manually
 handles = []
@@ -132,7 +132,7 @@ for i, distance in enumerate(dist_names.values()):
     labels.append(distance)
 plt.legend(handles, labels, loc="upper center", ncol=3, title=r"Splitting strategy:", handletextpad=-0.3)
 
-plt.savefig("plotting_scripts/splitting_publication.pdf", format="pdf")
 plt.subplots_adjust(bottom=0.15)  # Adjust the values as needed
+plt.savefig("plotting_scripts/splitting_publication.pdf", format="pdf")
 plt.show()
 plt.clf()
