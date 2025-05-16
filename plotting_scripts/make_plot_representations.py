@@ -12,37 +12,51 @@ plt.rc("ytick", labelsize=13)  # fontsize of the tick labels
 plt.rc("xtick", labelsize=13)  # fontsize of the tick labels
 plt.rc("grid", color="grey", alpha=0.2)
 
+
 MODEL_ARGS = {
     "rna_cm": {
-        "2.5D": {
+        "2.5D":{
             "num_layers": 3,
             "hidden_channels": 128
         },
-        "2D": {
+        "2D":{
             "num_layers": 3,
+            "hidden_channels": 128
+        },
+        "2D_GCN":{
+            "num_layers": 2,
             "hidden_channels": 128
         }
     },
     "rna_prot": {
-        "2.5D": {
+        "2.5D":{
             "num_layers": 4,
             "hidden_channels": 64,
             "dropout_rate": 0.2
         },
-        "2D": {
+        "2D":{
+            "num_layers": 4,
+            "hidden_channels": 64,
+            "dropout_rate": 0.2
+        },
+        "2D_GCN":{
             "num_layers": 4,
             "hidden_channels": 64,
             "dropout_rate": 0.2
         },
     },
     "rna_site": {
-        "2.5D": {
+        "2.5D":{
             "num_layers": 4,
             "hidden_channels": 256
         },
-        "2D": {
+        "2D":{
             "num_layers": 2,
-            "hidden_channels": 128
+            "hidden_channels":128
+        },
+        "2D_GCN":{
+            "num_layers": 2,
+            "hidden_channels":128
         },
     },
 }
@@ -50,36 +64,51 @@ MODEL_ARGS = {
 # There are only marginal improvements running a hundred epochs, so we leave it at 40 for the splitting analysis
 TRAINER_ARGS = {
     "rna_cm": {
-        "2.5D": {
+        "2.5D":{
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.001
         },
-        "2D": {
+        "2D":{
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.001
+        },
+        "2D_GCN":{
+            "epochs": 40,
+            "batch_size": 8,
+            "learning_rate": 0.0001
         }
     },
     "rna_prot": {
-        "2.5D": {
+        "2.5D":{
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.01
         },
-        "2D": {
+         "2D":{
+            "epochs": 40,
+            "batch_size": 8,
+            "learning_rate": 0.01
+        },
+        "2D_GCN":{
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.01
         },
     },  # 0.01 (original)
     "rna_site": {
-        "2.5D": {
+        "2.5D":{
             "batch_size": 8,
             "epochs": 40,
             "learning_rate": 0.001
         },
-        "2D": {
+        "2D":{
+            "batch_size": 8,
+            "epochs": 40,
+            "learning_rate": 0.0001
+        },
+        "2D_GCN":{
             "batch_size": 8,
             "epochs": 40,
             "learning_rate": 0.0001
@@ -98,22 +127,17 @@ METRICS = {
 SEEDS = [0, 1, 2]
 TASKLIST = ["rna_cm", "rna_site", "rna_prot"]
 REPRESENTATIONS = ["2D_GCN", "2D", "2.5D"]
-REPRESENTATIONS_debug = ["2D"] * 3
+# REPRESENTATIONS_debug = ["2D"] * 3
 
 rows = []
 for ta_name in TASKLIST:
     for i, representation in enumerate(REPRESENTATIONS):
         for seed in SEEDS:
-            # TO REMOVE ONCE FILES ARE PRODUCED
-            repr_temp = representation
-            representation = REPRESENTATIONS_debug[i]
-
             json_name = (
                 f"results/{ta_name}_{representation}_{MODEL_ARGS[ta_name][representation]['num_layers']}layers_"
                 f"lr{TRAINER_ARGS[ta_name][representation]['learning_rate']}_{TRAINER_ARGS[ta_name][representation]['epochs']}epochs_"
                 f"hiddendim{MODEL_ARGS[ta_name][representation]['hidden_channels']}_batch_size{TRAINER_ARGS[ta_name][representation]['batch_size']}_seed{seed}_results.json")
 
-            representation = repr_temp
             with open(json_name) as result:
                 result = json.load(result)
                 test_metrics = result["test_metrics"]
@@ -132,8 +156,6 @@ for task in TASKLIST:
     for seed in SEEDS:
         with open(f"results/workshop_{task}_rnafm_{seed}.json") as result:
             result = json.load(result)
-            print(task)
-            print(result)
             rows.append(
                 {
                     "score": result[METRICS[task]],

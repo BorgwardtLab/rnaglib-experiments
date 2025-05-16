@@ -93,7 +93,7 @@ SEEDS = [0, 1, 2]
 TASKLIST = ["rna_cm", "rna_site", "rna_prot"]
 NB_LAYERS_LIST = [2, 3, 4, 5, 6]
 
-representation = "2D"
+representation = "2.5D"
 
 rows = []
 for ta_name in TASKLIST:
@@ -147,7 +147,7 @@ g = sns.catplot(
     legend=False
 )
 g.set_axis_labels("", "Test Score")
-g.set(ylim=(0.5, 0.7))
+g.set(ylim=(0.5, 0.85))
 g.despine()
 
 # Create handles and labels manually
