@@ -33,7 +33,7 @@ MODEL_ARGS = {"rna_cm": {"num_layers": 0},
               "rna_go": {"num_layers": 0},
               "rna_if": {"num_layers": 0,
                          "hidden_channels": 128},
-              "rna_ligand": {"num_layers": 4},
+              "rna_ligand": {"num_layers": 0},
               "rna_prot": {"num_layers": 0, 
                           "hidden_channels": 64,
                           "dropout_rate": 0.2},
@@ -79,12 +79,13 @@ for tid in TASKS_TODO:
 
         for seed in [0, 1, 2]:
             model = PygModel.from_task(task, **MODEL_ARGS[tid], num_node_features=644)
+            print(model)
             rep = GraphRepresentation(framework="pyg")
             result_file = f"results/workshop_{tid}_rnafmtune_{seed}.json"
             if os.path.exists(result_file) and not recompute:
                 continue
 
-            exp_name = f"{tid}_rnafmtune_{seed}"
+            exp_name = f"workshop_{tid}_rnafmtune_{seed}"
 
             trainer = RNATrainer(task, model, rep, seed=seed, wandb_project="rnaglib-embeddings", exp_name=exp_name, **TRAINER_ARGS[tid])
             trainer.train()
