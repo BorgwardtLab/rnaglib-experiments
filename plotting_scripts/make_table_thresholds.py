@@ -55,7 +55,7 @@ for threshold in thresholds:
 
 # Build DataFrame
 df = pd.DataFrame(rows)
-df.to_csv("thresholds_with_random.csv")
+df.to_csv("plotting_scripts/thresholds_with_random.csv")
 
 # Create a column to use for legend hue, exclude 'rand'
 # df["distance"] = df["distance"].apply(lambda d: d if d in ["struc", "seq"] else "random")

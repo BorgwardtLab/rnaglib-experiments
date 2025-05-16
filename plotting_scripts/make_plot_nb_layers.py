@@ -99,7 +99,12 @@ rows = []
 for ta_name in TASKLIST:
     for nb_layers in NB_LAYERS_LIST:
         for seed in SEEDS:
-            json_name = f"""results/{ta_name}_{representation}_{str(nb_layers)}layers_lr{str(TRAINER_ARGS[ta_name][representation]["learning_rate"])}_{str(TRAINER_ARGS[ta_name][representation]["epochs"])}epochs_hiddendim{str(MODEL_ARGS[ta_name][representation]["hidden_channels"])}_batch_size{str(TRAINER_ARGS[ta_name][representation]["batch_size"])}_seed{str(seed)}_results.json"""
+            json_name = (f"results/{ta_name}_{representation}_{nb_layers}layers_"
+                         f"lr{TRAINER_ARGS[ta_name][representation]['learning_rate']}_"
+                         f"{TRAINER_ARGS[ta_name][representation]['epochs']}epochs_"
+                         f"hiddendim{MODEL_ARGS[ta_name][representation]['hidden_channels']}_"
+                         f"batch_size{TRAINER_ARGS[ta_name][representation]['batch_size']}_"
+                         f"seed{seed}_results.json")
             with open(json_name) as result:
                 result = json.load(result)
                 test_metrics = result["test_metrics"]
@@ -113,7 +118,7 @@ for ta_name in TASKLIST:
                     }
                 )
 df = pd.DataFrame(rows)
-df.to_csv(f"nb_layers_{representation}.csv")
+df.to_csv(f"plotting_scripts/nb_layers_{representation}.csv")
 df_mean = df.groupby(["task", "nb_layers"])["score"].mean().reset_index()
 df_std = df.groupby(["task", "nb_layers"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
@@ -143,8 +148,7 @@ g = sns.catplot(
 )
 g.set_axis_labels("", "Test Score")
 g.set(ylim=(0.5, 0.7))
-g.despine(left=True)
-
+g.despine()
 
 # Create handles and labels manually
 handles = []
@@ -157,9 +161,8 @@ for i, distance in enumerate(NB_LAYERS_LIST):
     handles.append(handle)
     labels.append(distance)
 plt.legend(handles, labels, loc="upper center", ncol=5, title=r"Number of layers :", handletextpad=-0.3)
-
 plt.subplots_adjust(bottom=0.1)  # Adjust the values as needed
 
-plt.savefig(f"nb_layers_{representation}.pdf", format="pdf")
+plt.savefig(f"plotting_scripts/nb_layers_{representation}.pdf", format="pdf")
 plt.show()
 plt.clf()

@@ -41,7 +41,6 @@ for task in TASKLIST:
                                 "rnafm": rnafm,
                             }
                         )
-    pass
 
 df = pd.DataFrame(rows)
 df.to_csv("rnafm.csv")
