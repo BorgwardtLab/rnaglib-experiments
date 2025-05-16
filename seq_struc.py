@@ -1,6 +1,8 @@
 import os
 import json
-
+import random
+import numpy as np
+import torch
 from rnaglib.dataset_transforms.cd_hit import CDHitComputer
 from rnaglib.dataset_transforms.structure_distance_computer import StructureDistanceComputer
 from rnaglib.tasks import get_task
@@ -30,7 +32,7 @@ SPLITS = {"seq": 'cd_hit',
           "rand": None,
           }
 
-SPLITS = {"rand": None}
+#SPLITS = {"rand": None}
 
 MODEL_ARGS = {"rna_cm": {"num_layers": 3},
               "rna_go": {"num_layers": 3,
@@ -62,6 +64,17 @@ TRAINER_ARGS = {"rna_cm": {'epochs': 40,
                 "rna_site_redundant": {"epochs": 100,
                          "learning_rate": 0.001}
                          }
+
+def set_seed(seed):
+    """Set all random seeds for reproducibility"""
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
 
 
 recompute = True
@@ -96,7 +109,7 @@ for tid in TASKS_TODO:
                 task.dataset = CDHitComputer()(task.dataset)
 
         for seed in [0, 1, 2]:
-
+            set_seed(seed)
             if split == 'rand':
                 task.splitter = RandomSplitter(seed=seed)
             else:
