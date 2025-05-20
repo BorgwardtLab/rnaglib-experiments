@@ -1,0 +1,151 @@
+{
+  "test_metrics": {
+    "accuracy": 0.4,
+    "f1": 0.0,
+    "jaccard": 0.0,
+    "auc": 0.6762239780777917,
+    "loss": 0.46925249715646106
+  },
+  "training_history": [
+    {
+      "epoch": 0,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.555213768580485,
+      "train_loss": 0.5334427533911429,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.5286469826469826,
+      "val_loss": 0.4546447441975276
+    },
+    {
+      "epoch": 1,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.3343090241085548,
+      "train_loss": 0.5390622035138587,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.2988220668220668,
+      "val_loss": 0.4662564059098562
+    },
+    {
+      "epoch": 2,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.3243483154263772,
+      "train_loss": 0.5508898920606405,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.29375964775964775,
+      "val_loss": 0.47512379129727683
+    },
+    {
+      "epoch": 3,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.3422831194354692,
+      "train_loss": 0.5682279298503624,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.33202512302512305,
+      "val_loss": 0.4914879141251246
+    },
+    {
+      "epoch": 4,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.37670202099761746,
+      "train_loss": 0.5691662864348608,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.3687081067081067,
+      "val_loss": 0.4906001116832097
+    },
+    {
+      "epoch": 5,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.3653416970424274,
+      "train_loss": 0.5801253896046504,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.3615027195027195,
+      "val_loss": 0.4943877059221268
+    },
+    {
+      "epoch": 6,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.3536404057541819,
+      "train_loss": 0.605055580102441,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.3525161875161875,
+      "val_loss": 0.5074030083417892
+    },
+    {
+      "epoch": 7,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.3350952630232991,
+      "train_loss": 0.6256030168181504,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.4286679616679616,
+      "val_loss": 0.5134638565778732
+    },
+    {
+      "epoch": 8,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.4273175847603078,
+      "train_loss": 0.6277334580790348,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.4922323232323233,
+      "val_loss": 0.5100785299142202
+    },
+    {
+      "epoch": 9,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.3788766229400014,
+      "train_loss": 0.6935112237140408,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.47033592333592333,
+      "val_loss": 0.5490607803066572
+    }
+  ],
+  "hyperparameters": {
+    "learning_rate": 0.001,
+    "num_node_features": 4,
+    "num_classes": 5,
+    "graph_level": true,
+    "num_layers": 3,
+    "hidden_channels": 128,
+    "dropout_rate": 0.5,
+    "multi_label": true
+  }
+}

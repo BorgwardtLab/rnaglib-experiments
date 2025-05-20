@@ -1,0 +1,150 @@
+{
+  "test_metrics": {
+    "accuracy": 0.7837837837837838,
+    "f1": 0.0,
+    "jaccard": 0.0,
+    "loss": 0.13043704576636161
+  },
+  "training_history": [
+    {
+      "epoch": 0,
+      "train_accuracy": 0.28530259365994237,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.48786948054566925,
+      "train_loss": 0.5502594000839706,
+      "val_accuracy": 0.04054054054054054,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.6718689777494415,
+      "val_loss": 0.46706946858683146
+    },
+    {
+      "epoch": 1,
+      "train_accuracy": 0.28530259365994237,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.4789338857357959,
+      "train_loss": 0.5451497390479794,
+      "val_accuracy": 0.04054054054054054,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.6228535138370609,
+      "val_loss": 0.4734076807225073
+    },
+    {
+      "epoch": 2,
+      "train_accuracy": 0.28530259365994237,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.3988883287997546,
+      "train_loss": 0.5513489766835479,
+      "val_accuracy": 0.04054054054054054,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.45157316502655276,
+      "val_loss": 0.48360177270463994
+    },
+    {
+      "epoch": 3,
+      "train_accuracy": 0.28530259365994237,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.42845513663396284,
+      "train_loss": 0.5567531339630957,
+      "val_accuracy": 0.04054054054054054,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.5260733625587781,
+      "val_loss": 0.5000795609242207
+    },
+    {
+      "epoch": 4,
+      "train_accuracy": 0.28530259365994237,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.43755217490865334,
+      "train_loss": 0.5834885738811507,
+      "val_accuracy": 0.04054054054054054,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.5788448661778595,
+      "val_loss": 0.5169756843431575
+    },
+    {
+      "epoch": 5,
+      "train_accuracy": 0.28530259365994237,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.40119847256082003,
+      "train_loss": 0.6242657699528277,
+      "val_accuracy": 0.04054054054054054,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.5026044724670008,
+      "val_loss": 0.5313897428883089
+    },
+    {
+      "epoch": 6,
+      "train_accuracy": 0.28530259365994237,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.4027864223696504,
+      "train_loss": 0.6572882979893547,
+      "val_accuracy": 0.04054054054054054,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.5227270835611527,
+      "val_loss": 0.5292487659969846
+    },
+    {
+      "epoch": 7,
+      "train_accuracy": 0.28530259365994237,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.41665949582235606,
+      "train_loss": 0.6814829714445971,
+      "val_accuracy": 0.04054054054054054,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.598771011033392,
+      "val_loss": 0.5258303504135158
+    },
+    {
+      "epoch": 8,
+      "train_accuracy": 0.28530259365994237,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.4190438412454955,
+      "train_loss": 0.7197772634755122,
+      "val_accuracy": 0.04054054054054054,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.5652068004450674,
+      "val_loss": 0.528297143409381
+    },
+    {
+      "epoch": 9,
+      "train_accuracy": 0.28530259365994237,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.42969329467330325,
+      "train_loss": 0.7399967114309585,
+      "val_accuracy": 0.04054054054054054,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.5991324620317491,
+      "val_loss": 0.5304914038326289
+    }
+  ],
+  "hyperparameters": {
+    "learning_rate": 0.001,
+    "num_node_features": 4,
+    "num_classes": 5,
+    "graph_level": true,
+    "num_layers": 3,
+    "hidden_channels": 128,
+    "dropout_rate": 0.5,
+    "multi_label": true
+  }
+}

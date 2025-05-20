@@ -1,0 +1,151 @@
+{
+  "test_metrics": {
+    "accuracy": 0.4266666666666667,
+    "f1": 0.0,
+    "jaccard": 0.0,
+    "auc": 0.7021839663788815,
+    "loss": 0.46927477926015854
+  },
+  "training_history": [
+    {
+      "epoch": 0,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.5449825475592988,
+      "train_loss": 0.526892504753561,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.41922947422947426,
+      "val_loss": 0.4683878540992737
+    },
+    {
+      "epoch": 1,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.5017644711006108,
+      "train_loss": 0.5207611005593166,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.5257876197876199,
+      "val_loss": 0.4733370411396027
+    },
+    {
+      "epoch": 2,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.42342865156963433,
+      "train_loss": 0.5403002921096917,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.3465641025641025,
+      "val_loss": 0.4825049696365992
+    },
+    {
+      "epoch": 3,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.3801926029001793,
+      "train_loss": 0.5612707736029324,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.3499002849002849,
+      "val_loss": 0.49250229279200236
+    },
+    {
+      "epoch": 4,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.3968582462941194,
+      "train_loss": 0.5574103457623704,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.43902072002072,
+      "val_loss": 0.49206381976604463
+    },
+    {
+      "epoch": 5,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.4578200580630406,
+      "train_loss": 0.570650951995549,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.5083263403263403,
+      "val_loss": 0.49031436959902447
+    },
+    {
+      "epoch": 6,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.5390426227900883,
+      "train_loss": 0.5811982386262505,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.6564048174048174,
+      "val_loss": 0.4855452088514964
+    },
+    {
+      "epoch": 7,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.5659384805497742,
+      "train_loss": 0.6239822168532961,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.6581548821548822,
+      "val_loss": 0.5011957532167435
+    },
+    {
+      "epoch": 8,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.5638746235039249,
+      "train_loss": 0.6489374430844811,
+      "val_accuracy": 0.38666666666666666,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.6262224812224813,
+      "val_loss": 0.514583990474542
+    },
+    {
+      "epoch": 9,
+      "train_accuracy": 0.2836676217765043,
+      "train_f1": 0.0,
+      "train_jaccard": 0.0,
+      "train_auc": 0.531091011929368,
+      "train_loss": 0.705573567837733,
+      "val_accuracy": 0.4,
+      "val_f1": 0.0,
+      "val_jaccard": 0.0,
+      "val_auc": 0.5970787360787361,
+      "val_loss": 0.5508744867642721
+    }
+  ],
+  "hyperparameters": {
+    "learning_rate": 0.001,
+    "num_node_features": 4,
+    "num_classes": 5,
+    "graph_level": true,
+    "num_layers": 3,
+    "hidden_channels": 128,
+    "dropout_rate": 0.5,
+    "multi_label": true
+  }
+}
