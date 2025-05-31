@@ -6,10 +6,11 @@ import wandb
 
 import torch
 import numpy as np
+from torch.utils.tensorboard import SummaryWriter
 
 class RNATrainer:
     def __init__(self, task, model, rep="pyg", wandb_project="", exp_name="default",
-                 learning_rate=0.001, epochs=100, seed=0, batch_size=8):
+                 learning_rate=0.001, epochs=100, seed=0, batch_size=8, output="wandb", log_dir="runs/"):
         self.task = task
         self.representation = rep
         self.model = model
@@ -20,15 +21,20 @@ class RNATrainer:
         self.training_log = []
         self.seed = seed
         self.batch_size = batch_size
+        self.output = output
+        self.log_dir = log_dir
 
     def setup(self):
         """Initialize wandb and model training"""
-        wandb.init(
-            entity="mlsb",  # Replace with your team name
-            project=self.wandb_project,
-            name=self.exp_name,
-        )
-    
+        if self.output == "tensorboard":
+            self.train_writer = SummaryWriter(log_dir=self.log_dir+self.task.name+"/"+self.exp_name+"/train")
+            self.val_writer = SummaryWriter(log_dir=self.log_dir+self.task.name+"/"+self.exp_name+"/val")
+        else:
+            wandb.init(
+                entity="mlsb",  # Replace with your team name
+                project=self.wandb_project,
+                name=self.exp_name,
+            )
         # Set seeds for reproducibility
         torch.manual_seed(self.seed)  # CPU random number generator
         if torch.cuda.is_available():
@@ -72,33 +78,48 @@ class RNATrainer:
             train_metrics = self.model.evaluate(self.task, split="train")
             val_metrics = self.model.evaluate(self.task, split="val")
 
-            # Log to wandb
+            # Log to wandb or Tensorboard
             metrics = {
                 "epoch": epoch,
                 **{f"train_{k}": v for k, v in train_metrics.items()},
                 **{f"val_{k}": v for k, v in val_metrics.items()}
             }
+            if self.output == "tensorboard":
+                self.train_writer.add_scalar("Loss", train_metrics['loss'], epoch)
+                self.val_writer.add_scalar("Loss", val_metrics['loss'], epoch)
             try:
                 metrics["train_auc"] = train_metrics['auc']
                 metrics["val_auc"] = val_metrics['auc']
+                if self.output == "tensorboard":
+                    self.train_writer.add_scalar("AUC", train_metrics['auc'], epoch)
+                    self.val_writer.add_scalar("AUC", val_metrics['auc'], epoch)
             except:
                 pass
             if self.task.metadata['multi_label']:
                 metrics["train_jaccard"] = train_metrics["jaccard"]
                 metrics["val_jaccard"] = val_metrics["jaccard"]
+                if self.output == "tensorboard":
+                    self.train_writer.add_scalar("Jaccard", train_metrics['jaccard'], epoch)
+                    self.val_writer.add_scalar("Jaccard", val_metrics['jaccard'], epoch)
             else:
                 try:
                     metrics["train_balanced_accuracy"] = train_metrics["balanced_accuracy"]
                     metrics["val_balanced_accuracy"] = val_metrics["balanced_accuracy"]
+                    if self.output == "tensorboard":
+                        self.train_writer.add_scalar("Balanced_acc", train_metrics['balanced_accuracy'], epoch)
+                        self.val_writer.add_scalar("Balanced_acc", val_metrics['balanced_accuracy'], epoch)
                 except:
                     pass
                 try:
                     metrics["train_mcc"] = train_metrics["mcc"]
                     metrics["val_mcc"] = val_metrics["mcc"]
+                    if self.output == "tensorboard":
+                        self.train_writer.add_scalar("MCC", train_metrics['mcc'], epoch)
+                        self.val_writer.add_scalar("MCC", val_metrics['mcc'], epoch)
                 except:
                     pass
-
-            wandb.log(metrics)
+            if self.output == "wandb":
+                wandb.log(metrics)
             self.training_log.append(metrics)
 
             # Print progress
@@ -110,7 +131,11 @@ class RNATrainer:
                 )
 
         self.save_results()
-        wandb.finish()
+        if self.output == "tensorboard":
+            self.train_writer.flush()
+            self.val_writer.flush()
+        else:
+            wandb.finish()
 
     def save_results(self):
         """Save final results and metrics"""
