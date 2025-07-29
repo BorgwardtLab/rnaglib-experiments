@@ -15,8 +15,8 @@ from model_seq import SequenceModel
 
 
 TASKS_TODO = ['rna_cm', 
-              'rna_prot',
-              'rna_site'
+              #'rna_prot',
+              #'rna_site'
               ]
 
 
@@ -27,7 +27,8 @@ TASKS_TODO = ['rna_cm',
 
 RNA_FM = [True, False]
 
-MODEL_ARGS = {"rna_cm": {"num_layers": 2},
+MODEL_ARGS = {"rna_cm": {"num_layers": 2, "use_bilstm": True, "hidden_channels":
+                         32},
               "rna_go": {"num_layers": 2},
               "rna_if": {"num_layers": 2,
                          "hidden_channels": 128},
@@ -42,7 +43,7 @@ MODEL_ARGS = {"rna_cm": {"num_layers": 2},
                            "hidden_channels": 256},
               }
 
-TRAINER_ARGS = {"rna_cm": {'epochs': 40, 
+TRAINER_ARGS = {"rna_cm": {'epochs': 50, 
                            "batch_size": 8},
                 "rna_go": {"epochs": 20,
                            "learning_rate":0.0001}, #0.001 (original)
@@ -65,7 +66,7 @@ TRAINER_ARGS = {"rna_cm": {'epochs': 40,
 recompute = True
 
 for tid in TASKS_TODO:
-    root = f"roots/{tid}_1d"
+    root = f"roots/{tid}_seq"
     task = get_task(task_id=tid, root=root)
         
     rnafm = RNAFMTransform()
@@ -76,17 +77,18 @@ for tid in TASKS_TODO:
     task.add_representation(SequenceRepresentation(framework="pyg"))
     task.get_split_loaders(recompute=False)
 
-    for seed in [0, 1, 2]:
+    for seed in [0, 1, 2, 3, 4, 5, 6]:
         model = SequenceModel.from_task(task, **MODEL_ARGS[tid], num_node_features=644)
         rep = SequenceRepresentation(framework="pyg")
-        result_file = f"results/workshop_{tid}_1d_{seed}.json"
+        model_string = '_'.join(f'{k}-{v}' for k, v in MODEL_ARGS[tid].items())
+        result_file = f"results/workshop_{tid}_seq_{seed}_{model_string}.json"
         if os.path.exists(result_file) and not recompute:
             continue
 
-        exp_name = f"{tid}_1d_{seed}"
+        exp_name = f"{tid}_seq_{seed}_{model_string}"
 
         trainer = RNATrainer(task, model, rep, seed=seed,\
-                wandb_project="rnaglib-1d", exp_name=exp_name, **TRAINER_ARGS[tid])
+                wandb_project="rnaglib-seq", exp_name=exp_name, **TRAINER_ARGS[tid])
         trainer.train()
         metrics = model.evaluate(task, split="test")
         with open(result_file, "w") as j:

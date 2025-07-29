@@ -1,13 +1,9 @@
-""" Sequence model for RNA using Transformer """
-
 import numpy as np
 import torch
 import torch.nn.functional as F
-from torch.nn import BatchNorm1d, Dropout, TransformerEncoder, TransformerEncoderLayer
+from torch.nn import BatchNorm1d, Dropout, TransformerEncoder, TransformerEncoderLayer, LSTM
 from torch_geometric.nn import global_mean_pool
-
 from rnaglib.utils.misc import tonumpy
-
 
 class SequenceModel(torch.nn.Module):
     @classmethod
@@ -18,7 +14,6 @@ class SequenceModel(torch.nn.Module):
                   graph_level=None, 
                   multi_label=None,
                   **model_args):
-        """ Create a model based on task metadata. """
         if num_node_features is None:
             num_node_features = task.metadata["num_node_features"]
         if num_classes is None:
@@ -50,6 +45,7 @@ class SequenceModel(torch.nn.Module):
         multi_label=False,
         final_activation="sigmoid",
         num_heads=8,
+        use_bilstm=False,  # New parameter to toggle BiLSTM
         device=None
     ):
         super().__init__()
@@ -61,6 +57,7 @@ class SequenceModel(torch.nn.Module):
         self.dropout_rate = dropout_rate
         self.multi_label = multi_label
         self.num_heads = num_heads
+        self.use_bilstm = use_bilstm  # Store BiLSTM flag
 
         # Input embedding layer
         self.input_embedding = torch.nn.Linear(num_node_features, hidden_channels)
@@ -68,15 +65,26 @@ class SequenceModel(torch.nn.Module):
         # Positional encoding
         self.pos_encoder = PositionalEncoding(hidden_channels, dropout_rate)
 
-        # Transformer encoder
-        encoder_layer = TransformerEncoderLayer(
-            d_model=hidden_channels,
-            nhead=num_heads,
-            dim_feedforward=hidden_channels * 4,
-            dropout=dropout_rate,
-            activation="relu"
-        )
-        self.transformer_encoder = TransformerEncoder(encoder_layer, num_layers=num_layers)
+        if self.use_bilstm:
+            # Bidirectional LSTM encoder
+            self.lstm = LSTM(
+                input_size=hidden_channels,
+                hidden_size=hidden_channels // 2,  # Divide by 2 to account for bidirectional output
+                num_layers=num_layers,
+                batch_first=False,  # Input: [seq_len, batch_size, hidden_channels]
+                bidirectional=True,
+                dropout=dropout_rate if num_layers > 1 else 0
+            )
+        else:
+            # Transformer encoder
+            encoder_layer = TransformerEncoderLayer(
+                d_model=hidden_channels,
+                nhead=num_heads,
+                dim_feedforward=hidden_channels * 4,
+                dropout=dropout_rate,
+                activation="relu"
+            )
+            self.transformer_encoder = TransformerEncoder(encoder_layer, num_layers=num_layers)
 
         # Batch normalization and dropout
         self.bn = BatchNorm1d(hidden_channels)
@@ -123,12 +131,12 @@ class SequenceModel(torch.nn.Module):
         self.configure_training()
 
     def forward(self, data):
-        x, batch, chain_index = data.x, data.batch, data.chain_index  # Added chain_index
+        x, batch, chain_index = data.x, data.batch, data.chain_index
 
         # Embed residue types
         x = self.input_embedding(x)  # [num_nodes, hidden_channels]
 
-        # Reshape for Transformer: [seq_len, batch_size, hidden_channels]
+        # Reshape for sequence model: [seq_len, batch_size, hidden_channels]
         seq_lengths = torch.bincount(batch)
         max_seq_len = seq_lengths.max().item()
         batch_size = seq_lengths.size(0)
@@ -145,11 +153,22 @@ class SequenceModel(torch.nn.Module):
             mask[:seq_len, b] = False  # False for valid positions
             node_idx += seq_len
 
-        # Apply positional encoding with chain_index
+        # Apply positional encoding
         x_padded = self.pos_encoder(x_padded, chain_index_padded)
 
-        # Transformer expects [seq_len, batch_size, hidden_channels]
-        x_transformed = self.transformer_encoder(x_padded, mask=None)  # [seq_len, batch_size, hidden_channels]
+        if self.use_bilstm:
+            # BiLSTM forward pass
+            # Pack padded sequence for LSTM efficiency
+            packed_input = torch.nn.utils.rnn.pack_padded_sequence(
+                x_padded, seq_lengths.cpu(), enforce_sorted=False
+            )
+            packed_output, (hn, cn) = self.lstm(packed_input)
+            x_transformed, _ = torch.nn.utils.rnn.pad_packed_sequence(
+                packed_output, total_length=max_seq_len
+            )  # [seq_len, batch_size, hidden_channels]
+        else:
+            # Transformer forward pass
+            x_transformed = self.transformer_encoder(x_padded, mask=None)
 
         # Reshape back to [num_nodes, hidden_channels]
         x_out = []
@@ -173,7 +192,6 @@ class SequenceModel(torch.nn.Module):
         return x
 
     def configure_training(self, learning_rate=0.001):
-        """Configure training settings."""
         self.to(self.device)
         self.criterion = self.criterion.to(self.device)
         self.optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
@@ -279,7 +297,6 @@ class SequenceModel(torch.nn.Module):
         metrics["loss"] = mean_loss
         return metrics
 
-
 class PositionalEncoding(torch.nn.Module):
     def __init__(self, d_model, dropout=0.1, max_len=5000):
         super().__init__()
@@ -287,7 +304,6 @@ class PositionalEncoding(torch.nn.Module):
         self.d_model = d_model
         self.max_len = max_len
 
-        # Precompute sinusoidal encoding for max_len positions
         position = torch.arange(max_len).unsqueeze(1)
         div_term = torch.exp(torch.arange(0, d_model, 2) * (-np.log(10000.0) / d_model))
         pe = torch.zeros(max_len, d_model)
@@ -296,27 +312,17 @@ class PositionalEncoding(torch.nn.Module):
         self.register_buffer('pe', pe)
 
     def forward(self, x, chain_index=None):
-        """
-        Args:
-            x: Tensor of shape [seq_len, batch_size, d_model]
-            chain_index: Tensor of shape [seq_len, batch_size] indicating chain index for each residue
-        """
         seq_len, batch_size, _ = x.shape
 
         if chain_index is not None:
-            # Compute chain-relative positions
             positions = torch.zeros(seq_len, batch_size, device=x.device, dtype=torch.long)
             for b in range(batch_size):
-                # Get chain indices for this batch
                 chain_ids = chain_index[:, b]
-                # Compute position within each chain
                 for chain_id in chain_ids.unique():
-                    mask = (chain_ids == chain_id) & (chain_ids != -1)  # Exclude padding (-1)
+                    mask = (chain_ids == chain_id) & (chain_ids != -1)
                     positions[mask, b] = torch.arange(mask.sum(), device=x.device)
         else:
-            # Fallback to absolute positions
             positions = torch.arange(seq_len, device=x.device).unsqueeze(1).expand(-1, batch_size)
 
-        # Apply positional encoding
         x = x + self.pe[positions, :].to(x.device)
         return self.dropout(x)
