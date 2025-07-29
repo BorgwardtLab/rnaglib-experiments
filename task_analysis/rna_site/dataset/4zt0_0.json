@@ -1,0 +1,3065 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {
+    "name": "4zt0_0",
+    "pdbid": "4zt0",
+    "resolution_low": "102.7",
+    "resolution_high": "2.9",
+    "ligand_to_smiles": {
+      "MSE": "C[Se]CCC(C(=O)O)N"
+    },
+    "ss": {
+      "B": "...........(((((..((((....))))....)))))...((.....)).......((((....))))..",
+      "D": "...........(((((..((((....))))....)))))...((.....)).......((((....)))).."
+    },
+    "seq": {
+      "B": "GAUGAGACGCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGU",
+      "D": "GAUGAGACGCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGU"
+    }
+  },
+  "nodes": [
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        18.75,
+        0.3370000123977661,
+        -43.255001068115234
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          495,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        2,
+        4
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 2,
+      "protein_content_8.0": 4,
+      "id": "4zt0.B.12"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        16.150999069213867,
+        3.0160000324249268,
+        -48.78499984741211
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        2
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 2,
+      "id": "4zt0.B.11"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        21.77400016784668,
+        -5.309999942779541,
+        -40.97999954223633
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          495,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        2,
+        5
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 2,
+      "protein_content_8.0": 5,
+      "id": "4zt0.B.13"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        25.36199951171875,
+        -9.854000091552734,
+        -41.47100067138672
+      ],
+      "binding_small-molecule-4.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          495,
+          " "
+        ]
+      },
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-6.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          495,
+          " "
+        ]
+      },
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          495,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        2,
+        4
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 2,
+      "protein_content_8.0": 4,
+      "id": "4zt0.B.14"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        29.974000930786133,
+        -13.185999870300293,
+        -43.249000549316406
+      ],
+      "binding_small-molecule-4.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          495,
+          " "
+        ]
+      },
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-6.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          495,
+          " "
+        ]
+      },
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          495,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        1,
+        6
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 1,
+      "protein_content_8.0": 6,
+      "id": "4zt0.B.15"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        35.016998291015625,
+        -14.88700008392334,
+        -45.18600082397461
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        2,
+        6
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 2,
+      "protein_content_8.0": 6,
+      "id": "4zt0.B.16"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        40.529998779296875,
+        -14.432999610900879,
+        -45.698001861572266
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        2,
+        6
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 2,
+      "protein_content_8.0": 6,
+      "id": "4zt0.B.17"
+    },
+    {
+      "nt": "C",
+      "nt_full": "C",
+      "nt_code": "C",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        45.54999923706055,
+        -11.151000022888184,
+        -44.362998962402344
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        6
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 6,
+      "id": "4zt0.B.18"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        49.87300109863281,
+        -7.230000019073486,
+        -43.08599853515625
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          321,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        3,
+        7
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 3,
+      "protein_content_8.0": 7,
+      "id": "4zt0.B.19"
+    },
+    {
+      "nt": "C",
+      "nt_full": "C",
+      "nt_code": "C",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        52.202999114990234,
+        -2.930999994277954,
+        -39.308998107910156
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          321,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        4,
+        7
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 4,
+      "protein_content_8.0": 7,
+      "id": "4zt0.B.20"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        51.69499969482422,
+        0.4000000059604645,
+        -33.47600173950195
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        1,
+        4
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 1,
+      "protein_content_8.0": 4,
+      "id": "4zt0.B.21"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        50.06100082397461,
+        1.062000036239624,
+        -28.270999908447266
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        1,
+        3
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 1,
+      "protein_content_8.0": 3,
+      "id": "4zt0.B.22"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        49.97600173950195,
+        -1.4240000247955322,
+        -23.125
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        5
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 5,
+      "id": "4zt0.B.23"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        51.566001892089844,
+        -5.5980000495910645,
+        -19.34000015258789
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        4,
+        6
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 4,
+      "protein_content_8.0": 6,
+      "id": "4zt0.B.24"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        56.88199996948242,
+        -9.178000450134277,
+        -17.957000732421875
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        3
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 3,
+      "id": "4zt0.B.25"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        62.00699996948242,
+        -11.711000442504883,
+        -19.650999069213867
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        4
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 4,
+      "id": "4zt0.B.26"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        66.87999725341797,
+        -11.470000267028809,
+        -22.398000717163086
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        5
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 5,
+      "id": "4zt0.B.27"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        71.18699645996094,
+        -7.632999897003174,
+        -23.844999313354492
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        1,
+        2
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 1,
+      "protein_content_8.0": 2,
+      "id": "4zt0.B.28"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        69.6449966430664,
+        -6.867000102996826,
+        -17.038999557495117
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.29"
+    },
+    {
+      "nt": "C",
+      "nt_full": "C",
+      "nt_code": "C",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        74.83000183105469,
+        -3.98799991607666,
+        -15.475000381469727
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.30"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        80.16899871826172,
+        -1.7070000171661377,
+        -14.406999588012695
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.31"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        82.64099884033203,
+        1.7910000085830688,
+        -9.758999824523926
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.32"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        81.86299896240234,
+        3.9130001068115234,
+        -3.808000087738037
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.33"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        79.5260009765625,
+        3.0739998817443848,
+        0.8849999904632568
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.34"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        74.66300201416016,
+        0.6970000267028809,
+        -0.3440000116825104
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.35"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        68.51300048828125,
+        2.1500000953674316,
+        -2.062000036239624
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.36"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        64.6729965209961,
+        6.138999938964844,
+        -3.2330000400543213
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.37"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        66.9739990234375,
+        11.458000183105469,
+        -6.9070000648498535
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.38"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        71.34100341796875,
+        13.961000442504883,
+        -11.17199993133545
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.39"
+    },
+    {
+      "nt": "C",
+      "nt_full": "C",
+      "nt_code": "C",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        74.38600158691406,
+        13.57800006866455,
+        -16.92300033569336
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.40"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        74.74600219726562,
+        9.604999542236328,
+        -22.541000366210938
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.41"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        74.83300018310547,
+        5.4070000648498535,
+        -26.358999252319336
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        1
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 1,
+      "id": "4zt0.B.42"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        69.68699645996094,
+        1.6679999828338623,
+        -29.402000427246094
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        1
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 1,
+      "id": "4zt0.B.43"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        63.220001220703125,
+        -0.7979999780654907,
+        -29.32699966430664
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          321,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        1
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 1,
+      "id": "4zt0.B.44"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        59.75400161743164,
+        -1.034999966621399,
+        -34.64400100708008
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          321,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        3,
+        5
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 3,
+      "protein_content_8.0": 5,
+      "id": "4zt0.B.45"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        58.999000549316406,
+        -6.631999969482422,
+        -36.082000732421875
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        4
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 4,
+      "id": "4zt0.B.46"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        57.22600173950195,
+        -12.28499984741211,
+        -35.14500045776367
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          161,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        1,
+        4
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 1,
+      "protein_content_8.0": 4,
+      "id": "4zt0.B.47"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        54.36199951171875,
+        -16.64299964904785,
+        -32.970001220703125
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        3
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 3,
+      "id": "4zt0.B.48"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        48.97999954223633,
+        -17.091999053955078,
+        -30.628999710083008
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        2
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 2,
+      "id": "4zt0.B.49"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        43.65999984741211,
+        -15.60200023651123,
+        -29.56599998474121
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        2
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 2,
+      "id": "4zt0.B.50"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        39.334999084472656,
+        -12.177000045776367,
+        -31.215999603271484
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          1169,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        1,
+        4
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 1,
+      "protein_content_8.0": 4,
+      "id": "4zt0.B.51"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        39.03300094604492,
+        -15.557000160217285,
+        -26.35700035095215
+      ],
+      "binding_small-molecule-4.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          1169,
+          " "
+        ]
+      },
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-6.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          1169,
+          " "
+        ]
+      },
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          1169,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        2
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 2,
+      "id": "4zt0.B.52"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        40.25899887084961,
+        -19.344999313354492,
+        -22.430999755859375
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          1169,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        2,
+        4
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 2,
+      "protein_content_8.0": 4,
+      "id": "4zt0.B.53"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        35.763999938964844,
+        -24.636999130249023,
+        -23.21299934387207
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.54"
+    },
+    {
+      "nt": "C",
+      "nt_full": "C",
+      "nt_code": "C",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        32.32099914550781,
+        -28.381999969482422,
+        -24.910999298095703
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.55"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        29.166000366210938,
+        -32.6609992980957,
+        -29.913000106811523
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.56"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        32.73699951171875,
+        -33.14699935913086,
+        -35.79399871826172
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.57"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        38.51100158691406,
+        -31.145999908447266,
+        -38.112998962402344
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          465,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        1
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 1,
+      "id": "4zt0.B.58"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        38.53099822998047,
+        -28.298999786376953,
+        -42.67300033569336
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          465,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        2,
+        7
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 2,
+      "protein_content_8.0": 7,
+      "id": "4zt0.B.59"
+    },
+    {
+      "nt": "C",
+      "nt_full": "C",
+      "nt_code": "C",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        37.305999755859375,
+        -21.555999755859375,
+        -41.36800003051758
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          465,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        2,
+        6
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 2,
+      "protein_content_8.0": 6,
+      "id": "4zt0.B.60"
+    },
+    {
+      "nt": "C",
+      "nt_full": "C",
+      "nt_code": "C",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        32.3129997253418,
+        -19.673999786376953,
+        -39.316001892089844
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        2,
+        8
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 2,
+      "protein_content_8.0": 8,
+      "id": "4zt0.B.61"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        29.5939998626709,
+        -16.763999938964844,
+        -35.08599853515625
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        3
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 3,
+      "id": "4zt0.B.62"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        28.531999588012695,
+        -13.496999740600586,
+        -31.71299934387207
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        3
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 3,
+      "id": "4zt0.B.63"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        24.70199966430664,
+        -8.569000244140625,
+        -29.65399932861328
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        1,
+        2,
+        6
+      ],
+      "protein_content_4.0": 1,
+      "protein_content_6.0": 2,
+      "protein_content_8.0": 6,
+      "id": "4zt0.B.64"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        19.75,
+        -6.7789998054504395,
+        -31.517000198364258
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        2,
+        6
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 2,
+      "protein_content_8.0": 6,
+      "id": "4zt0.B.65"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        14.265999794006348,
+        -8.435999870300293,
+        -32.33599853515625
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": true,
+      "protein_content": [
+        0,
+        1,
+        6
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 1,
+      "protein_content_8.0": 6,
+      "id": "4zt0.B.66"
+    },
+    {
+      "nt": "C",
+      "nt_full": "C",
+      "nt_code": "C",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        11.038000106811523,
+        -11.234000205993652,
+        -28.851999282836914
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        3
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 3,
+      "id": "4zt0.B.67"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        9.069000244140625,
+        -11.354000091552734,
+        -23.503999710083008
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        5
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 5,
+      "id": "4zt0.B.68"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        9.965999603271484,
+        -14.718999862670898,
+        -17.631999969482422
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        2
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 2,
+      "id": "4zt0.B.69"
+    },
+    {
+      "nt": "C",
+      "nt_full": "C",
+      "nt_code": "C",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        8.359000205993652,
+        -18.402999877929688,
+        -13.876999855041504
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.70"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        6.138000011444092,
+        -23.72599983215332,
+        -13.383000373840332
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.71"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        5.139999866485596,
+        -28.7549991607666,
+        -15.442000389099121
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.72"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        6.566999912261963,
+        -32.5629997253418,
+        -19.416000366210938
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.73"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        11.619999885559082,
+        -33.24100112915039,
+        -22.8439998626709
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.74"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        13.54800033569336,
+        -27.781999588012695,
+        -23.785999298095703
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.75"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        12.743000030517578,
+        -23.698999404907227,
+        -28.284000396728516
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.76"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        9.604000091552734,
+        -20.91699981689453,
+        -31.695999145507812
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.77"
+    },
+    {
+      "nt": "A",
+      "nt_full": "A",
+      "nt_code": "A",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        2.808000087738037,
+        -21.851999282836914,
+        -31.481000900268555
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.78"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        -2.7360000610351562,
+        -23.229999542236328,
+        -28.434999465942383
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.79"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        -5.836999893188477,
+        -21.93199920654297,
+        -22.950000762939453
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.80"
+    },
+    {
+      "nt": "G",
+      "nt_full": "G",
+      "nt_code": "G",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        -7.848999977111816,
+        -19.490999221801758,
+        -19.10700035095215
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_ion_8.0A": null,
+      "binding_small-molecule-8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        0,
+        0
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 0,
+      "protein_content_8.0": 0,
+      "id": "4zt0.B.81"
+    },
+    {
+      "nt": "U",
+      "nt_full": "U",
+      "nt_code": "U",
+      "chain_id": "B",
+      "is_modified": false,
+      "xyz_P": [
+        -10.984000205993652,
+        -15.14900016784668,
+        -15.241000175476074
+      ],
+      "binding_ion_4.0A": null,
+      "binding_small-molecule-4.0A": null,
+      "binding_ion_6.0A": null,
+      "binding_small-molecule-6.0A": null,
+      "binding_small-molecule-8.0A": {
+        "name": "MSE",
+        "id": [
+          "H_MSE",
+          751,
+          " "
+        ]
+      },
+      "binding_ion_8.0A": null,
+      "protein_binding": false,
+      "protein_content": [
+        0,
+        1,
+        2
+      ],
+      "protein_content_4.0": 0,
+      "protein_content_6.0": 1,
+      "protein_content_8.0": 2,
+      "id": "4zt0.B.82"
+    }
+  ],
+  "links": [
+    {
+      "LW": "B53",
+      "source": "4zt0.B.12",
+      "target": "4zt0.B.11"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.12",
+      "target": "4zt0.B.13"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.11",
+      "target": "4zt0.B.12"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.13",
+      "target": "4zt0.B.12"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.13",
+      "target": "4zt0.B.14"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.14",
+      "target": "4zt0.B.13"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.14",
+      "target": "4zt0.B.15"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.15",
+      "target": "4zt0.B.14"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.15",
+      "target": "4zt0.B.16"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.16",
+      "target": "4zt0.B.15"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.16",
+      "target": "4zt0.B.17"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.17",
+      "target": "4zt0.B.16"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.17",
+      "target": "4zt0.B.18"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.18",
+      "target": "4zt0.B.17"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.18",
+      "target": "4zt0.B.19"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.19",
+      "target": "4zt0.B.18"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.19",
+      "target": "4zt0.B.20"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.20",
+      "target": "4zt0.B.19"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.20",
+      "target": "4zt0.B.21"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.21",
+      "target": "4zt0.B.20"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.21",
+      "target": "4zt0.B.22"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.21",
+      "target": "4zt0.B.50"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.22",
+      "target": "4zt0.B.21"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.22",
+      "target": "4zt0.B.23"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.22",
+      "target": "4zt0.B.49"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.23",
+      "target": "4zt0.B.22"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.23",
+      "target": "4zt0.B.24"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.23",
+      "target": "4zt0.B.48"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.24",
+      "target": "4zt0.B.23"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.24",
+      "target": "4zt0.B.25"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.24",
+      "target": "4zt0.B.47"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.25",
+      "target": "4zt0.B.24"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.25",
+      "target": "4zt0.B.26"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.25",
+      "target": "4zt0.B.46"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.26",
+      "target": "4zt0.B.25"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.26",
+      "target": "4zt0.B.27"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.26",
+      "target": "4zt0.B.45"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.27",
+      "target": "4zt0.B.26"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.27",
+      "target": "4zt0.B.28"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.28",
+      "target": "4zt0.B.27"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.28",
+      "target": "4zt0.B.29"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.29",
+      "target": "4zt0.B.28"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.29",
+      "target": "4zt0.B.30"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.29",
+      "target": "4zt0.B.40"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.30",
+      "target": "4zt0.B.29"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.30",
+      "target": "4zt0.B.31"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.30",
+      "target": "4zt0.B.39"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.31",
+      "target": "4zt0.B.30"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.31",
+      "target": "4zt0.B.32"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.31",
+      "target": "4zt0.B.38"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.32",
+      "target": "4zt0.B.31"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.32",
+      "target": "4zt0.B.33"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.33",
+      "target": "4zt0.B.32"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.33",
+      "target": "4zt0.B.34"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.34",
+      "target": "4zt0.B.33"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.34",
+      "target": "4zt0.B.35"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.35",
+      "target": "4zt0.B.34"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.35",
+      "target": "4zt0.B.36"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.36",
+      "target": "4zt0.B.35"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.36",
+      "target": "4zt0.B.37"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.37",
+      "target": "4zt0.B.36"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.37",
+      "target": "4zt0.B.38"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.38",
+      "target": "4zt0.B.37"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.38",
+      "target": "4zt0.B.39"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.38",
+      "target": "4zt0.B.31"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.39",
+      "target": "4zt0.B.38"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.39",
+      "target": "4zt0.B.40"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.39",
+      "target": "4zt0.B.30"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.40",
+      "target": "4zt0.B.39"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.40",
+      "target": "4zt0.B.41"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.40",
+      "target": "4zt0.B.29"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.41",
+      "target": "4zt0.B.40"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.41",
+      "target": "4zt0.B.42"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.42",
+      "target": "4zt0.B.41"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.42",
+      "target": "4zt0.B.43"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.43",
+      "target": "4zt0.B.42"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.43",
+      "target": "4zt0.B.44"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.44",
+      "target": "4zt0.B.43"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.44",
+      "target": "4zt0.B.45"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.45",
+      "target": "4zt0.B.44"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.45",
+      "target": "4zt0.B.46"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.45",
+      "target": "4zt0.B.26"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.46",
+      "target": "4zt0.B.45"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.46",
+      "target": "4zt0.B.47"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.46",
+      "target": "4zt0.B.25"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.47",
+      "target": "4zt0.B.46"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.47",
+      "target": "4zt0.B.48"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.47",
+      "target": "4zt0.B.24"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.48",
+      "target": "4zt0.B.47"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.48",
+      "target": "4zt0.B.49"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.48",
+      "target": "4zt0.B.23"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.49",
+      "target": "4zt0.B.48"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.49",
+      "target": "4zt0.B.50"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.49",
+      "target": "4zt0.B.22"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.50",
+      "target": "4zt0.B.49"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.50",
+      "target": "4zt0.B.51"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.50",
+      "target": "4zt0.B.21"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.51",
+      "target": "4zt0.B.50"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.51",
+      "target": "4zt0.B.52"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.52",
+      "target": "4zt0.B.51"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.52",
+      "target": "4zt0.B.53"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.53",
+      "target": "4zt0.B.52"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.53",
+      "target": "4zt0.B.54"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.53",
+      "target": "4zt0.B.61"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.54",
+      "target": "4zt0.B.53"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.54",
+      "target": "4zt0.B.55"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.54",
+      "target": "4zt0.B.60"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.55",
+      "target": "4zt0.B.54"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.55",
+      "target": "4zt0.B.56"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.55",
+      "target": "4zt0.B.58"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.56",
+      "target": "4zt0.B.55"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.56",
+      "target": "4zt0.B.57"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.57",
+      "target": "4zt0.B.56"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.57",
+      "target": "4zt0.B.58"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.58",
+      "target": "4zt0.B.57"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.58",
+      "target": "4zt0.B.59"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.58",
+      "target": "4zt0.B.55"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.59",
+      "target": "4zt0.B.58"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.59",
+      "target": "4zt0.B.60"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.60",
+      "target": "4zt0.B.59"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.60",
+      "target": "4zt0.B.61"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.60",
+      "target": "4zt0.B.54"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.61",
+      "target": "4zt0.B.60"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.61",
+      "target": "4zt0.B.62"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.61",
+      "target": "4zt0.B.53"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.62",
+      "target": "4zt0.B.61"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.62",
+      "target": "4zt0.B.63"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.63",
+      "target": "4zt0.B.62"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.63",
+      "target": "4zt0.B.64"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.64",
+      "target": "4zt0.B.63"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.64",
+      "target": "4zt0.B.65"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.65",
+      "target": "4zt0.B.64"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.65",
+      "target": "4zt0.B.66"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.66",
+      "target": "4zt0.B.65"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.66",
+      "target": "4zt0.B.67"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.67",
+      "target": "4zt0.B.66"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.67",
+      "target": "4zt0.B.68"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.68",
+      "target": "4zt0.B.67"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.68",
+      "target": "4zt0.B.69"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.69",
+      "target": "4zt0.B.68"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.69",
+      "target": "4zt0.B.70"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.69",
+      "target": "4zt0.B.80"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.70",
+      "target": "4zt0.B.69"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.70",
+      "target": "4zt0.B.71"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.70",
+      "target": "4zt0.B.79"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.71",
+      "target": "4zt0.B.70"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.71",
+      "target": "4zt0.B.72"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.71",
+      "target": "4zt0.B.78"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.72",
+      "target": "4zt0.B.71"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.72",
+      "target": "4zt0.B.73"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.72",
+      "target": "4zt0.B.77"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.73",
+      "target": "4zt0.B.72"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.73",
+      "target": "4zt0.B.74"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.74",
+      "target": "4zt0.B.73"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.74",
+      "target": "4zt0.B.75"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.75",
+      "target": "4zt0.B.74"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.75",
+      "target": "4zt0.B.76"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.76",
+      "target": "4zt0.B.75"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.76",
+      "target": "4zt0.B.77"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.77",
+      "target": "4zt0.B.76"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.77",
+      "target": "4zt0.B.78"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.77",
+      "target": "4zt0.B.72"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.78",
+      "target": "4zt0.B.77"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.78",
+      "target": "4zt0.B.79"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.78",
+      "target": "4zt0.B.71"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.79",
+      "target": "4zt0.B.78"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.79",
+      "target": "4zt0.B.80"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.79",
+      "target": "4zt0.B.70"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.80",
+      "target": "4zt0.B.79"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.80",
+      "target": "4zt0.B.81"
+    },
+    {
+      "LW": "cWW",
+      "source": "4zt0.B.80",
+      "target": "4zt0.B.69"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.81",
+      "target": "4zt0.B.80"
+    },
+    {
+      "LW": "B35",
+      "source": "4zt0.B.81",
+      "target": "4zt0.B.82"
+    },
+    {
+      "LW": "B53",
+      "source": "4zt0.B.82",
+      "target": "4zt0.B.81"
+    }
+  ]
+}
