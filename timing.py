@@ -17,7 +17,6 @@ TASKS = [
     ProteinBindingSite,
     BindingSite,
     InverseFolding,
-
 ]
 
 resdir = "timing_exp"
@@ -61,7 +60,36 @@ for device in ("cpu", "cuda"):
               f" memory used: {peak_memory_mb:.2f} MB")
         rows.append({"task_name": task.name,
                      "time": time_per_point,
-                     "memory": peak_memory_mb
+                     "memory": peak_memory_mb,
                      })
 df = pd.DataFrame(rows)
-print(df)
+df.to_csv('timing.csv')
+
+df = pd.read_csv('timing.csv', index_col=0)
+
+# Split the first and second rounds, make them columns
+df['run'] = df.groupby('task_name').cumcount()
+df_pivoted = df.pivot(index='task_name', columns='run', values=['time', 'memory'])
+df_pivoted.columns = [f'{value}_{run}' for value, run in df_pivoted.columns]
+df_transformed = df_pivoted.reset_index()
+
+# Cosmetic
+df_transformed = df_transformed.drop(columns=['memory_0'])
+df_transformed['time_0'] = df_transformed['time_0'] * 1000
+df_transformed['time_1'] = df_transformed['time_1'] * 1000
+df_transformed = df_transformed.rename(columns={'time_0': 'Time/RNA (CPU ms)',
+                                                'time_1': 'Time/RNA (GPU ms)',
+                                                'memory_1': 'Peak GPU Memory (Mb)',
+                                                'task_name': 'Task Name'})
+task_names = {
+    "rna_cm": "RNA_CM",
+    "rna_go": "RNA_Go",
+    "rna_ligand": "RNA_Ligand",
+    "rna_prot": "RNA_Prot",
+    "rna_if": "RNA_IF",
+    "rna_site": "RNA_Site",
+    "rna_vs": "RNA_VS",
+}
+df_transformed['Task Name'] = df_transformed['Task Name'].apply(lambda x: task_names[x])
+df_transformed = df_transformed.round(2)
+print(df_transformed.to_markdown(index=False))
