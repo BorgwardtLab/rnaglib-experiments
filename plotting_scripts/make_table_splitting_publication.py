@@ -6,6 +6,7 @@ import matplotlib.lines as mlines  # Import mlines
 import matplotlib.patches as mpatches
 
 plt.rcParams["text.usetex"] = True
+#plt.rcParams['font.family'] = 'monospace'
 plt.rc("font", size=16)  # fontsize of the tick labels
 plt.rc("ytick", labelsize=13)  # fontsize of the tick labels
 plt.rc("xtick", labelsize=13)  # fontsize of the tick labels
@@ -35,7 +36,7 @@ for task in TASKLIST:
             if task == "rna_go":
                 path = f"results/RNA_GO_{distance}_threshold0.6_3layers_lr0.001_20epochs_seed{seed}_results.json"
             else:
-                path = f"results/workshop_{task}_{distance}_{seed}.json"
+                path = f"results/outerseed_{task}_{distance}_{seed}.json"
 
             with open(path) as result:
                 result = json.load(result)
@@ -56,7 +57,7 @@ for task in TASKLIST:
                 )
 
 df = pd.DataFrame(rows)
-df.to_csv("plotting_scripts/splitting_publication.csv")
+df.to_csv("plotting_scripts/splitting_publication_outerseed.csv")
 df_mean = df.groupby(["task", "distance"])["score"].mean().reset_index()
 df_std = df.groupby(["task", "distance"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
@@ -133,6 +134,6 @@ for i, distance in enumerate(dist_names.values()):
 plt.legend(handles, labels, loc="upper center", ncol=3, title=r"Splitting strategy:", handletextpad=-0.3)
 
 plt.subplots_adjust(bottom=0.15)  # Adjust the values as needed
-plt.savefig("plotting_scripts/splitting_publication.pdf", format="pdf")
+plt.savefig("plotting_scripts/splitting_publication_outerseed.pdf", format="pdf")
 plt.show()
 plt.clf()
