@@ -10,13 +10,13 @@ from rnaglib.tasks.RNA_VS.model_pyg import VSPygModel
 from rnaglib.transforms import GraphRepresentation
 
 TASKS = [
-    VirtualScreening,
     RNAGo,
+    InverseFolding,
     ChemicalModification,
-    LigandIdentification,
     ProteinBindingSite,
     BindingSite,
-    InverseFolding,
+    LigandIdentification,
+    VirtualScreening,
 ]
 
 resdir = "timing_exp"

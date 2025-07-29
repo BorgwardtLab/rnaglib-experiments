@@ -49,60 +49,60 @@ MODEL_ARGS = {
         }
     },
     "rna_cm": {
-        "struc":{
+        "struc": {
             "num_layers": 3,
             "hidden_channels": 128
         },
-        "seq":{
+        "seq": {
             "num_layers": 3,
             "hidden_channels": 128
         },
-        "rand":{
+        "rand": {
             "num_layers": 3,
             "hidden_channels": 128
         },
     },
     "rna_prot": {
-        "struc":{
+        "struc": {
             "num_layers": 4,
             "hidden_channels": 64,
             "dropout_rate": 0.2
         },
-        "seq":{
+        "seq": {
             "num_layers": 4,
             "hidden_channels": 64,
             "dropout_rate": 0.2
         },
-        "rand":{
+        "rand": {
             "num_layers": 4,
             "hidden_channels": 64,
             "dropout_rate": 0.2
         },
     },
     "rna_site": {
-        "struc":{
+        "struc": {
             "num_layers": 4,
             "hidden_channels": 256
         },
-        "seq":{
+        "seq": {
             "num_layers": 4,
-            "hidden_channels":256
+            "hidden_channels": 256
         },
-        "rand":{
+        "rand": {
             "num_layers": 4,
-            "hidden_channels":256
+            "hidden_channels": 256
         },
     },
-    "rna_ligand":{
-        "struc":{
+    "rna_ligand": {
+        "struc": {
             "num_layers": 3,
             "hidden_channels": 64,
         },
-        "seq":{
+        "seq": {
             "num_layers": 3,
             "hidden_channels": 64,
         },
-        "rand":{
+        "rand": {
             "num_layers": 3,
             "hidden_channels": 64,
         },
@@ -110,68 +110,68 @@ MODEL_ARGS = {
 }
 TRAINER_ARGS = {
     "rna_cm": {
-        "seq":{
+        "seq": {
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.001
         },
-        "struc":{
+        "struc": {
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.001
         },
-        "rand":{
+        "rand": {
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.001
         },
     },
     "rna_prot": {
-        "rand":{
+        "rand": {
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.01
         },
-         "seq":{
+        "seq": {
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.01
         },
-        "struc":{
+        "struc": {
             "epochs": 40,
             "batch_size": 8,
             "learning_rate": 0.01
         },
     },  # 0.01 (original)
     "rna_site": {
-        "rand":{
+        "rand": {
             "batch_size": 8,
             "epochs": 40,
             "learning_rate": 0.001
         },
-        "seq":{
+        "seq": {
             "batch_size": 8,
             "epochs": 40,
             "learning_rate": 0.001
         },
-        "struc":{
+        "struc": {
             "batch_size": 8,
             "epochs": 40,
             "learning_rate": 0.001
         },
     },
     "rna_ligand": {
-        "rand":{
+        "rand": {
             "batch_size": 8,
             "epochs": 20,
             "learning_rate": 0.001
         },
-        "seq":{
+        "seq": {
             "batch_size": 8,
             "epochs": 20,
             "learning_rate": 0.001
         },
-        "struc":{
+        "struc": {
             "batch_size": 8,
             "epochs": 20,
             "learning_rate": 0.001
@@ -189,17 +189,17 @@ for task in TASKLIST:
                 path = f"""results/RNA_CM_{MODEL_ARGS[task][distance]["num_layers"]}layers_lr0.001_40epochs_hiddendim128_2.5D_layer_type_rgcn_redundant_{distance}_seed{seed}_results.json"""
             elif task == "rna_cm":
                 path = f"""results/RNA_CM_{MODEL_ARGS[task][distance]["num_layers"]}layers_lr{TRAINER_ARGS[task][distance]["learning_rate"]}_{TRAINER_ARGS[task][distance]["epochs"]}epochs_hiddendim{MODEL_ARGS[task][distance]["hidden_channels"]}_2.5D_layer_type_rgcn_{distance}_seed{seed}_results.json"""
-            elif task=="rna_ligand":
+            elif task == "rna_ligand":
                 path = f"""results/rna_ligand_{MODEL_ARGS[task][distance]["num_layers"]}layers_lr{TRAINER_ARGS[task][distance]["learning_rate"]}_{TRAINER_ARGS[task][distance]["epochs"]}epochs_hiddendim{MODEL_ARGS[task][distance]["hidden_channels"]}_2.5D_layer_type_rgcn_batchsize8_{distance}_seed{seed}_results.json"""
             else:
-                path = f"results/workshop_{task}_{distance}_{seed}.json"                
+                path = f"results/workshop_{task}_{distance}_{seed}.json"
 
             with open(path) as result:
                 result = json.load(result)
                 metric_key = METRICS[task]
                 score = (
                     result["test_metrics"][metric_key]
-                    if task == "rna_go" or task=="rna_cm_redundant" or task=="rna_cm" or task=="rna_ligand"
+                    if task == "rna_go" or task == "rna_cm_redundant" or task == "rna_cm" or task == "rna_ligand"
                     else result[metric_key]
                 )
                 rows.append(
@@ -223,13 +223,14 @@ print(df_mean)
 
 # Replace label for prettier x-axis
 task_names = {
- #   "rna_cm": r"\texttt{cm}",
- #   "rna_go": r"\texttt{go}",
- #   "rna_ligand": r"\texttt{ligand}",
- #   "rna_prot": r"\texttt{prot}",
- #   "rna_if": r"\texttt{if}",
- #   "rna_site": r"\texttt{site}",
-    "rna_site_redundant": r"\texttt{site} \newline \textit{redundant}"
+    "rna_go": r"\texttt{go}",
+    "rna_if": r"\texttt{if}",
+    "rna_cm": r"\texttt{cm}",
+    "rna_prot": r"\texttt{prot}",
+    "rna_site": r"\texttt{site}",
+    "rna_ligand": r"\texttt{ligand}",
+    "rna_cm_redundant": r"\texttt{cm} \newline \textit{redundant}",
+    "rna_site_redundant": r"\texttt{site} \newline \textit{redundant}",
 }
 df["task"] = df["task"].replace(task_names)
 
@@ -263,6 +264,7 @@ g = sns.catplot(
     aspect=1.6,
     legend=False,
     palette=palette_dict,
+    order=task_names.values(),
 )
 g.set_axis_labels(x_var="", y_var="Test Score")
 g.set(ylim=(0, 1))

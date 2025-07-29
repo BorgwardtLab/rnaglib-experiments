@@ -192,7 +192,8 @@ g = sns.catplot(
     height=4,
     aspect=1.6,
     palette=palette_dict,
-    legend=False
+    legend=False,
+    order=task_names.values()
 )
 g.set_axis_labels("", "Test Score")
 # g.set_titles("{col_name} {col_var}")
