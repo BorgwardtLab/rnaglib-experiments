@@ -1,6 +1,8 @@
 import os
 import sys
 import copy
+from joblib import Parallel, delayed
+
 import time
 
 from rnaglib.learning import PygModel, GVPModel
@@ -16,7 +18,9 @@ from model_seq import SequenceModel
 from utils import CustomLigandIdentification
 from constants import BEST_HPARAMS, TASKLIST, REPRESENTATIONS, SPLITS, SEEDS
 
+
 def run_experiment(task, split, seeds = SEEDS, shuffle = False, hparams_dict = None, rna_fm = False, representation = "2.5D", output = "wandb", project_name = "final_benchmark", debug = False):
+    start = time.time()
     if hparams_dict is None:
         hparams_dict = BEST_HPARAMS[task][representation][split]
 
@@ -156,13 +160,21 @@ def run_experiment(task, split, seeds = SEEDS, shuffle = False, hparams_dict = N
             output = output
         )
         trainer.train()
+        end = time.time()
+        print(f"Training time: {end - start} seconds")
+        print("Trained")
 
 if __name__ == "__main__":
     hparams_dict = BEST_HPARAMS
+    rna_fm = False
+    output = "wandb"
+    
     for task in TASKLIST:
+        task_params = []
         for representation in hparams_dict[task]:
             if representation in REPRESENTATIONS:
                 for split in hparams_dict[task][representation]:
                     if split in SPLITS:
-                        print(task)
-                        run_experiment(task, split, seeds = SEEDS, shuffle = True, hparams_dict = hparams_dict[task][representation][split], debug = False)
+                        params = (task, split, SEEDS, True, hparams_dict[task][representation][split], rna_fm, representation, output, "final_benchmark", False)
+                        task_params.append(params)
+        _ = Parallel(n_jobs=-1)(delayed(run_experiment)(*params) for params in task_params)
