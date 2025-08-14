@@ -485,5 +485,33 @@ BEST_HPARAMS = {
                 'dropout_rate': 0.5
             }
         }
+    },
+    'rna_if': {
+        '2.5D':{
+            'struc': {
+                'num_layers': 3,
+                'hidden_channels': 128,
+                'epochs': 100,
+                'learning_rate': 0.0001,
+                'batch_size': 8,
+                'dropout_rate': 0.5
+            },
+            'seq': {
+                'num_layers': 3,
+                'hidden_channels': 128,
+                'epochs': 100,
+                'learning_rate': 0.0001,
+                'batch_size': 8,
+                'dropout_rate': 0.5
+            },
+            'rand': {
+                'num_layers': 3,
+                'hidden_channels': 128,
+                'epochs': 100,
+                'learning_rate': 0.0001,
+                'batch_size': 8,
+                'dropout_rate': 0.5
+            }
+        }
     }
 }
