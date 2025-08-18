@@ -87,8 +87,10 @@ def run_experiment(task, split, seeds = SEEDS, shuffle = False, hparams_dict = N
     if split == 'rand':
         ta.splitter = RandomSplitter()
     elif split == 'struc' or split == 'seq':
-        ta.splitter = ClusterSplitter(distance_name = distance)
-
+        if ta == "rna_go":
+            ta.splitter = ClusterSplitter(similarity_threshold = 0.6, distance_name = distance)
+        else:
+            ta.splitter = ClusterSplitter(distance_name = distance)
     # If the sequence information is needed, add it to the task dataset
     if rna_fm or representation == "seq":
         rnafm = RNAFMTransform()
