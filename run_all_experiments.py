@@ -138,7 +138,7 @@ def run_experiment(task, split, seeds = SEEDS, shuffle = False, hparams_dict = N
             model = PygModel.from_task(ta, **model_args)
         elif representation == "seq":
             model = SequenceModel.from_task(ta, **model_args, num_node_features = 644)
-        elif representation in ["2D", "2D_GCN"]:
+        elif representation in ["GVP", "GVP_2.5D"]:
             model = GVPModel(**model_args)
         else:
             raise ValueError(f"Representation {representation} not supported")
