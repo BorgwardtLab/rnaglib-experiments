@@ -151,15 +151,22 @@ class RNATrainer:
             "training_history": self.training_log,
             "hyperparameters": {
                 "learning_rate": self.learning_rate,
-                "num_node_features": self.model.num_node_features,
                 "num_classes": self.model.num_classes,
                 "graph_level": self.model.graph_level,
                 "num_layers": self.model.num_layers,
-                "hidden_channels": self.model.hidden_channels,
                 "dropout_rate": self.model.dropout_rate,
                 "multi_label": self.model.multi_label,
             },
         }
+
+        if self.representation.name == "gvp_graph":
+            results["node_in_dim"] = self.model.node_in_dim
+            results["node_h_dim"] = self.model.node_h_dim
+            results["edge_in_dim"] = self.model.edge_in_dim
+            results["edge_h_dim"] = self.model.edge_h_dim
+        else:
+            results["num_node_features"] = self.model.num_node_features
+            results["hidden_channels"] = self.model.hidden_channels
 
         # Save to file
         os.makedirs("results", exist_ok=True)
