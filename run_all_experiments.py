@@ -87,7 +87,7 @@ def run_experiment(task, split, seeds = SEEDS, shuffle = False, hparams_dict = N
     if split == 'rand':
         ta.splitter = RandomSplitter()
     elif split == 'struc' or split == 'seq':
-        if ta == "rna_go":
+        if task == "rna_go":
             ta.splitter = ClusterSplitter(similarity_threshold = 0.6, distance_name = distance)
         else:
             ta.splitter = ClusterSplitter(distance_name = distance)
