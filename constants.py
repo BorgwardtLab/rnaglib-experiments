@@ -1,13 +1,23 @@
 SEEDS = [0, 1, 2]
 
 TASKLIST = [
-    "rna_cm", "rna_go", "rna_ligand", "rna_prot", "rna_if", "rna_site",
+    "rna_cm", "rna_go", "rna_ligand", "rna_prot",
+    "rna_if", "rna_site",
     "rna_site_redundant", "rna_cm_redundant", "rna_prot_redundant"
 ]
 
 SPLITS = ["struc", "seq", "rand"]
 
 REPRESENTATIONS = ["2.5D", "2D", "2D_GCN", "GVP", "GVP_2.5D"]
+
+METRICS = {
+    "rna_cm": "balanced_accuracy",
+    "rna_go": "jaccard",
+    "rna_ligand": "auc",
+    "rna_prot": "balanced_accuracy",
+    "rna_site": "balanced_accuracy",
+    "rna_if": "accuracy",
+}
 
 BEST_HPARAMS = {
     'rna_cm_redundant': {
