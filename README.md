@@ -12,6 +12,6 @@ This repository provides the necessary code to reproduce the three main experime
 
 * To reproduce the representation ablation study, run `python run_exp_representations.py`, which will train models and dump the relevant JSONs in `results`. In order to reproduce the associated plot, run `python plotting_scripts/make_plot_representations.py`. This will create a file named `plotting_scripts/representation_ablation.pdf` reproducing Figure 4b of our preprint.
 
-* To reproduce the benchmark table , run `python run_benchmark.py`, which will train each model with its default splitting and 2.5D representations with its best hyperparameters. Then run `python plotting_scripts/make_table_benchmark.py`. This will create a file named `plotting_scripts/final_benchmark.pdf` reproducing Table 2 of our preprint, alongside a CSV file `plotting_scripts/final_benchmark.csv`.
+* To reproduce the benchmark table , run `python run_exp_splitting.py`, which will train each model with its default splitting and 2.5D representations with its best hyperparameters. Then run `python plotting_scripts/make_table_benchmark.py`. This will create a file named `plotting_scripts/final_benchmark.pdf` reproducing Table 2 of our preprint, alongside a CSV file `plotting_scripts/final_benchmark.csv`.
 
 Once a training has been made in specific conditions, it won't be re-run if a subsequently used script needs to run it, unless you change the `retrain` parameter to `True`. Therefore, running experiments which trainings partially overlap won't lead to a waste of time.
