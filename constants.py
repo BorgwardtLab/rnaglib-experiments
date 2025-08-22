@@ -13,7 +13,7 @@ REPRESENTATIONS = ["2.5D", "2D", "2D_GCN", "GVP", "GVP_2.5D"]
 METRICS = {
     "rna_cm": "balanced_accuracy",
     "rna_go": "jaccard",
-    "rna_ligand": "auc",
+    "rna_ligand": "balanced_accuracy",
     "rna_prot": "balanced_accuracy",
     "rna_site": "balanced_accuracy",
     "rna_if": "accuracy",

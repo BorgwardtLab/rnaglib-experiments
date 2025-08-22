@@ -11,7 +11,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 from constants import BEST_HPARAMS, SEEDS, METRICS
 
-plt.rcParams["text.usetex"] = False
+plt.rcParams["text.usetex"] = True
 plt.rc("font", size=16)  # fontsize of the tick labels
 plt.rc("ytick", labelsize=13)  # fontsize of the tick labels
 plt.rc("xtick", labelsize=13)  # fontsize of the tick labels
@@ -50,14 +50,19 @@ df.to_csv(f"nb_layers_{representation}.csv")
 df_mean = df.groupby(["task", "nb_layers"])["score"].mean().reset_index()
 df_std = df.groupby(["task", "nb_layers"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
-df_mean["metric"] = [METRICS[row.task] for row in df_mean.itertuples()]
+df_mean["metric"] = [METRICS[row.task.split("_redundant")[0]] for row in df_mean.itertuples()]
 
-# Replace label for prettier x-axis
+Replace label for prettier x-axis
 task_names = {
     "rna_cm": r"\texttt{cm}",
     "rna_prot": r"\texttt{prot}",
     "rna_site": r"\texttt{site}",
 }
+# task_names = {
+#     "rna_cm": "cm",
+#     "rna_prot": "prot",
+#     "rna_site": "site",
+# }
 df["task"] = df["task"].replace(task_names)
 
 print(df)

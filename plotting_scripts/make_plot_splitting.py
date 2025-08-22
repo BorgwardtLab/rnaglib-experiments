@@ -27,6 +27,8 @@ for task in TASKLIST:
             with open(path) as result:
                 result = json.load(result)
                 metric_key = METRICS[task.split("_redundant")[0]]
+                print(task)
+                print(result["test_metrics"])
                 score = (
                     result["test_metrics"][metric_key]
                 )
@@ -41,7 +43,7 @@ for task in TASKLIST:
                 )
 
 df = pd.DataFrame(rows)
-df.to_csv("plotting_scripts/splitting_publication_final_benchmark.csv")
+df.to_csv("splitting_publication_final_benchmark.csv")
 df_mean = df.groupby(["task", "distance"])["score"].mean().reset_index()
 df_std = df.groupby(["task", "distance"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
@@ -49,7 +51,7 @@ df_mean["metric"] = [METRICS[row.task.split("_redundant")[0]] for row in df_mean
 
 print(df_mean)
 
-# Replace label for prettier x-axis
+Replace label for prettier x-axis
 task_names = {
     "rna_go": r"\texttt{go}",
     "rna_if": r"\texttt{if}",
@@ -60,6 +62,16 @@ task_names = {
     "rna_cm_redundant": r"\texttt{cm} \newline \textit{redundant}",
     "rna_site_redundant": r"\texttt{site} \newline \textit{redundant}",
 }
+# task_names = {
+#     "rna_go": "go",
+#     "rna_if": "if",
+#     "rna_cm": "cm",
+#     "rna_prot": "prot",
+#     "rna_site": "site",
+#     "rna_ligand": "ligand",
+#     "rna_cm_redundant": "cm redundant",
+#     "rna_site_redundant": "site redundant",
+# }
 df["task"] = df["task"].replace(task_names)
 
 dist_names = {
@@ -120,6 +132,6 @@ for i, distance in enumerate(dist_names.values()):
 plt.legend(handles, labels, loc="upper center", ncol=3, title=r"Splitting strategy:", handletextpad=-0.3)
 
 plt.subplots_adjust(bottom=0.15)  # Adjust the values as needed
-plt.savefig("plotting_scripts/splitting_ablation.pdf", format="pdf")
+plt.savefig("splitting_ablation.pdf", format="pdf")
 plt.show()
 plt.clf()

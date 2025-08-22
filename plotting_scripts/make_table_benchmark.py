@@ -13,15 +13,17 @@ for task in TASKLIST:
     for distance in SPLITS:
         for seed in SEEDS:
                 with open(
-                    f"../results/{task}_{distance}_2.5D_best_params_seed{seed}_results.json"
+                    f"../../results/{task}_{distance}_2.5D_best_params_seed{seed}_results.json"
                 ) as result:
                     result = json.load(result)
-                    print(task)
-                    print(result)
+                    metric_key = METRICS[task.split("_redundant")[0]]
+                    score = (
+                        result["test_metrics"][metric_key]
+                    )
                     rows.append(
                         {
-                            "score": result[METRICS[task]],
-                            "metric": METRICS[task],
+                            "score": score,
+                            "metric": metric_key,
                             "task": task,
                             "seed": seed,
                             "distance": distance,
@@ -35,7 +37,7 @@ df_mean = df.groupby(["task", "distance"])["score"].mean().reset_index()
 #df_mean = df.groupby(["task"])["score"].mean().reset_index()
 df_std = df.groupby(["task", "distance"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
-df_mean["metric"] = [METRICS[row.task] for row in df_mean.itertuples()]
+df_mean["metric"] = [METRICS[row.task.split("_redundant")[0]] for row in df_mean.itertuples()]
 
 print(df_mean)
 
@@ -44,12 +46,12 @@ print(df_mean)
 # Load dummy scores
 dummy_scores = []
 for task in TASKLIST:
-    for distance in DISTANCES:
-        dummy_path = f"results/dummy_{task}_{distance}.json"
+    for distance in SPLITS:
+        dummy_path = f"""../results/dummy_{task.split("_redundant")[0]}_struc.json"""
         try:
             with open(dummy_path) as f:
                 dummy_result = json.load(f)
-                score = dummy_result[METRICS[task]]
+                score = dummy_result[METRICS[task.split("_redundant")[0]]]
                 dummy_scores.append({
                     "task": task,
                     "distance": distance,

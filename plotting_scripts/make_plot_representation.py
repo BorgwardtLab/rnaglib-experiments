@@ -40,7 +40,7 @@ for ta_name in ["rna_cm", "rna_site", "rna_prot"]:
                 )
                 
 df = pd.DataFrame(rows)
-df.to_csv("plotting_scripts/repr_final_benchmark.csv")
+df.to_csv("representation_ablation.csv")
 df_mean = df.groupby(["task", "representation"])["score"].mean().reset_index()
 df_std = df.groupby(["task", "representation"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
@@ -51,6 +51,11 @@ task_names = {
     "rna_prot": r"\texttt{prot}",
     "rna_site": r"\texttt{site}",
 }
+# task_names = {
+#     "rna_cm": "cm",
+#     "rna_prot": "prot",
+#     "rna_site": "site",
+# }
 df["task"] = df["task"].replace(task_names)
 print(df)
 
@@ -86,6 +91,6 @@ for i, representation in enumerate(REPRESENTATIONS):
 plt.legend(handles, labels, loc="upper center", ncol=5, title=r"Representation type :", handletextpad=-0.3)
 plt.subplots_adjust(bottom=0.1)  # Adjust the values as needed
 
-plt.savefig(f"plotting_scripts/representation_ablation.pdf", format="pdf")
+plt.savefig(f"representation_ablation.pdf", format="pdf")
 plt.show()
 plt.clf()
