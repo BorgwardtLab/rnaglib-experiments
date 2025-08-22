@@ -3,53 +3,41 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-TASKLIST = ["rna_cm", "rna_go", "rna_ligand", "rna_prot", "rna_site", "rna_if"]
-#RNAFM = [True, False]
-RNAFM = [True]
-#DISTANCES = ["USalign", "cd_hit"]
-DISTANCES = ["struc"] #, "seq", "rand"]
-SEEDS = [0, 1, 2]
-#LAYERS = [0, 1, 2]
-LAYERS = [2]
-
-METRICS = {
-    "rna_cm": "balanced_accuracy",
-    "rna_go": "jaccard",
-    "rna_ligand": "auc",
-    "rna_prot": "balanced_accuracy",
-    "rna_site": "balanced_accuracy",
-    "rna_if": "accuracy",
-}
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
+from constants import TASKLIST, SPLITS, SEEDS, METRICS
 
 rows = []
 for task in TASKLIST:
-    for distance in DISTANCES:
-        for rnafm in RNAFM:
-            for seed in SEEDS:
-                    with open(
-                        f"results/workshop_{task}_{distance}_{seed}.json"
-                    ) as result:
-                        result = json.load(result)
-                        print(task)
-                        print(result)
-                        rows.append(
-                            {
-                                "score": result[METRICS[task]],
-                                "metric": METRICS[task],
-                                "task": task,
-                                "seed": seed,
-                                "distance": distance,
-                            }
-                        )
+    for distance in SPLITS:
+        for seed in SEEDS:
+                with open(
+                    f"../../results/{task}_{distance}_2.5D_best_params_seed{seed}_results.json"
+                ) as result:
+                    result = json.load(result)
+                    metric_key = METRICS[task.split("_redundant")[0]]
+                    score = (
+                        result["test_metrics"][metric_key]
+                    )
+                    rows.append(
+                        {
+                            "score": score,
+                            "metric": metric_key,
+                            "task": task,
+                            "seed": seed,
+                            "distance": distance,
+                        }
+                    )
     pass
 
 df = pd.DataFrame(rows)
-df.to_csv("benchmark.csv")
+df.to_csv("final_benchmark.csv")
 df_mean = df.groupby(["task", "distance"])["score"].mean().reset_index()
 #df_mean = df.groupby(["task"])["score"].mean().reset_index()
 df_std = df.groupby(["task", "distance"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
-df_mean["metric"] = [METRICS[row.task] for row in df_mean.itertuples()]
+df_mean["metric"] = [METRICS[row.task.split("_redundant")[0]] for row in df_mean.itertuples()]
 
 print(df_mean)
 
@@ -58,12 +46,12 @@ print(df_mean)
 # Load dummy scores
 dummy_scores = []
 for task in TASKLIST:
-    for distance in DISTANCES:
-        dummy_path = f"results/dummy_{task}_{distance}.json"
+    for distance in SPLITS:
+        dummy_path = f"""../results/dummy_{task.split("_redundant")[0]}_struc.json"""
         try:
             with open(dummy_path) as f:
                 dummy_result = json.load(f)
-                score = dummy_result[METRICS[task]]
+                score = dummy_result[METRICS[task.split("_redundant")[0]]]
                 dummy_scores.append({
                     "task": task,
                     "distance": distance,
@@ -96,6 +84,6 @@ g.set_axis_labels("", "Test Score")
 # g.set_titles("{col_name} {col_var}")
 g.set(ylim=(0, 1))
 g.despine(left=True)
-plt.savefig("benchmark.pdf", format="pdf")
+plt.savefig("final_benchmark.pdf", format="pdf")
 plt.show()
 plt.clf()
