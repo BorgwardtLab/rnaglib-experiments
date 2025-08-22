@@ -81,13 +81,16 @@ def run_experiment(task, split, seeds = SEEDS, shuffle = False, hparams_dict = N
     distance = "USalign" if split == "struc" else "cd_hit"
     if distance not in ta.dataset.distances:
         if split == 'struc':
-                ta.dataset = StructureDistanceComputer()(ta.dataset)
+            ta.dataset = StructureDistanceComputer()(ta.dataset)
         if split == 'seq':
-                ta.dataset = CDHitComputer()(ta.dataset)
+            ta.dataset = CDHitComputer()(ta.dataset)
     if split == 'rand':
         ta.splitter = RandomSplitter()
     elif split == 'struc' or split == 'seq':
-        ta.splitter = ClusterSplitter(distance_name = distance)
+        if task == "rna_go":
+            ta.splitter = ClusterSplitter(similarity_threshold=0.6, distance_name = distance)
+        else:
+            ta.splitter = ClusterSplitter(distance_name = distance)
 
     # If the sequence information is needed, add it to the task dataset
     if rna_fm or representation == "seq":
