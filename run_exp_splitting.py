@@ -184,8 +184,8 @@ if __name__ == "__main__":
     output = "wandb"
     retrain = False
     all_params = []
-    for task in ["rna_go","rna_ligand"]:
-        for split in ["struc"]:
+    for task in TASKLIST:
+        for split in SPLITS:
             hparams_set = hparams_dict[task][representation][split]
             params = (task, split, SEEDS, True, hparams_set, rna_fm, representation, output, "final_benchmark", retrain, False)
             all_params.append(params)
