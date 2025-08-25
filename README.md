@@ -17,3 +17,5 @@ This repository provides the necessary code to reproduce the three main experime
 * To reproduce the benchmark table , run `python run_exp_splitting.py`, which will train each model with its default splitting and 2.5D representations with its best hyperparameters. Then run `python plotting_scripts/make_table_benchmark.py`. This will create a file named `plotting_scripts/final_benchmark.pdf` reproducing Table 2 of our preprint, alongside a CSV file `plotting_scripts/final_benchmark.csv`.
 
 Once a training has been made in specific conditions, it won't be re-run if a subsequently used script needs to run it, unless you change the `retrain` parameter to `True`. Therefore, running experiments which trainings partially overlap won't lead to a waste of time.
+
+* To reproduce the timing results, run `python timing.py`

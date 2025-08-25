@@ -1,0 +1,59 @@
+*.json
+*.swp*
+*x3dna-dssr*
+*wandb*
+*junk*
+*.pdb
+
+*.ipynb
+# Pickle files are a security risk
+*.pkl
+*.p
+*.pickle
+pickling.py
+create_pickle.py
+
+# PyTorch model files
+*.pth
+
+# Hidden files
+.*
+
+# Compressed and archive files
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.rar
+*.7z
+*.gz
+
+# Debug scripts do not need to be tracked
+*debug*
+*.out
+__pycache__/
+
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Pyre type checker
+.pyre/
+.DS_Store
