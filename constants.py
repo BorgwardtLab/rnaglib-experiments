@@ -1,23 +1,39 @@
 SEEDS = [0, 1, 2]
 
 TASKLIST = [
-    "rna_cm", "rna_go", "rna_ligand", "rna_prot",
-    "rna_if", "rna_site",
-    "rna_site_redundant", "rna_cm_redundant", "rna_prot_redundant"
+    "rna_go",
+    "rna_if",
+    "rna_cm",
+    "rna_prot",
+    "rna_site",
+    "rna_ligand",
+    "rna_cm_redundant",
+    "rna_prot_redundant",
+    "rna_site_redundant",
 ]
 
 SPLITS = ["struc", "seq", "rand"]
 
-REPRESENTATIONS = ["2.5D", "2D", "2D_GCN", "GVP", "GVP_2.5D"]
+REPRESENTATIONS = ["2D", "2D_GCN", "2.5D", "GVP", "GVP_2.5D"]
 
 METRICS = {
-    "rna_cm": "balanced_accuracy",
     "rna_go": "jaccard",
-    "rna_ligand": "balanced_accuracy",
+    "rna_if": "accuracy",
+    "rna_cm": "balanced_accuracy",
     "rna_prot": "balanced_accuracy",
     "rna_site": "balanced_accuracy",
-    "rna_if": "accuracy",
+    "rna_ligand": "balanced_accuracy",
 }
+
+DEFAULT_SPLIT = {
+    "rna_go": "seq",
+    "rna_if": "struc",
+    "rna_cm": "struc",
+    "rna_prot": "struc",
+    "rna_site": "struc",
+    "rna_ligand": "struc",
+}
+
 
 BEST_HPARAMS = {
     'rna_cm_redundant': {
@@ -71,7 +87,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 3,
                 'h_node_dim': (128, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -82,7 +98,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 3,
                 'h_node_dim': (32, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -128,7 +144,7 @@ BEST_HPARAMS = {
             }
         },
         '2D_GCN': {
-            'struc':{
+            'struc': {
                 'num_layers': 2,
                 'hidden_channels': 128,
                 'epochs': 40,
@@ -141,7 +157,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 3,
                 'h_node_dim': (128, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -152,7 +168,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 3,
                 'h_node_dim': (32, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -211,7 +227,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 4,
                 'h_node_dim': (32, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -222,7 +238,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 4,
                 'h_node_dim': (32, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -231,7 +247,7 @@ BEST_HPARAMS = {
         }
     },
     'rna_prot_redundant': {
-        '2.5D':{
+        '2.5D': {
             'struc': {
                 'num_layers': 4,
                 'hidden_channels': 128,
@@ -281,7 +297,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 4,
                 'h_node_dim': (32, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -292,7 +308,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 4,
                 'h_node_dim': (32, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -351,7 +367,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 6,
                 'h_node_dim': (32, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -362,7 +378,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 6,
                 'h_node_dim': (32, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 100,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -421,7 +437,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 6,
                 'h_node_dim': (32, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -432,7 +448,7 @@ BEST_HPARAMS = {
             'struc': {
                 'num_layers': 6,
                 'h_node_dim': (32, 2),
-                'h_edge_dim':  (32, 1),
+                'h_edge_dim': (32, 1),
                 'epochs': 100,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -441,7 +457,7 @@ BEST_HPARAMS = {
         }
     },
     'rna_ligand': {
-        '2.5D':{
+        '2.5D': {
             'struc': {
                 'num_layers': 3,
                 'hidden_channels': 64,
@@ -469,7 +485,7 @@ BEST_HPARAMS = {
         }
     },
     'rna_go': {
-        '2.5D':{
+        '2.5D': {
             'struc': {
                 'num_layers': 3,
                 'hidden_channels': 128,
@@ -497,7 +513,7 @@ BEST_HPARAMS = {
         }
     },
     'rna_if': {
-        '2.5D':{
+        '2.5D': {
             'struc': {
                 'num_layers': 3,
                 'hidden_channels': 128,

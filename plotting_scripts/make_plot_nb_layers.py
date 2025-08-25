@@ -1,15 +1,17 @@
+import os
+import sys
+
 import json
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines  # Import mlines
-import matplotlib.patches as mpatches
-
-import sys
+import pandas as pd
 from pathlib import Path
+import seaborn as sns
+
 sys.path.append(str(Path(__file__).parent.parent))
 from constants import BEST_HPARAMS, SEEDS, METRICS
+
+os.makedirs('plots', exist_ok=True)
 
 plt.rcParams["text.usetex"] = True
 plt.rc("font", size=16)  # fontsize of the tick labels
@@ -30,9 +32,9 @@ for ta_name in TASKLIST:
     for nb_layers in NB_LAYERS_LIST:
         for seed in SEEDS:
             if nb_layers == BEST_HPARAMS[ta_name][representation][split]["num_layers"]:
-                json_name = f"""../../results/{ta_name}_struc_{representation}{"_rna_fm" if rna_fm else ""}_best_params_seed{seed}_results.json"""
+                json_name = f"""results/{ta_name}_struc_{representation}{"_rna_fm" if rna_fm else ""}_best_params_seed{seed}_results.json"""
             else:
-                json_name = f"""../../results/{ta_name}_{split}_{representation}{"_rna_fm" if rna_fm else ""}_{nb_layers}layers_seed{seed}_results.json"""
+                json_name = f"""results/{ta_name}_{split}_{representation}{"_rna_fm" if rna_fm else ""}_{nb_layers}layers_seed{seed}_results.json"""
             with open(json_name) as result:
                 result = json.load(result)
                 test_metrics = result["test_metrics"]
@@ -46,25 +48,19 @@ for ta_name in TASKLIST:
                     }
                 )
 df = pd.DataFrame(rows)
-df.to_csv(f"nb_layers_{representation}.csv")
+df.to_csv(f"plots/nb_layers_{representation}.csv")
 df_mean = df.groupby(["task", "nb_layers"])["score"].mean().reset_index()
 df_std = df.groupby(["task", "nb_layers"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
 df_mean["metric"] = [METRICS[row.task.split("_redundant")[0]] for row in df_mean.itertuples()]
 
-Replace label for prettier x-axis
+# Replace label for prettier x-axis
 task_names = {
     "rna_cm": r"\texttt{cm}",
     "rna_prot": r"\texttt{prot}",
     "rna_site": r"\texttt{site}",
 }
-# task_names = {
-#     "rna_cm": "cm",
-#     "rna_prot": "prot",
-#     "rna_site": "site",
-# }
 df["task"] = df["task"].replace(task_names)
-
 print(df)
 
 palette_dict = sns.color_palette("Blues")
@@ -81,7 +77,7 @@ g = sns.catplot(
     order=task_names.values()
 )
 g.set_axis_labels("", "Test Score")
-g.set(ylim=(0.5, 0.85))
+g.set(ylim=(0.5, 0.75))
 g.despine()
 
 # Create handles and labels manually
@@ -97,6 +93,6 @@ for i, distance in enumerate(NB_LAYERS_LIST):
 plt.legend(handles, labels, loc="upper center", ncol=5, title=r"Number of layers :", handletextpad=-0.3)
 plt.subplots_adjust(bottom=0.1)  # Adjust the values as needed
 
-plt.savefig(f"nb_layers_ablation_{representation}.pdf", format="pdf")
+plt.savefig(f"plots/nb_layers_ablation_{representation}.pdf", format="pdf")
 plt.show()
 plt.clf()

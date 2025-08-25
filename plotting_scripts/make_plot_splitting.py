@@ -1,57 +1,89 @@
+import os
+import sys
+
 import json
-import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines  # Import mlines
-import matplotlib.patches as mpatches
-import latex
-
-import sys
+import pandas as pd
 from pathlib import Path
+import seaborn as sns
+
 sys.path.append(str(Path(__file__).parent.parent))
-from constants import TASKLIST, SEEDS, METRICS, SPLITS
+from constants import TASKLIST, SEEDS, METRICS, SPLITS, DEFAULT_SPLIT
+
+os.makedirs('plots', exist_ok=True)
 
 plt.rcParams["text.usetex"] = True
-#plt.rcParams['font.family'] = 'monospace'
+# plt.rcParams['font.family'] = 'monospace'
 plt.rc("font", size=16)  # fontsize of the tick labels
 plt.rc("ytick", labelsize=13)  # fontsize of the tick labels
 plt.rc("xtick", labelsize=13)  # fontsize of the tick labels
 plt.rc("grid", color="grey", alpha=0.2)
 
+# Load results
 rows = []
 for task in TASKLIST:
+    task_name = task.split("_redundant")[0]
     for distance in SPLITS:
         for seed in SEEDS:
-            path = f"../../results/{task}_{distance}_2.5D_best_params_seed{seed}_results.json"
-
+            path = f"results/{task}_{distance}_2.5D_best_params_seed{seed}_results.json"
             with open(path) as result:
                 result = json.load(result)
-                metric_key = METRICS[task.split("_redundant")[0]]
-                print(task)
-                print(result["test_metrics"])
-                score = (
-                    result["test_metrics"][metric_key]
-                )
-                rows.append(
-                    {
-                        "score": score,
-                        "metric": metric_key,
-                        "task": task,
-                        "seed": seed,
-                        "distance": distance,
-                    }
-                )
+                metric_key = METRICS[task_name]
+                score = (result["test_metrics"][metric_key])
+                rows.append({"score": score,
+                             "metric": metric_key,
+                             "task": task,
+                             "seed": seed,
+                             "distance": distance, })
 
+# Compute means
 df = pd.DataFrame(rows)
-df.to_csv("splitting_publication_final_benchmark.csv")
+df.to_csv("plots/splitting_ablation.csv")
 df_mean = df.groupby(["task", "distance"])["score"].mean().reset_index()
 df_std = df.groupby(["task", "distance"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
 df_mean["metric"] = [METRICS[row.task.split("_redundant")[0]] for row in df_mean.itertuples()]
 
+# After df_mean and df_std are created, load dummy scores
+dummy_scores = []
+for task in TASKLIST:
+    task_name = task.split("_redundant")[0]
+    for distance in SPLITS:
+        dummy_path = f"results/dummy_{task.split("_redundant")[0]}_struc.json"
+        try:
+            with open(dummy_path) as f:
+                dummy_result = json.load(f)
+                score = dummy_result[METRICS[task.split("_redundant")[0]]]
+                dummy_scores.append({
+                    "task": task,
+                    "distance": distance,
+                    "dummy_score": score
+                })
+        except FileNotFoundError:
+            print(f"Warning: Dummy file not found for {task} with {distance}")
+            dummy_scores.append({
+                "task": task,
+                "distance": distance,
+                "dummy_score": None
+            })
+
+# Convert to DataFrame and merge with df_mean
+df_dummy = pd.DataFrame(dummy_scores)
+df_mean = pd.merge(df_mean, df_dummy, on=["task", "distance"])
+
+# Filter the DataFrame to keep only the rows to report
+valid_pairs = list(DEFAULT_SPLIT.items())
+df_mean = df_mean[df_mean[['task', 'distance']].apply(tuple, axis=1).isin(valid_pairs)]
+
+# Just reorder
+df_mean['task'] = pd.Categorical(df_mean['task'], categories=DEFAULT_SPLIT.keys(), ordered=True)
+df_mean= df_mean.sort_values('task').reset_index(drop=True)
 print(df_mean)
 
-Replace label for prettier x-axis
+# Now let's move on to plotting.
+
+# Replace label for prettier x - axis
 task_names = {
     "rna_go": r"\texttt{go}",
     "rna_if": r"\texttt{if}",
@@ -60,18 +92,9 @@ task_names = {
     "rna_site": r"\texttt{site}",
     "rna_ligand": r"\texttt{ligand}",
     "rna_cm_redundant": r"\texttt{cm} \newline \textit{redundant}",
+    "rna_prot_redundant": r"\texttt{prot} \newline \textit{redundant}",
     "rna_site_redundant": r"\texttt{site} \newline \textit{redundant}",
 }
-# task_names = {
-#     "rna_go": "go",
-#     "rna_if": "if",
-#     "rna_cm": "cm",
-#     "rna_prot": "prot",
-#     "rna_site": "site",
-#     "rna_ligand": "ligand",
-#     "rna_cm_redundant": "cm redundant",
-#     "rna_site_redundant": "site redundant",
-# }
 df["task"] = df["task"].replace(task_names)
 
 dist_names = {
@@ -83,11 +106,7 @@ df["distance"] = df["distance"].replace(dist_names)
 
 palette_dict = sns.color_palette("muted")
 # palette_dict = sns.color_palette()
-# palette_dict = {
-#     r"Structure": "#2ba9ff",
-#     r"Sequence": "#0a14db",
-#     r"Random": "#FA4828",
-# }
+# palette_dict = {r"Structure": "#2ba9ff", r"Sequence": "#0a14db", r"Random": "#FA4828"}
 palette_dict = {
     r"Structure": palette_dict[0],
     r"Sequence": palette_dict[9],
@@ -111,9 +130,9 @@ g.set(ylim=(0, 1))
 # g.despine(left=True)
 
 # Add a vertical dotted line between rna_site and rna_site_redundant
-# ax = g.ax
-# line_pos = list(task_names.keys()).index("rna_site") + 0.5
-# ax.axvline(x=line_pos, ymax=0.75, linestyle="--", color="dimgray", linewidth=2)
+ax = g.ax
+line_pos = list(task_names.keys()).index("rna_ligand") + 0.5
+ax.axvline(x=line_pos, ymax=0.75, linestyle="--", color="dimgray", linewidth=2)
 
 # Create handles and labels manually
 handles = []
@@ -132,6 +151,6 @@ for i, distance in enumerate(dist_names.values()):
 plt.legend(handles, labels, loc="upper center", ncol=3, title=r"Splitting strategy:", handletextpad=-0.3)
 
 plt.subplots_adjust(bottom=0.15)  # Adjust the values as needed
-plt.savefig("splitting_ablation.pdf", format="pdf")
+plt.savefig("plots/splitting_ablation.pdf", format="pdf")
 plt.show()
 plt.clf()
