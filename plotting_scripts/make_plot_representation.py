@@ -13,7 +13,7 @@ from constants import REPRESENTATIONS, SEEDS, METRICS
 
 os.makedirs('plots', exist_ok=True)
 
-plt.rcParams["text.usetex"] = True
+plt.rcParams["text.usetex"] = False
 plt.rc("font", size=16)  # fontsize of the tick labels
 plt.rc("ytick", labelsize=13)  # fontsize of the tick labels
 plt.rc("xtick", labelsize=13)  # fontsize of the tick labels
@@ -55,7 +55,8 @@ df["task"] = df["task"].replace(task_names)
 
 # task_reps = task_names.update({
 task_reps = {
-    "2D_GCN": r"2D+",
+    "2D_GCN": r"2D",
+    "2D": r"2D+",
     "GVP_2.5D": r"GVP-2.5D",
 }
 df["representation"] = df["representation"].replace(task_reps)
