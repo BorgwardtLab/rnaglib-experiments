@@ -10,7 +10,8 @@ from torch.utils.tensorboard import SummaryWriter
 
 class RNATrainer:
     def __init__(self, task, model, rep="pyg", wandb_project="", exp_name="default",
-                 learning_rate=0.001, epochs=100, seed=0, batch_size=8, output="wandb", log_dir="runs/"):
+                 learning_rate=0.001, epochs=100, seed=0, batch_size=8, output="wandb", log_dir="runs/", 
+                 loss_weights="sqrt_ratio"):
         self.task = task
         self.representation = rep
         self.model = model
@@ -23,6 +24,7 @@ class RNATrainer:
         self.batch_size = batch_size
         self.output = output
         self.log_dir = log_dir
+        self.loss_weights = loss_weights
 
     def setup(self):
         """Initialize wandb and model training"""
@@ -58,9 +60,12 @@ class RNATrainer:
         if self.model.num_classes == 2:
             neg_count = float(self.task.metadata["class_distribution"]["0"])
             pos_count = float(self.task.metadata["class_distribution"]["1"])
-            pos_weight = torch.tensor(np.sqrt(neg_count /
-                                              pos_count)).to(self.model.device,
-                                                             dtype=torch.float32)
+            if self.loss_weights=="sqrt_ratio":
+                pos_weight = torch.tensor(np.sqrt(neg_count /
+                                                    pos_count)).to(self.model.device,
+                                                                    dtype=torch.float32)
+            else:
+                pos_weight = torch.tensor(neg_count/pos_count).to(self.model.device,dtype=torch.float32)
             self.model.criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 
         for epoch in range(self.epochs):

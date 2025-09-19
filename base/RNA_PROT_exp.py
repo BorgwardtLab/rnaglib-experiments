@@ -1,123 +1,106 @@
 """experiment setup."""
 
+
 import os
 import sys
 import shutil
-import json
-from itertools import product
-
-# Add parent directory to Python path to find the exp module
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 import torch
+from joblib import Parallel, delayed
 
 from rnaglib.learning.task_models import PygModel
-from rnaglib.tasks import get_task 
-from rnaglib.transforms import GraphRepresentation
+from rnaglib.tasks import get_task, RNA_CM
+from rnaglib.transforms import GraphRepresentation, RNAFMTransform
+from rnaglib.dataset_transforms import CDHitComputer, ClusterSplitter, StructureDistanceComputer, RandomSplitter
+from rnaglib.encoders import ListEncoder
+from rnaglib.config.graph_keys import GRAPH_KEYS, TOOL
 
+script_dir = os.path.dirname(os.path.realpath(__file__))
+if __name__ == "__main__":
+    sys.path.append(os.path.join(script_dir, '..'))
+    
 from exp import RNATrainer
 
-ta = get_task(root="roots/RNA_PROT", task_id="rna_prot")
+# Hyperparameters (to tune)
+#nb_layers = 4
+#hidden_dim = 64
+learning_rate = 0.01
+batch_size = 8
+epochs = 40
+split = "default"
+rna_fm = False
+representation = "2D"
+layer_type = "gcn"
+output = "wandb"
+shuffle = True
+dropout_rate = 0.2
+loss_weights = "ratio"
 
-model_args = {
-        "num_node_features": ta.metadata["num_node_features"],
-        "num_classes": ta.metadata["num_classes"],
-        "graph_level": False,
-        "num_layers": 3,
-}
+
+def run_one_training(nb_layers, hidden_dim):
+    # Experiment name
+    exp_name=f"RNA_Prot_{nb_layers}layers_lr{learning_rate}_{epochs}epochs_hiddendim{hidden_dim}_{representation}_layer_type_{layer_type}_shuffle"
+    if loss_weights != "sqrt_ratio":
+        exp_name += "_no_sqrt"
+    if rna_fm:
+        exp_name += "rna_fm"
+    if split != "default":
+        exp_name += split
+    for seed in [0,1,2]:
+        ta = get_task(root="../../roots/rna_prot", task_id="rna_prot")
+        if split=="struc":
+            distance = "USalign"
+        else:
+                distance = "cd_hit"
+
+        if distance not in ta.dataset.distances:
+            if split == 'struc':
+                    ta.dataset = StructureDistanceComputer()(ta.dataset)
+            if split == 'seq':
+                    ta.dataset = CDHitComputer()(ta.dataset)
+        if split == 'rand':
+            ta.splitter = RandomSplitter()
+        elif split=='struc' or split=='seq':
+            ta.splitter = ClusterSplitter(distance_name=distance)
+
+        if rna_fm:
+            rnafm = RNAFMTransform()
+            [rnafm(rna) for rna in ta.dataset]
+            ta.dataset.features_computer.add_feature(feature_names=["rnafm"], custom_encoders={"rnafm": ListEncoder(640)})
+
+        if representation=="2D":
+            edge_map = GRAPH_KEYS["2D_edge_map"][TOOL]
+        elif representation=="simplified_2.5D":
+            edge_map = GRAPH_KEYS["simplified_edge_map"][TOOL]
+        else:
+            edge_map = GRAPH_KEYS["edge_map"][TOOL]
+
+        representation_args = {
+            "framework": "pyg",
+            "edge_map": edge_map,
+        }
+
+        rep = GraphRepresentation(**representation_args)
+        ta.dataset.add_representation(rep)
+        ta.get_split_loaders(batch_size=batch_size, recompute=True, shuffle=shuffle)
+        model_args = {
+            "graph_level": False,
+            "num_layers": nb_layers,
+            "hidden_channels": hidden_dim,
+            "layer_type": layer_type,
+            "dropout_rate": dropout_rate,
+        }
+        if rna_fm:
+            model_args["num_node_features"]=644
+        model = PygModel.from_task(ta, **model_args)
+        trainer = RNATrainer(ta, model, rep, exp_name=exp_name+"_seed"+str(seed), learning_rate=learning_rate, epochs=epochs, seed=seed, batch_size=batch_size, output=output, loss_weights=loss_weights)
+        trainer.train()
 
 
-# Setup task
-ta.dataset.add_representation(GraphRepresentation(framework="pyg"))
-ta.get_split_loaders()
-
-model = PygModel(**model_args)
-
-trainer = RNATrainer(ta, model)
-
-trainer.train()
 
 if __name__ == "__main__":
-    # Hyperparameters for grid search
-    learning_rates = [0.0001, 0.001, 0.01]
-    num_layers_options = [2, 3, 4]
-    hidden_dims = [32, 64, 128]
-    dropout_rates = [0.2, 0.5, 0.7]  # Add dropout rates as a hyperparameter
-    
-    # Store results for each combination
-    grid_search_results = []
-    
-    # Setup experiment directory for results
-    os.makedirs("results/grid_search_RNA_PROT", exist_ok=True)
-    
-    # Perform grid search
-    for lr, n_layers, hidden_dim, dropout_rate in product(learning_rates, num_layers_options, hidden_dims, dropout_rates):
-        print(f"\n--- Training with lr={lr}, num_layers={n_layers}, hidden_dim={hidden_dim}, dropout_rate={dropout_rate} ---\n")
-        
-        # Create model with current hyperparameters
-        current_model_args = {
-            "num_node_features": ta.metadata["num_node_features"],
-            "num_classes": ta.metadata["num_classes"],
-            "graph_level": False,
-            "num_layers": n_layers,
-            "hidden_channels": hidden_dim,
-            "dropout_rate": dropout_rate
-        }
-        
-        model = PygModel(**current_model_args)
-        
-        # Create experiment name based on hyperparameters
-        exp_name = f"rna_prot_lr{lr}_layers{n_layers}_hidden{hidden_dim}_dropout{dropout_rate}"
-        
-        # Initialize trainer with current hyperparameters
-        trainer = RNATrainer(
-            ta, 
-            model, 
-            exp_name=exp_name,
-            learning_rate=lr
-        )
-        
-        # Train the model
-        trainer.train()
-        
-        # Get test metrics for this configuration
-        test_metrics = model.evaluate(ta)
-        
-        # Store results
-        result = {
-            "hyperparameters": {
-                "learning_rate": lr,
-                "num_layers": n_layers,
-                "hidden_dim": hidden_dim,
-                "dropout_rate": dropout_rate
-            },
-            "test_metrics": test_metrics
-        }
-        
-        grid_search_results.append(result)
-        
-        # Save individual result
-        with open(f"results/grid_search_RNA_PROT/{exp_name}_results.json", "w") as f:
-            json.dump(result, f, indent=2)
-    
-    # Find best configuration based on test accuracy
-    best_result = max(grid_search_results, key=lambda x: x["test_metrics"]["accuracy"])
-    
-    # Save all results and best configuration
-    with open("results/grid_search_RNA_PROT/all_results.json", "w") as f:
-        json.dump({
-            "all_results": grid_search_results,
-            "best_result": best_result
-        }, f, indent=2)
-    
-    print("\n----- Grid Search Complete -----")
-    print("Best Configuration:")
-    print(f"Learning Rate: {best_result['hyperparameters']['learning_rate']}")
-    print(f"Number of Layers: {best_result['hyperparameters']['num_layers']}")
-    print(f"Hidden Dimension: {best_result['hyperparameters']['hidden_dim']}")
-    print(f"Dropout Rate: {best_result['hyperparameters']['dropout_rate']}")
-    print("Test Metrics:")
-    for metric, value in best_result["test_metrics"].items():
-        print(f"{metric}: {value}")
-
-
+    task_params = []
+    for nb_layers in [2]:
+        for hidden_dim in [64]:
+            params = (nb_layers, hidden_dim)
+            task_params.append(params)
+    _ = Parallel(n_jobs=-1)(delayed(run_one_training)(*params) for params in task_params)

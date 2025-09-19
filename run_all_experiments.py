@@ -88,16 +88,10 @@ def run_experiment(task, split, seeds = SEEDS, shuffle = False, hparams_dict = N
         ta.splitter = RandomSplitter()
     elif split == 'struc' or split == 'seq':
         if task == "rna_go":
-<<<<<<< HEAD
             ta.splitter = ClusterSplitter(similarity_threshold=0.6, distance_name = distance)
         else:
             ta.splitter = ClusterSplitter(distance_name = distance)
 
-=======
-            ta.splitter = ClusterSplitter(similarity_threshold = 0.6, distance_name = distance)
-        else:
-            ta.splitter = ClusterSplitter(distance_name = distance)
->>>>>>> bda6ecec63ec2c11f74d019c38587496ac767c69
     # If the sequence information is needed, add it to the task dataset
     if rna_fm or representation == "seq":
         rnafm = RNAFMTransform()
@@ -166,7 +160,8 @@ def run_experiment(task, split, seeds = SEEDS, shuffle = False, hparams_dict = N
             epochs = epochs,
             seed = seed, 
             batch_size = hparams_dict["batch_size"], 
-            output = output
+            output = output,
+            loss_weights=hparams_dict["loss_weights"],
         )
         trainer.train()
         end = time.time()

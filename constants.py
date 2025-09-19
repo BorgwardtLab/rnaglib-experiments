@@ -28,7 +28,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'seq': {
                 'num_layers': 3,
@@ -36,7 +37,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'rand': {
                 'num_layers': 6,
@@ -44,7 +46,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         '2D': {
@@ -54,7 +57,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         '2D_GCN': {
@@ -63,8 +67,9 @@ BEST_HPARAMS = {
                 'hidden_channels': 128,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.0001,
-                'dropout_rate': 0.5
+                'learning_rate': 0.001,
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         'GVP': {
@@ -75,7 +80,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         'GVP_2.5D': {
@@ -86,7 +92,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         }
     },
@@ -98,7 +105,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'seq': {
                 'num_layers': 3,
@@ -106,7 +114,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'rand': {
                 'num_layers': 3,
@@ -114,7 +123,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         '2D': {
@@ -124,7 +134,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         '2D_GCN': {
@@ -133,8 +144,9 @@ BEST_HPARAMS = {
                 'hidden_channels': 128,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.0001,
-                'dropout_rate': 0.5
+                'learning_rate': 0.001,
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         'GVP': {
@@ -145,7 +157,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         'GVP_2.5D': {
@@ -156,7 +169,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         }
     },
@@ -168,7 +182,8 @@ BEST_HPARAMS = {
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.001
+                'learning_rate': 0.001,
+                'loss_weights': 'sqrt_ratio',
             },
             'seq': {
                 'num_layers': 4,
@@ -176,7 +191,8 @@ BEST_HPARAMS = {
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.001
+                'learning_rate': 0.001,
+                'loss_weights': 'sqrt_ratio',
             },
             'rand': {
                 'num_layers': 4,
@@ -184,7 +200,8 @@ BEST_HPARAMS = {
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.001
+                'learning_rate': 0.001,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         '2D': {
@@ -194,7 +211,8 @@ BEST_HPARAMS = {
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.01
+                'learning_rate': 0.01,
+                'loss_weights': 'sqrt_ratio',
             },
         },
         '2D_GCN': {
@@ -204,7 +222,8 @@ BEST_HPARAMS = {
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.01
+                'learning_rate': 0.01,
+                'loss_weights': 'sqrt_ratio',
             },
         },
         'GVP': {
@@ -215,7 +234,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         'GVP_2.5D': {
@@ -226,7 +246,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         }
     },
@@ -238,7 +259,8 @@ BEST_HPARAMS = {
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.001
+                'learning_rate': 0.001,
+                'loss_weights': 'sqrt_ratio',
             },
             'seq': {
                 'num_layers': 4,
@@ -246,7 +268,8 @@ BEST_HPARAMS = {
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.001
+                'learning_rate': 0.001,
+                'loss_weights': 'sqrt_ratio',
             },
             'rand': {
                 'num_layers': 6,
@@ -254,7 +277,8 @@ BEST_HPARAMS = {
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.001
+                'learning_rate': 0.001,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         '2D': {
@@ -264,7 +288,8 @@ BEST_HPARAMS = {
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.01
+                'learning_rate': 0.01,
+                'loss_weights': 'sqrt_ratio',
             },
         },
         '2D_GCN': {
@@ -274,7 +299,8 @@ BEST_HPARAMS = {
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
-                'learning_rate': 0.01
+                'learning_rate': 0.01,
+                'loss_weights': 'sqrt_ratio',
             },
         },
         'GVP': {
@@ -285,7 +311,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         'GVP_2.5D': {
@@ -296,7 +323,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         }
     },
@@ -308,7 +336,8 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 40,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'seq': {
                 'num_layers': 4,
@@ -316,7 +345,8 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 40,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'rand': {
                 'num_layers': 4,
@@ -324,7 +354,8 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 40,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         '2D': {
@@ -334,17 +365,19 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 40,
                 'learning_rate': 0.0001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         '2D_GCN': {
             'struc': {
-                'num_layers': 2,
-                'hidden_channels': 128,
+                'num_layers': 4,
+                'hidden_channels': 256,
                 'batch_size': 8,
-                'epochs': 40,
-                'learning_rate': 0.0001,
-                'dropout_rate': 0.5
+                'epochs': 100,
+                'learning_rate': 0.001,
+                'dropout_rate': 0.5,
+                'loss_weights': 'ratio',
             }
         },
         'GVP': {
@@ -355,7 +388,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         'GVP_2.5D': {
@@ -366,7 +400,8 @@ BEST_HPARAMS = {
                 'epochs': 100,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         }
     },
@@ -378,7 +413,8 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 40,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'seq': {
                 'num_layers': 4,
@@ -386,7 +422,8 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 40,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'rand': {
                 'num_layers': 4,
@@ -394,7 +431,8 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 40,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         '2D': {
@@ -404,7 +442,8 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 40,
                 'learning_rate': 0.0001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         '2D_GCN': {
@@ -414,7 +453,8 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 40,
                 'learning_rate': 0.0001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'ratio',
             }
         },
         'GVP': {
@@ -425,7 +465,8 @@ BEST_HPARAMS = {
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         },
         'GVP_2.5D': {
@@ -436,7 +477,8 @@ BEST_HPARAMS = {
                 'epochs': 100,
                 'batch_size': 8,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         }
     },
@@ -448,7 +490,8 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 20,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'seq': {
                 'num_layers': 3,
@@ -456,7 +499,8 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 20,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'rand': {
                 'num_layers': 3,
@@ -464,7 +508,8 @@ BEST_HPARAMS = {
                 'batch_size': 8,
                 'epochs': 20,
                 'learning_rate': 0.001,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         }
     },
@@ -476,7 +521,8 @@ BEST_HPARAMS = {
                 'epochs': 20,
                 'learning_rate': 0.001,
                 'batch_size': 8,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'seq': {
                 'num_layers': 3,
@@ -484,7 +530,8 @@ BEST_HPARAMS = {
                 'epochs': 20,
                 'learning_rate': 0.001,
                 'batch_size': 8,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'rand': {
                 'num_layers': 3,
@@ -492,7 +539,8 @@ BEST_HPARAMS = {
                 'epochs': 20,
                 'learning_rate': 0.001,
                 'batch_size': 8,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         }
     },
@@ -504,7 +552,8 @@ BEST_HPARAMS = {
                 'epochs': 100,
                 'learning_rate': 0.0001,
                 'batch_size': 8,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'seq': {
                 'num_layers': 3,
@@ -512,7 +561,8 @@ BEST_HPARAMS = {
                 'epochs': 100,
                 'learning_rate': 0.0001,
                 'batch_size': 8,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             },
             'rand': {
                 'num_layers': 3,
@@ -520,7 +570,8 @@ BEST_HPARAMS = {
                 'epochs': 100,
                 'learning_rate': 0.0001,
                 'batch_size': 8,
-                'dropout_rate': 0.5
+                'dropout_rate': 0.5,
+                'loss_weights': 'sqrt_ratio',
             }
         }
     }

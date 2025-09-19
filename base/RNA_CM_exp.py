@@ -5,6 +5,7 @@ import sys
 import shutil
 
 import torch
+from joblib import Parallel, delayed
 
 from rnaglib.learning.task_models import PygModel
 from rnaglib.tasks import get_task, RNA_CM
@@ -20,40 +21,26 @@ if __name__ == "__main__":
 from exp import RNATrainer
 
 # Hyperparameters (to tune)
-nb_layers = 3
+nb_layers = 6
 hidden_dim = 128
 learning_rate = 0.001
 batch_size = 8
 epochs = 40
 split = "default"
 rna_fm = False
-representation = "2.5D"
-layer_type = "rgcn"
-output = "tensorboard"
-
-# Experiment name
-exp_name="RNA_CM_"+str(nb_layers)+"layers_lr"+str(learning_rate)+"_"+str(epochs)+"epochs_hiddendim"+str(hidden_dim)+"_"+representation+"_layer_type_"+layer_type
-if rna_fm:
-    exp_name += "rna_fm"
-if split != "default":
-     exp_name += split
+representation = "2D"
+layer_type = "gcn"
+output = "wandb"
+shuffle = True
 
 
-model_args = {
-    "graph_level": False,
-    "num_layers": nb_layers,
-    "hidden_channels": hidden_dim,
-    "layer_type": layer_type,
-}
-
-if rna_fm:
-    model_args["num_node_features"]=644
-
-#model_CM = PygModel(**model_args)
-#trainer_CM = RNATrainer(ta, model_CM, rep, exp_name=exp_name, learning_rate=learning_rate, epochs=epochs)
-#trainer_CM.train()
-
-if __name__ == "__main__":
+def run_one_training(nb_layers, hidden_dim):
+    # Experiment name
+    exp_name="RNA_CM_"+str(nb_layers)+"layers_lr"+str(learning_rate)+"_"+str(epochs)+"epochs_hiddendim"+str(hidden_dim)+"_"+representation+"_layer_type_"+layer_type+"_shuffle"
+    if rna_fm:
+        exp_name += "rna_fm"
+    if split != "default":
+        exp_name += split
     for seed in [0,1,2]:
         ta = get_task(root="roots/RNA_CM", task_id="rna_cm")
         if split=="struc":
@@ -90,7 +77,30 @@ if __name__ == "__main__":
 
         rep = GraphRepresentation(**representation_args)
         ta.dataset.add_representation(rep)
-        ta.get_split_loaders(batch_size=batch_size, recompute=True)
+        ta.get_split_loaders(batch_size=batch_size, recompute=True, shuffle=shuffle)
+        model_args = {
+            "graph_level": False,
+            "num_layers": nb_layers,
+            "hidden_channels": hidden_dim,
+            "layer_type": layer_type,
+        }
+        if rna_fm:
+            model_args["num_node_features"]=644
         model = PygModel.from_task(ta, **model_args)
         trainer = RNATrainer(ta, model, rep, exp_name=exp_name+"_seed"+str(seed), learning_rate=learning_rate, epochs=epochs, seed=seed, batch_size=batch_size, output=output)
         trainer.train()
+
+
+
+
+#model_CM = PygModel(**model_args)
+#trainer_CM = RNATrainer(ta, model_CM, rep, exp_name=exp_name, learning_rate=learning_rate, epochs=epochs)
+#trainer_CM.train()
+
+if __name__ == "__main__":
+    task_params = []
+    for nb_layers in [2,3,4,5,6]:
+        for hidden_dim in [32,64,128,256]:
+            params = (nb_layers, hidden_dim)
+            task_params.append(params)
+    _ = Parallel(n_jobs=-1)(delayed(run_one_training)(*params) for params in task_params)
