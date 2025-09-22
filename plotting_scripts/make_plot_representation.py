@@ -23,9 +23,7 @@ rows = []
 for ta_name in ["rna_cm", "rna_site", "rna_prot"]:
     for i, representation in enumerate(REPRESENTATIONS):
         for seed in SEEDS:
-            json_name = (
-                f"results/{ta_name}_struc_{representation}_best_params_seed{seed}_results.json")
-
+            json_name = f"results/{ta_name}_struc_{representation}_best_params_seed{seed}_results.json"
             with open(json_name) as result:
                 result = json.load(result)
                 test_metrics = result["test_metrics"]
