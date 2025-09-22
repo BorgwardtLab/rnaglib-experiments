@@ -14,7 +14,7 @@ TASKLIST = [
 
 SPLITS = ["struc", "seq", "rand"]
 
-REPRESENTATIONS = ["2D", "2D_GCN", "2.5D", "GVP", "GVP_2.5D"]
+REPRESENTATIONS = ["1D", "2D_GCN", "2D", "2.5D", "GVP", "GVP_2.5D"]
 
 METRICS = {
     "rna_go": "jaccard",
@@ -89,7 +89,7 @@ BEST_HPARAMS = {
         '2D_GCN': {
             'struc': {
                 'num_layers': 2,
-                'hidden_channels': 128,
+                'hidden_channels': 256,
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -166,7 +166,7 @@ BEST_HPARAMS = {
         '2D_GCN': {
             'struc': {
                 'num_layers': 2,
-                'hidden_channels': 128,
+                'hidden_channels': 256,
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
@@ -242,13 +242,13 @@ BEST_HPARAMS = {
         },
         '2D_GCN': {
             'struc': {
-                'num_layers': 4,
-                'hidden_channels': 64,
+                'num_layers': 5,
+                'hidden_channels': 256,
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.01,
-                'loss_weights': 'sqrt_ratio',
+                'loss_weights': 'ratio',
             },
         },
         'GVP': {
@@ -319,13 +319,13 @@ BEST_HPARAMS = {
         },
         '2D_GCN': {
             'struc': {
-                'num_layers': 4,
-                'hidden_channels': 64,
+                'num_layers': 5,
+                'hidden_channels': 256,
                 'dropout_rate': 0.2,
                 'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.01,
-                'loss_weights': 'sqrt_ratio',
+                'loss_weights': 'ratio',
             },
         },
         'GVP': {
@@ -473,11 +473,11 @@ BEST_HPARAMS = {
         },
         '2D_GCN': {
             'struc': {
-                'num_layers': 2,
-                'hidden_channels': 128,
+                'num_layers': 4,
+                'hidden_channels': 256,
                 'batch_size': 8,
-                'epochs': 40,
-                'learning_rate': 0.0001,
+                'epochs': 100,
+                'learning_rate': 0.001,
                 'dropout_rate': 0.5,
                 'loss_weights': 'ratio',
             }
