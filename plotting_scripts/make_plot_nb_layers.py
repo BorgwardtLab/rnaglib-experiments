@@ -37,15 +37,9 @@ for ta_name in TASKLIST:
     for nb_layers in NB_LAYERS_LIST:
         for seed in SEEDS:
             if nb_layers == BEST_HPARAMS[ta_name][representation][split]["num_layers"]:
-<<<<<<< HEAD
-                json_name = f"""../../results/{ta_name}_struc_{representation}{"_rna_fm" if rna_fm else ""}_best_params_seed{seed}_results.json"""
-            else:
-                json_name = f"""../../results/{ta_name}_{split}_{representation}{"_rna_fm" if rna_fm else ""}_{nb_layers}layers_seed{seed}_results.json"""
-=======
                 json_name = f"""results/{ta_name}_struc_{representation}{"_rna_fm" if rna_fm else ""}_best_params_seed{seed}_results.json"""
             else:
                 json_name = f"""results/{ta_name}_{split}_{representation}{"_rna_fm" if rna_fm else ""}_{nb_layers}layers_seed{seed}_results.json"""
->>>>>>> 1b78c816f93b08e1983dca3144dcf06e4db4b0e2
             with open(json_name) as result:
                 result = json.load(result)
                 test_metrics = result["test_metrics"]
@@ -59,11 +53,7 @@ for ta_name in TASKLIST:
                     }
                 )
 df = pd.DataFrame(rows)
-<<<<<<< HEAD
-df.to_csv(f"nb_layers_{representation}.csv")
-=======
 df.to_csv(f"plots/nb_layers_{representation}.csv")
->>>>>>> 1b78c816f93b08e1983dca3144dcf06e4db4b0e2
 df_mean = df.groupby(["task", "nb_layers"])["score"].mean().reset_index()
 df_std = df.groupby(["task", "nb_layers"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
@@ -113,10 +103,6 @@ for i, distance in enumerate(NB_LAYERS_LIST):
 plt.legend(handles, labels, loc="upper center", ncol=5, title=r"Number of layers :", handletextpad=-0.3)
 plt.subplots_adjust(bottom=0.1)  # Adjust the values as needed
 
-<<<<<<< HEAD
-plt.savefig(f"nb_layers_ablation_{representation}.pdf", format="pdf")
-=======
 plt.savefig(f"plots/nb_layers_ablation_{representation}.pdf", format="pdf")
->>>>>>> 1b78c816f93b08e1983dca3144dcf06e4db4b0e2
 plt.show()
 plt.clf()
