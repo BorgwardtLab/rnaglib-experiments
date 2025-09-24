@@ -19,9 +19,9 @@ sys.path.append(str(Path(__file__).parent.parent))
 from constants import BEST_HPARAMS, SEEDS, METRICS
 
 plt.rcParams["text.usetex"] = True
-plt.rc("font", size=16)  # fontsize of the tick labels
-plt.rc("ytick", labelsize=13)  # fontsize of the tick labels
-plt.rc("xtick", labelsize=13)  # fontsize of the tick labels
+plt.rc("font", size=20)  # fontsize of the tick labels
+plt.rc("ytick", labelsize=18)  # fontsize of the tick labels
+plt.rc("xtick", labelsize=18)  # fontsize of the tick labels
 plt.rc("grid", color="grey", alpha=0.2)
 
 
@@ -59,7 +59,7 @@ df_std = df.groupby(["task", "nb_layers"])["score"].std().reset_index()
 df_mean["std"] = df_std["score"]
 df_mean["metric"] = [METRICS[row.task.split("_redundant")[0]] for row in df_mean.itertuples()]
 
-Replace label for prettier x-axis
+# Replace label for prettier x-axis
 task_names = {
     "rna_cm": r"\texttt{cm}",
     "rna_prot": r"\texttt{prot}",
@@ -81,14 +81,15 @@ g = sns.catplot(
     hue="nb_layers",
     kind="bar",
     height=4,
-    aspect=1.6,
+    aspect=2.,
     palette=palette_dict,
     legend=False,
     order=task_names.values()
 )
 g.set_axis_labels("", "Test Score")
-g.set(ylim=(0.5, 0.75))
-g.despine()
+# g.set(ylim=(0.5, 0.75))
+g.set(ylim=(0.45, 0.7))
+plt.axhline(0.5, color='dimgray', linestyle='--')
 
 # Create handles and labels manually
 handles = []
@@ -100,7 +101,12 @@ for i, distance in enumerate(NB_LAYERS_LIST):
     # handle = plt.Rectangle((0, 0), 1, 1, color=color)  # Create a rectangle with that color
     handles.append(handle)
     labels.append(distance)
-plt.legend(handles, labels, loc="upper center", ncol=5, title=r"Number of layers :", handletextpad=-0.3)
+
+# plt.legend(handles, labels, loc="upper center", ncol=5, title=r"Number of layers :",
+#            bbox_to_anchor=(0.5, 1.2), handletextpad=-0.3)
+# plt.subplots_adjust(bottom=0.1, top=0.87)  # Adjust the values as needed
+plt.legend(handles, labels, loc="upper center", ncol=2, title=r"Number of layers :",
+           bbox_to_anchor=(0.5, 1.1), handletextpad=-0.3)
 plt.subplots_adjust(bottom=0.1)  # Adjust the values as needed
 
 plt.savefig(f"plots/nb_layers_ablation_{representation}.pdf", format="pdf")

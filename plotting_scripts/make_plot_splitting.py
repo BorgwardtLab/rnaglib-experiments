@@ -15,9 +15,9 @@ os.makedirs('plots', exist_ok=True)
 
 plt.rcParams["text.usetex"] = True
 # plt.rcParams['font.family'] = 'monospace'
-plt.rc("font", size=16)  # fontsize of the tick labels
-plt.rc("ytick", labelsize=13)  # fontsize of the tick labels
-plt.rc("xtick", labelsize=13)  # fontsize of the tick labels
+plt.rc("font", size=20)  # fontsize of the tick labels
+plt.rc("ytick", labelsize=18)  # fontsize of the tick labels
+plt.rc("xtick", labelsize=18)  # fontsize of the tick labels
 plt.rc("grid", color="grey", alpha=0.2)
 
 # Load results
@@ -78,7 +78,7 @@ df_mean = df_mean[df_mean[['task', 'distance']].apply(tuple, axis=1).isin(valid_
 
 # Just reorder
 df_mean['task'] = pd.Categorical(df_mean['task'], categories=DEFAULT_SPLIT.keys(), ordered=True)
-df_mean= df_mean.sort_values('task').reset_index(drop=True)
+df_mean = df_mean.sort_values('task').reset_index(drop=True)
 print(df_mean)
 
 # Now let's move on to plotting.
@@ -107,10 +107,15 @@ df["distance"] = df["distance"].replace(dist_names)
 palette_dict = sns.color_palette("muted")
 # palette_dict = sns.color_palette()
 # palette_dict = {r"Structure": "#2ba9ff", r"Sequence": "#0a14db", r"Random": "#FA4828"}
+
+palette_dict_reds = sns.color_palette("Reds")
+palette_dict_blue = sns.color_palette("Blues")
+palette_dict_greens = sns.color_palette("Greens")
+
 palette_dict = {
     r"Structure": palette_dict[0],
     r"Sequence": palette_dict[9],
-    r"Random": palette_dict[3],
+    r"Random": palette_dict_reds[3],
 }
 
 g = sns.catplot(
@@ -120,7 +125,7 @@ g = sns.catplot(
     hue="distance",
     kind="bar",
     height=4,
-    aspect=1.6,
+    aspect=4,
     legend=False,
     palette=palette_dict,
     order=task_names.values(),
@@ -135,9 +140,12 @@ line_pos = list(task_names.keys()).index("rna_ligand") + 0.5
 ax.axvline(x=line_pos, ymax=0.75, linestyle="--", color="dimgray", linewidth=2)
 
 # Create handles and labels manually
+# handles = [mlines.Line2D([], [], color='white', marker='o', linestyle='None', markersize=0)]
+# labels = [r"Splitting strategy: "]
 handles = []
 labels = []
 for i, distance in enumerate(dist_names.values()):
+
     # Create a dummy rectangle for each distance, using the color from the plot
     color = palette_dict[distance]  # Get color for this distance
     # color = sns.color_palette()[i]  # Get color for this distance
@@ -148,7 +156,9 @@ for i, distance in enumerate(dist_names.values()):
     # handle = plt.Rectangle((0, 0), 1, 1, color=color)  # Create a rectangle with that color
     handles.append(handle)
     labels.append(distance)
-plt.legend(handles, labels, loc="upper center", ncol=3, title=r"Splitting strategy:", handletextpad=-0.3)
+# plt.legend(handles, labels, loc="upper center", ncol=len(handles), handletextpad=-0.3)
+plt.legend(handles, labels, loc="upper center", ncol=len(handles), bbox_to_anchor=(0.5, 1.1),
+           title=r"Splitting strategy:", handletextpad=-0.3)
 
 plt.subplots_adjust(bottom=0.15)  # Adjust the values as needed
 plt.savefig("plots/splitting_ablation.pdf", format="pdf")

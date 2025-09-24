@@ -13,10 +13,10 @@ from constants import REPRESENTATIONS, SEEDS, METRICS
 
 os.makedirs('plots', exist_ok=True)
 
-plt.rcParams["text.usetex"] = False
-plt.rc("font", size=16)  # fontsize of the tick labels
-plt.rc("ytick", labelsize=13)  # fontsize of the tick labels
-plt.rc("xtick", labelsize=13)  # fontsize of the tick labels
+plt.rcParams["text.usetex"] = True
+plt.rc("font", size=20)  # fontsize of the tick labels
+plt.rc("ytick", labelsize=18)  # fontsize of the tick labels
+plt.rc("xtick", labelsize=18)  # fontsize of the tick labels
 plt.rc("grid", color="grey", alpha=0.2)
 
 rows = []
@@ -60,7 +60,20 @@ task_reps = {
 df["representation"] = df["representation"].replace(task_reps)
 print(df)
 
-palette_dict = sns.color_palette("Reds")
+palette_dict_reds = sns.color_palette("Reds")
+palette_dict_blue = sns.color_palette("Blues")
+palette_dict_greens = sns.color_palette("Greens")
+
+offset = 2
+palette_dict = {
+    "1D": palette_dict_greens[0 + offset],
+    "2D": palette_dict_blue[0 + offset],
+    "2D+": palette_dict_blue[1 + offset],
+    "2.5D": palette_dict_blue[2 + offset],
+    "GVP": palette_dict_reds[0 + offset],
+    "GVP-2.5D": palette_dict_reds[1 + offset],
+
+}
 
 g = sns.catplot(
     data=df,
@@ -68,29 +81,39 @@ g = sns.catplot(
     y="score",
     hue="representation",
     kind="bar",
-    height=4,
-    aspect=1.6,
+    height=5,
+    aspect=2,
     palette=palette_dict,
     legend=False,
     order=task_names.values()
 )
 g.set_axis_labels("", "Test Score")
 # g.set_titles("{col_name} {col_var}")
-g.set(ylim=(0.45, 0.75))
+# g.set(ylim=(0.45, 0.75))
+# g.set(ylim=(0.5, 0.75))
+g.set(ylim=(0.5, 0.68))
+g.set(ylim=(0.45, 0.7))
 plt.axhline(0.5, color='dimgray', linestyle='--')
 g.despine()
 
 # Create handles and labels manually
 handles = []
 labels = []
-for i, representation in enumerate(df["representation"].unique()):
+# for i, representation in enumerate(df["representation"].unique()):
+#     Create a dummy rectangle for each distance, using the color from the plot
+# color = palette_dict[i]  # Get color for this distance
+
+for representation, color in palette_dict.items():
     # Create a dummy rectangle for each distance, using the color from the plot
-    color = palette_dict[i]  # Get color for this distance
     handle = mlines.Line2D([], [], color=color, marker='o', linestyle='None', markersize=10, )
     # handle = plt.Rectangle((0, 0), 1, 1, color=color)  # Create a rectangle with that color
     handles.append(handle)
     labels.append(representation)
-plt.legend(handles, labels, loc="upper center", ncol=5, title=r"Representation type :", handletextpad=-0.3)
+    # if representation == "2.5D" or representation == "1D":
+    #     handle = mlines.Line2D([], [], color="white", marker='o', linestyle='None', markersize=10, )
+    #     handles.append(handle)
+    #     labels.append("")
+plt.legend(handles, labels, loc="upper center", ncol=3, title=r"Representation type :", handletextpad=-0.4)
 plt.subplots_adjust(bottom=0.1)  # Adjust the values as needed
 
 plt.savefig(f"plots/representation_ablation.pdf", format="pdf")
