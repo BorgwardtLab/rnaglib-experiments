@@ -14,7 +14,7 @@ TASKLIST = [
 
 SPLITS = ["struc", "seq", "rand"]
 
-REPRESENTATIONS = ["1D", "2D_GCN", "2D", "2.5D", "GVP", "GVP_2.5D"]
+REPRESENTATIONS = ["1D", "1D_Transformer", "2D_GCN", "2D", "2.5D", "GVP", "GVP_2.5D"]
 
 METRICS = {
     "rna_go": "jaccard",
@@ -422,7 +422,7 @@ BEST_HPARAMS = {
                 'num_layers': 6,
                 'h_node_dim': (32, 2),
                 'h_edge_dim': (32, 1),
-                'epochs': 100,
+                'epochs': 40,
                 'batch_size': 8,
                 'learning_rate': 0.001,
                 'dropout_rate': 0.5,

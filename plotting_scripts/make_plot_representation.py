@@ -13,7 +13,7 @@ from constants import REPRESENTATIONS, SEEDS, METRICS
 
 os.makedirs('plots', exist_ok=True)
 
-plt.rcParams["text.usetex"] = True
+plt.rcParams["text.usetex"] = False
 plt.rc("font", size=20)  # fontsize of the tick labels
 plt.rc("ytick", labelsize=18)  # fontsize of the tick labels
 plt.rc("xtick", labelsize=18)  # fontsize of the tick labels
@@ -53,6 +53,8 @@ df["task"] = df["task"].replace(task_names)
 
 # task_reps = task_names.update({
 task_reps = {
+    "1D": r"1D-LSTM",
+    "1D_Transformer": r"1D-Transformer",
     "2D_GCN": r"2D",
     "2D": r"2D+",
     "GVP_2.5D": r"GVP-2.5D",
@@ -66,7 +68,8 @@ palette_dict_greens = sns.color_palette("Greens")
 
 offset = 2
 palette_dict = {
-    "1D": palette_dict_greens[0 + offset],
+    "1D-LSTM": palette_dict_greens[0 + offset],
+    "1D-Transformer": palette_dict_greens[1 + offset],
     "2D": palette_dict_blue[0 + offset],
     "2D+": palette_dict_blue[1 + offset],
     "2.5D": palette_dict_blue[2 + offset],
