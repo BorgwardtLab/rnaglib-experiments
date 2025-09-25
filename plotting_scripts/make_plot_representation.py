@@ -13,7 +13,7 @@ from constants import REPRESENTATIONS, SEEDS, METRICS
 
 os.makedirs('plots', exist_ok=True)
 
-plt.rcParams["text.usetex"] = False
+plt.rcParams["text.usetex"] = True
 plt.rc("font", size=20)  # fontsize of the tick labels
 plt.rc("ytick", labelsize=18)  # fontsize of the tick labels
 plt.rc("xtick", labelsize=18)  # fontsize of the tick labels
@@ -112,11 +112,15 @@ for representation, color in palette_dict.items():
     # handle = plt.Rectangle((0, 0), 1, 1, color=color)  # Create a rectangle with that color
     handles.append(handle)
     labels.append(representation)
-    # if representation == "2.5D" or representation == "1D":
-    #     handle = mlines.Line2D([], [], color="white", marker='o', linestyle='None', markersize=10, )
-    #     handles.append(handle)
-    #     labels.append("")
-plt.legend(handles, labels, loc="upper center", ncol=3, title=r"Representation type :", handletextpad=-0.4)
+    if representation == "1D-Transformer":
+    # if representation == "2.5D" or representation == "1D-LSTM":
+        handle = mlines.Line2D([], [], color="white", marker='o', linestyle='None', markersize=10, )
+        handles.append(handle)
+        labels.append("")
+plt.legend(handles, labels, loc="upper center", ncol=3, title=r"Representation type :", handletextpad=-0.4,
+           bbox_to_anchor=(0.6, 1.1))
+# plt.legend(handles, labels, loc="upper center", ncol=4, title=r"Representation type :", handletextpad=-0.4,
+#            bbox_to_anchor=(0.6, 1.1))
 plt.subplots_adjust(bottom=0.1)  # Adjust the values as needed
 
 plt.savefig(f"plots/representation_ablation.pdf", format="pdf")
